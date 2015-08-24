@@ -1,5 +1,5 @@
 {
-  "name": "pump-page",
+  "name": "pump-dashboard",
   "version": "0.0.1",
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js --progress --colors",
