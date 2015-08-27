@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import path from "path";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import session from "express-session";
@@ -23,7 +24,8 @@ export default function applyMiddleware(app) {
   }));
   app.use(passport.initialize());
   app.use(passport.session());
-  //app.use(express.static("dist"));
+  //console.log(__dirname);
+  app.use(express.static(path.resolve(__dirname + "/../dist")));
 
   passport.serializeUser(function(user, done) {
     done(null, user);

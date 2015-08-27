@@ -12,8 +12,8 @@ function extentions() {
 module.exports = {
   context: __dirname + "/lib",
   entry: [
-    "webpack-dev-server/client?http://localhost:8080",
-    "webpack/hot/dev-server",
+    //"webpack-dev-server/client?http://localhost:8080",
+    //"webpack/hot/dev-server",
     "./app.js"
   ],
   resolve: {
@@ -33,8 +33,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    //new webpack.HotModuleReplacementPlugin(),
+    //new webpack.NoErrorsPlugin()
   ],
   devServer: {
     progress: true,

@@ -1,20 +1,15 @@
 import express from "express";
 import passport from "passport";
 import applyMiddleware from "./middleware";
-import api from "./api";
+import getApi from "./api";
 
-const app = express();
-
-applyMiddleware(app);
-app.use(api);
-
-export default function startServer(port=9090) {
+export default function startServer(port=9090, apiIO) {
   return new Promise((resolve) => {
+    const app = express();
+    applyMiddleware(app);
+    app.use(getApi(apiIO));
     app.listen(port, () => {
-      console.log(`Listening on port ${port}`);
       resolve();
     });
   });
 }
-
-startServer();
