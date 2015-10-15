@@ -10,18 +10,16 @@ function extentions() {
 }
 
 module.exports = {
-  context: __dirname + "/lib",
+  context: __dirname + "/client",
   entry: [
-    //"webpack-dev-server/client?http://localhost:8080",
-    //"webpack/hot/dev-server",
     "./app.js"
   ],
   resolve: {
-    root: __dirname + "/lib",
+    root: __dirname + "/client",
     extensions: ["", ".js"]
   },
   output: {
-    path: __dirname + "/dist",
+    path: __dirname + "/dist/public",
     filename: "app.js"
   },
   module: {

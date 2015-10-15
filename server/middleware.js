@@ -25,7 +25,7 @@ export default function applyMiddleware(app) {
   app.use(passport.initialize());
   app.use(passport.session());
   //console.log(__dirname);
-  app.use(express.static(path.resolve(__dirname + "/../dist")));
+  app.use(express.static(path.resolve(__dirname + "/public")));
 
   passport.serializeUser(function(user, done) {
     done(null, user);

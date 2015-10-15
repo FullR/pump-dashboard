@@ -4,7 +4,7 @@ import {log} from "./log-manager";
 import delay from "./util/delay";
 import formatRemaining from "./util/format-remaining";
 
-const stream = new BehaviorSubject(require("../schedule"));
+const stream = new BehaviorSubject(require("./schedule"));
 
 function enableManualMode(manualSchedule=[]) {
   const newSchedule = Object.assign({}, stream.getValue(), {manual: true, manualSchedule});
@@ -20,6 +20,7 @@ function fetchNewData() {
   return downloadTideData({stationId: 9432780}).take(1)
     .do((automaticSchedule) => {
       const newSchedule = Object.assign({}, stream.getValue(), {automaticSchedule});
+      log("info", "Successfully downloaded new tide data");
       stream.onNext(newSchedule);
     }, (error) => {
       log("error", `Failed to fetch tide data from NOAA: ${error.message}`);
@@ -48,9 +49,7 @@ function start() {
       log("error", "No valid times found in manual mode. Cannot schedule pump job.");
     } else {
       log("info", "No valid times found in automatic mode. Downloading new data.");
-      fetchNewData().do(() => {
-        log("info", "Successfully downloaded new tide data")
-      })
+      fetchNewData()
       .subscribe(start, (error) => {
         log("error", `Failed to download new tide data: ${error.message}`);
         setTimeout(start, 1);

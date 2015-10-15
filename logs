@@ -424,3 +424,27 @@
 {"timestamp": 1444856368294, "level": "info", "message": "Server started successfully"}
 {"timestamp": 1444856368763, "level": "info", "message": "Successfully downloaded new tide data"}
 {"timestamp": 1444856368764, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 12 hours, 18 minutes remaining"}
+{"timestamp": 1444927269536, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927269602, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444927270051, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927270053, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927270501, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927270502, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927270736, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927270737, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927271063, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927271065, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927271595, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927271596, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927272151, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927272151, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927272427, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927272427, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927272753, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927272754, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927273039, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927273041, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927273334, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927273336, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444927273591, "level": "error", "message": "Failed to download new tide data: undefined is not a function"}
+{"timestamp": 1444927273594, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}

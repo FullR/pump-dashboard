@@ -1,6 +1,6 @@
 import {BehaviorSubject} from "rx";
 import {writeFile} from "fs";
-const settingsStream = new BehaviorSubject(require("../settings"));
+const settingsStream = new BehaviorSubject(require("./settings"));
 
 function writeSettings(settings) {
   writeFile("./settings.json", JSON.stringify(settings, null, 2), (error) => {

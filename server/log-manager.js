@@ -1,13 +1,9 @@
 import {readFileSync, appendFile} from "fs";
 import {BehaviorSubject} from "rx";
-const filename = __dirname + "/../logs";
+import {red, yellow, green, gray} from "chalk";
+const filename = __dirname + "/logs";
 const logText = readFileSync(filename).toString();
-const logs = JSON.parse(`
-  [
-    ${logText.trim().split("\n").join(",")}
-  ]
-`);
-const stream = new BehaviorSubject(logs)
+const logs = JSON.parse(`[${logText.trim().split("\n").join(",")}]`);
 
 function writeLog({timestamp, level, message}) {
   appendFile(filename, `\n{"timestamp": ${timestamp}, "level": "${level}", "message": "${message}"}`, {flag: "a+"}, (error) => {
@@ -17,8 +13,18 @@ function writeLog({timestamp, level, message}) {
   });
 }
 
+const levelColors = {
+  info: green.bold,
+  warning: yellow.bold,
+  error: red.bold,
+  defaults: (s) => s
+};
+
 export default {
-  stream,
+  getLogs() {
+    return logs;
+  },
+
   log(level, message) {
     if(arguments.length < 2) {
       message = level;
@@ -27,7 +33,11 @@ export default {
     const timestamp = Date.now();
     const logObj = {timestamp, level, message};
     writeLog(logObj);
-    console.log(`${new Date(timestamp)} [${level}]: ${message}`);
-    stream.onNext(stream.getValue().concat(logObj));
+    if(level === "error") {
+      console.log(`${gray(new Date(timestamp))} [${levelColors.error(level)}]: ${white(message)}`, console.trace());
+    } else {
+      console.log(`${gray(new Date(timestamp))} [${(levelColors[level] || levelColors.defaults)(level)}]: ${message}`);
+    }
+    logs.push(logObj);
   }
 };

@@ -35,7 +35,7 @@ router.route("/api/settings")
 
 router.route("/api/logs")
   .get(auth, (req, res) => {
-    res.json(logManager.stream.getValue());
+    res.json(logManager.getLogs());
   });
 
 router.get("/", (req, res) => {

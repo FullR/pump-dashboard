@@ -1,5 +1,4 @@
 import {Observable, Observer, Subject, BehaviorSubject} from "rx";
-import {red, green} from "chalk";
 import delay from "./util/delay";
 import isStream from "./util/isStream";
 import pumpCycle from "./pump-cycle";
@@ -21,7 +20,8 @@ export default function testSystem({
   timeouts={},
   initialValues={}, 
   debug=false, 
-  lowPressure=false
+  lowPressure=false,
+  log
 }={}) {
   const inputs = {
     valve1Closed: new BehaviorSubject(!!initialValues.valve1Closed),
@@ -57,8 +57,5 @@ export default function testSystem({
     })
   };
 
-  const log = debug ? (str) => console.log(green(str)) : () => {};
-  const logError = (error) => debug ? console.log(red(`${error}`)) : null;
-
-  return pumpCycle({inputs, outputs, timeouts});
+  return pumpCycle({inputs, outputs, timeouts, log});
 }

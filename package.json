@@ -2,9 +2,11 @@
   "name": "pump-dashboard",
   "version": "0.0.1",
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js --progress --colors",
-    "start": "./node_modules/babel/bin/babel-node.js server/index.js",
-    "watch": "npm run start & ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress --colors",
+    "clean": "rm -rf dist/*",
+    "build:client": "node ./node_modules/webpack/bin/webpack.js --progress --colors",
+    "build:server": "node ./node_modules/babel/bin/babel.js --stage=1 server -d dist && touch dist/logs && cp settings.json dist && cp schedule.json dist",
+    "build": "npm run build:client && npm run build:server",
+    "start": "npm run build && node dist",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register -t 10000 -c"
   },
   "dependencies": {
