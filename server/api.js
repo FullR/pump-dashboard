@@ -21,7 +21,6 @@ router.route("/api/schedule")
     res.json({});
   })
   .post(auth, (req, res) => {
-    log("info", "Received schedule settings from client");
     res.end();
   });
 

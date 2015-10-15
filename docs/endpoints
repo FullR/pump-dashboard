@@ -1,0 +1,56 @@
+All API endpoints are prefixed with /api/. 
+All Timestamp values are expressed using universal time (number of milliseconds since 1 January 1970 00:00:00 UTC).
+
+/login
+  POST
+    If the username and password match an existing Number the session will be authenticated
+    and a success status will be returned. Otherwise, a authorization failed status will be
+    returned.
+    The expected shape of the response body:
+      username: String
+      password: String
+
+/logout
+  GET
+    If the session is authenticated, it will be unauthenticated.
+
+/schedule
+  GET
+    Returns an object containing information about the pump schedule. Including both
+    automatic and manual pump schedules and a boolean manual flag. The response's body
+    shape:
+      manual: Boolean
+      manualSchedule: Array<Timestamp>
+      automaticSchedule: Array<Timestamp>
+
+  POST
+    Expects a body of the same shape as GET /schedule. This request will be ignored if body.manual is false,
+    as the schedule should not be modified in automatic mode. If manual is true, the body.manualSchedule and
+    body.manual fields will overwrite the existing schedule settings.
+
+/settings
+  GET
+    Returns an object containing all network and pump timing (delay/timeout) settings. The response body
+    has this shape:
+      dynamic: Boolean
+      ip: Array<Number>
+      subnet: Array<Number>
+      gateway: Array<Number>
+      closeValvesTimeout: Number
+      primeTimeout: Number
+      pumpTimeout: Number
+      primeDelay: Number
+      postPumpValveDelay: Number
+      pressureMonitorDelay: Number
+
+  POST
+    Accepts a body with the same shape as GET /settings. Overwrites existing server settings with those
+    in the body. Any missing or invalid fields will be replaced with existing settings. Timing fields
+    will be considered invalid if they're below 0.
+
+/logs
+  GET
+    Returns the system logs. The body is an array of log objects with this shape:
+      timestamp: Timestamp
+      level: String
+      message: String

@@ -1,9 +1,10 @@
 import {Observable, Observer, Subject, BehaviorSubject} from "rx";
 import {red, green} from "chalk";
-import isTrue from "./util/isTrue";
 import delay from "./util/delay";
 import isStream from "./util/isStream";
 import pumpCycle from "./pump-cycle";
+
+const isTrue = (v) => !!v;
 
 function fakeProcess(time, onCompleteObserver, value=true) {
   setTimeout(() => onCompleteObserver.onNext(value), time);
