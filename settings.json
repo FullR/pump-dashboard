@@ -1,0 +1,27 @@
+{
+  "dynamic": false,
+  "ip": [
+    184,
+    168,
+    1,
+    2
+  ],
+  "subnet": [
+    255,
+    255,
+    255,
+    0
+  ],
+  "gateway": [
+    192,
+    168,
+    1,
+    1
+  ],
+  "closeValvesTimeout": 30000,
+  "primeTimeout": 120000,
+  "pumpTimeout": 180000,
+  "primeDelay": 80004,
+  "postPumpValveDelay": 50000,
+  "pressureMonitorDelay": 300000
+}

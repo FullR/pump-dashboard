@@ -1,0 +1,426 @@
+
+{"timestamp": 1444847620909, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444847699719, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444850213535, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850214423, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444850226787, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850226787, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850226789, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850226997, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850226997, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227000, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850227225, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227225, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227225, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850227432, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227432, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227432, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850227636, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227636, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850227638, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850228673, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850228673, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850228675, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850228875, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850228875, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850228877, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850229078, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850229078, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850229080, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850230108, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850230108, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850230110, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850231198, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850231198, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850231199, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850232306, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850232306, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850232307, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850233299, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850233299, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850233300, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850234739, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850234739, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850234741, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850234944, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850234944, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850234945, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850235145, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850235145, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850235146, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850236426, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850236426, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850236427, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850236625, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850236626, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850236627, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850236829, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850236829, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850236830, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850237575, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850237576, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850237578, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850238533, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850238533, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850238535, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850239133, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239133, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239135, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850239339, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239339, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239340, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850239540, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239540, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239542, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850239740, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239740, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850239742, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850240296, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850240296, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850240298, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850240496, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850240496, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850240496, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850240697, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850240697, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850240699, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850241308, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241308, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241310, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850241512, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241513, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241513, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850241712, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241712, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241714, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850241921, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241921, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850241923, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850242130, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850242131, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850242131, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850242666, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850242667, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850242668, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850243037, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850243037, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850243039, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850243241, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850243241, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850243243, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850243449, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850243449, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850243452, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850244381, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850244381, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850244382, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850244604, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850244604, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850244606, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850245115, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850245115, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850245115, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850245314, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850245315, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850245316, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850245751, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850245751, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850245753, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850246435, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850246435, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850246435, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850246848, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850246848, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850246849, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850247353, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850247354, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850247354, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850247555, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850247555, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850247555, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850248059, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850248060, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850248061, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850248496, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850248496, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850248498, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850248928, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850248928, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850248928, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850249436, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850249436, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850249436, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850249640, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850249640, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850249640, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850249969, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850249969, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850249971, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850250489, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850250489, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850250491, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850250941, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850250941, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850250943, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850251418, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850251418, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850251418, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850251616, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850251616, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850251618, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850251815, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850251816, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850251817, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850252314, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252314, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252316, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850252529, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252529, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252529, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850252729, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252730, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252731, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850252931, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252931, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850252933, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850253130, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253131, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253132, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850253330, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253330, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253332, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850253549, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253549, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253549, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850253754, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253754, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253754, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850253954, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253954, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850253956, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850254159, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850254159, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850254160, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850255227, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850255227, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850255228, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850255942, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850255942, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850255944, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850256144, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850256144, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850256144, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850257066, "level": "error", "message": "Failed to fetch tide data from NOAA: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850257066, "level": "error", "message": "Failed to fetch new tide data: NOAA Exception: The station ID of the parameter 'offering' is not valid - [undefined]."}
+{"timestamp": 1444850257068, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850339510, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850340464, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444850340801, "level": "info", "message": "Successfully fetched new tide data"}
+{"timestamp": 1444850416770, "level": "info", "message": "No valid times found in automatic mode. Fetching new data."}
+{"timestamp": 1444850417886, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444850418685, "level": "info", "message": "Successfully fetched new tide data"}
+{"timestamp": 1444850418689, "level": "info", "message": "Scheduling pump job for Wed Oct 14 2015 13:25:00 GMT-0700 (PDT). 64.68856666666667 minutes remaining"}
+{"timestamp": 1444850786511, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444850787714, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444850788138, "level": "info", "message": "Successfully downloaded new tide data"}
+{"timestamp": 1444850788139, "level": "info", "message": "Scheduling pump job for Wed Oct 14 2015 13:25:00 GMT-0700 (PDT). 58 minutes remaining"}
+{"timestamp": 1444855146121, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444855147111, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444855147389, "level": "info", "message": "Successfully downloaded new tide data"}
+{"timestamp": 1444855147389, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855150396, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855150397, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855150398, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855153404, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855153404, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855153407, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855156412, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855156412, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855156413, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855159418, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855159419, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855159420, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855162424, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855162424, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855162426, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855165428, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855165428, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855165429, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855168435, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855168435, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855168437, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855171442, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855171442, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855171444, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855174450, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855174450, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855174452, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855177458, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855177459, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855177461, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855180466, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855180467, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855180469, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855183474, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855183474, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855183475, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855186475, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855186476, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855186478, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855189483, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855189484, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855189485, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855192491, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855192492, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855192492, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855195498, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855195498, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855195500, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855198501, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855198501, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855198503, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 758 minutes remaining"}
+{"timestamp": 1444855201504, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855201505, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855201505, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855204507, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855204508, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855204510, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855207513, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855207513, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855207515, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855210518, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855210519, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855210520, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855213526, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855213526, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855213528, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855216533, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855216534, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855216534, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855219535, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855219536, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855219536, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855222538, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855222538, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855222540, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855225546, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855225546, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855225548, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855228550, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855228551, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855228552, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855231558, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855231558, "level": "error", "message": "wait is not defined"}
+{"timestamp": 1444855231558, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855235507, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444855236471, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444855237000, "level": "info", "message": "Successfully downloaded new tide data"}
+{"timestamp": 1444855237001, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855240012, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855255019, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855255022, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 757 minutes remaining"}
+{"timestamp": 1444855258030, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855273030, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855273031, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 756 minutes remaining"}
+{"timestamp": 1444855276032, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855291037, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855291039, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 756 minutes remaining"}
+{"timestamp": 1444855294042, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855309045, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855309047, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 756 minutes remaining"}
+{"timestamp": 1444855312060, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855327062, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855327063, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 755 minutes remaining"}
+{"timestamp": 1444855330069, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855345072, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855345078, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 755 minutes remaining"}
+{"timestamp": 1444855348080, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855363082, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855363084, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 755 minutes remaining"}
+{"timestamp": 1444855366116, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855381119, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855381119, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 754 minutes remaining"}
+{"timestamp": 1444855384120, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855399126, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855399127, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 754 minutes remaining"}
+{"timestamp": 1444855402130, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855417133, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855417135, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 754 minutes remaining"}
+{"timestamp": 1444855420135, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855435137, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855435139, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 754 minutes remaining"}
+{"timestamp": 1444855438141, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855453143, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855453145, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 753 minutes remaining"}
+{"timestamp": 1444855456151, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855471157, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855471159, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 753 minutes remaining"}
+{"timestamp": 1444855474166, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855489167, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855489169, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 753 minutes remaining"}
+{"timestamp": 1444855492173, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855507180, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855507182, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 752 minutes remaining"}
+{"timestamp": 1444855510185, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855525191, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855525193, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 752 minutes remaining"}
+{"timestamp": 1444855528195, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855543202, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855543204, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 752 minutes remaining"}
+{"timestamp": 1444855546208, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855561210, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855561212, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 751 minutes remaining"}
+{"timestamp": 1444855564218, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855579223, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855579225, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 751 minutes remaining"}
+{"timestamp": 1444855582231, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855597234, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855597235, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 751 minutes remaining"}
+{"timestamp": 1444855600240, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855615243, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855615244, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 751 minutes remaining"}
+{"timestamp": 1444855618246, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855633246, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855633248, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 750 minutes remaining"}
+{"timestamp": 1444855636253, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855651254, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855651255, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 750 minutes remaining"}
+{"timestamp": 1444855654260, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855669267, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855669269, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 750 minutes remaining"}
+{"timestamp": 1444855672271, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855687278, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855687279, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 749 minutes remaining"}
+{"timestamp": 1444855690281, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855705289, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855705289, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 749 minutes remaining"}
+{"timestamp": 1444855708295, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855723297, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855723299, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 749 minutes remaining"}
+{"timestamp": 1444855726303, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855741307, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855741310, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 748 minutes remaining"}
+{"timestamp": 1444855744316, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855759322, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855759322, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 748 minutes remaining"}
+{"timestamp": 1444855762328, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855777331, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855777333, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 748 minutes remaining"}
+{"timestamp": 1444855780336, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444855795341, "level": "info", "message": "Scheduled pump job finished successfully"}
+{"timestamp": 1444855795343, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 748 minutes remaining"}
+{"timestamp": 1444855798345, "level": "info", "message": "Running pump cycle"}
+{"timestamp": 1444856015709, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444856016891, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444856017262, "level": "info", "message": "Successfully downloaded new tide data"}
+{"timestamp": 1444856017263, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 12 hours, 744 minutes remaining"}
+{"timestamp": 1444856063362, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444856064288, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444856064866, "level": "info", "message": "Successfully downloaded new tide data"}
+{"timestamp": 1444856064867, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 12 hours, 23 minutes remaining"}
+{"timestamp": 1444856319387, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444856320307, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444856367377, "level": "info", "message": "No valid times found in automatic mode. Downloading new data."}
+{"timestamp": 1444856368294, "level": "info", "message": "Server started successfully"}
+{"timestamp": 1444856368763, "level": "info", "message": "Successfully downloaded new tide data"}
+{"timestamp": 1444856368764, "level": "info", "message": "Scheduling pump job for Thu Oct 15 2015 02:18:00 GMT-0700 (PDT). 12 hours, 18 minutes remaining"}
