@@ -7,6 +7,7 @@
     "build:server": "node ./node_modules/babel/bin/babel.js --stage=1 server -d dist && touch dist/logs && cp settings.json dist && cp schedule.json dist",
     "build": "npm run build:client && npm run build:server",
     "start": "npm run build && node dist",
+    "package": "node pack.js",
     "test": "./node_modules/mocha/bin/mocha --compilers js:babel/register -t 10000 -c"
   },
   "dependencies": {
