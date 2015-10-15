@@ -26,21 +26,21 @@ export default class ScheduleTable extends React.Component {
     extendState(this, {newTimestamp});
   }
 
-  updateRow(jobToUpdate, newTimestamp) {
-    this.props.onChange(this.props.pumpSchedule.map((job) => {
-      if(job === jobToUpdate) {
-        return {timestamp: newTimestamp};
+  updateRow(index, newTimestamp) {
+    this.props.onChange(this.props.pumpSchedule.map((timestamp, i) => {
+      if(i === index) {
+        return newTimestamp;
       }
-      return job;
+      return timestamp;
     }))
   }
 
-  removeRow(jobToRemove) {
-    this.props.onChange(this.props.pumpSchedule.filter((job) => job !== jobToRemove));
+  removeRow(indexToRemove) {
+    this.props.onChange(this.props.pumpSchedule.filter((_, i) => i !== indexToRemove));
   }
 
   addRow() {
-    this.props.onChange(this.props.pumpSchedule.concat({timestamp: this.state.newTimestamp}));
+    this.props.onChange(this.props.pumpSchedule.concat(this.state.newTimestamp));
   }
 
   render() {
@@ -62,20 +62,20 @@ export default class ScheduleTable extends React.Component {
               <th></th>
             </tr>
           </thead>
+
           <tbody>
             {disabled ?
               null :
               <AppendTimeForm value={newTimestamp} onChange={this.updateNewTimestamp} onSubmit={this.addRow} local={local}/>
             }
-            {pumpSchedule.sort((jobA, jobB) => jobA.timestamp - jobB.timestamp).map((job, i) => {
-              const {timestamp} = job;
+            {pumpSchedule.map((timestamp, i) => {
               return (
-                <tr key={`entry-${timestamp}-${i}`}>
-                  <td><DateInput local={local} disabled={disabled} value={timestamp} onChange={this.updateRow.bind(this, job)}/></td>
-                  <td><TimeInput local={local} disabled={disabled} value={timestamp} onChange={this.updateRow.bind(this, job)}/></td>
+                <tr key={`entry-${i}`}>
+                  <td><DateInput local={local} disabled={disabled} value={timestamp} onChange={this.updateRow.bind(this, i)}/></td>
+                  <td><TimeInput local={local} disabled={disabled} value={timestamp} onChange={this.updateRow.bind(this, i)}/></td>
                   <td>
                     {disabled ? null :
-                      <Button type="danger" disabled={disabled} onClick={this.removeRow.bind(this, job)}>Remove</Button>
+                      <Button type="danger" disabled={disabled} onClick={this.removeRow.bind(this, i)}>Remove</Button>
                     }
                   </td>
                 </tr>

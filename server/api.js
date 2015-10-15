@@ -4,6 +4,8 @@ import auth from "./auth";
 
 import logManager from "./log-manager";
 import settingManager from "./setting-manager";
+import scheduleManager from "./schedule-manager";
+
 const {log} = logManager;
 const router = express.Router();
 
@@ -18,10 +20,21 @@ router.get("/api/logout", (req, res) => {
 
 router.route("/api/schedule")
   .get(auth, (req, res) => {
-    res.json({});
+    res.json(scheduleManager.stream.getValue());
   })
   .post(auth, (req, res) => {
-    res.end();
+    console.log("Received schedule from client:", req.body);
+    const {manual, manualSchedule} = req.body;
+    if(req.body && req.body.manual) {
+      if(manualSchedule.some((t) => typeof t !== "number")) {
+        res.status(400).json({error: "Invalid times"});
+      } else {
+        scheduleManager.enableManualMode(manualSchedule);
+        res.end();
+      }
+    } else {
+      res.end();
+    }
   });
 
 router.route("/api/settings")

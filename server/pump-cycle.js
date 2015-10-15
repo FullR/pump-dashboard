@@ -1,6 +1,5 @@
 import Rx from "rx";
 import {noop, defaults} from "lodash";
-import isTrue from "./util/isTrue";
 import autoObservable from "./util/autoObservable";
 import maybeTimeout from "./util/maybeTimeout";
 import delay from "./util/delay";
@@ -8,6 +7,7 @@ import delay from "./util/delay";
 const {Observable, Observer, BehaviorSubject} = Rx;
 const {combineLatest, fromArray, concat} = Observable;
 const blankObserver = Observer.create(noop, noop, noop);
+const isTrue = (v) => !!v;
 
 export default function runCycle({
   inputs = {

@@ -26,6 +26,10 @@ var _settingManager = require("./setting-manager");
 
 var _settingManager2 = _interopRequireDefault(_settingManager);
 
+var _scheduleManager = require("./schedule-manager");
+
+var _scheduleManager2 = _interopRequireDefault(_scheduleManager);
+
 var log = _logManager2["default"].log;
 
 var router = _express2["default"].Router();
@@ -40,9 +44,25 @@ router.get("/api/logout", function (req, res) {
 });
 
 router.route("/api/schedule").get(_auth2["default"], function (req, res) {
-  res.json({});
+  res.json(_scheduleManager2["default"].stream.getValue());
 }).post(_auth2["default"], function (req, res) {
-  res.end();
+  console.log("Received schedule from client:", req.body);
+  var _req$body = req.body;
+  var manual = _req$body.manual;
+  var manualSchedule = _req$body.manualSchedule;
+
+  if (req.body && req.body.manual) {
+    if (manualSchedule.some(function (t) {
+      return typeof t !== "number";
+    })) {
+      res.status(400).json({ error: "Invalid times" });
+    } else {
+      _scheduleManager2["default"].enableManualMode(manualSchedule);
+      res.end();
+    }
+  } else {
+    res.end();
+  }
 });
 
 router.route("/api/settings").get(_auth2["default"], function (req, res) {

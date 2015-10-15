@@ -16,6 +16,6 @@ export default {
   stream: settingsStream,
   update(newSettings) {
     writeSettings(newSettings);
-    settingsStream.onNext(newSettings);
+    settingsStream.onNext(Object.assign({}, settingsStream.getValue(), newSettings));
   }
 };

@@ -55611,7 +55611,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -55640,10 +55640,6 @@
 	var _utilRequestObservable = __webpack_require__(469);
 
 	var _utilRequestObservable2 = _interopRequireDefault(_utilRequestObservable);
-
-	var _utilExtendState = __webpack_require__(462);
-
-	var _utilExtendState2 = _interopRequireDefault(_utilExtendState);
 
 	var _utilBindEach = __webpack_require__(475);
 
@@ -55677,6 +55673,10 @@
 	  marginBottom: 30
 	};
 
+	var submitButtonStyle = {
+	  marginTop: 20
+	};
+
 	function requestSchedule() {
 	  return (0, _utilRequestObservable2["default"])((0, _superagent2["default"])("GET", "/api/schedule")).map(function (res) {
 	    return res.body;
@@ -55690,16 +55690,17 @@
 	    _classCallCheck(this, Schedule);
 
 	    _get(Object.getPrototypeOf(Schedule.prototype), "constructor", this).call(this, props);
-	    (0, _utilBindEach2["default"])(this, "toggleManual", "toggleLocal", "updatePumpSchedule");
+	    (0, _utilBindEach2["default"])(this, "toggleManual", "toggleLocal", "updatePumpSchedule", "submit");
+
 	    if (cachedSchedule) {
 	      this.state = {
 	        error: null,
 	        loading: true,
 	        local: true,
-	        originalPumpSchedule: cachedSchedule.pumpSchedule.slice(),
 	        schedule: {
 	          manual: cachedSchedule.manual,
-	          pumpSchedule: cachedSchedule.pumpSchedule.slice()
+	          manualSchedule: cachedSchedule.manualSchedule.slice(),
+	          automaticSchedule: cachedSchedule.automaticSchedule.slice()
 	        }
 	      };
 	    } else {
@@ -55707,10 +55708,10 @@
 	        error: null,
 	        loading: true,
 	        local: true,
-	        originalPumpSchedule: [],
 	        schedule: {
 	          manual: false,
-	          pumpSchedule: []
+	          manualSchedule: [],
+	          automaticSchedule: []
 	        }
 	      };
 	    }
@@ -55719,13 +55720,22 @@
 	  _createClass(Schedule, [{
 	    key: "getNearestTimestamp",
 	    value: function getNearestTimestamp() {
-	      var originalPumpSchedule = this.state.originalPumpSchedule;
+	      var originalSchedule = this.state.originalSchedule;
 
-	      if (!originalPumpSchedule.length) return null;
+	      if (!originalSchedule) {
+	        return null;
+	      };
+	      var timestamps = originalSchedule.manual ? originalSchedule.manualSchedule : originalSchedule.automaticSchedule;
+	      var now = Date.now();
+	      if (!timestamps.length) {
+	        return null;
+	      }
 
-	      return Math.min.apply(Math, _toConsumableArray(originalPumpSchedule.map(function (job) {
-	        return job.timestamp;
-	      })));
+	      return timestamps.filter(function (t) {
+	        return t >= now;
+	      }).reduce(function (a, b) {
+	        return Math.min(a, b);
+	      });
 	    }
 	  }, {
 	    key: "componentDidMount",
@@ -55733,18 +55743,15 @@
 	      var _this = this;
 
 	      requestSchedule().subscribe(function (schedule) {
-	        cachedSchedule = {
-	          manual: schedule.manual,
-	          pumpSchedule: schedule.pumpSchedule.slice()
-	        };
-	        (0, _utilExtendState2["default"])(_this, {
+	        cachedSchedule = (0, _lodash.cloneDeep)(schedule);
+	        _this.setState({
 	          schedule: schedule,
-	          originalPumpSchedule: schedule.pumpSchedule.slice(), // keep a copy in case the user changes to manual mode and makes changes
+	          originalSchedule: (0, _lodash.cloneDeep)(schedule),
 	          error: null,
 	          loading: false
 	        });
 	      }, function (error) {
-	        (0, _utilExtendState2["default"])(_this, {
+	        _this.setState({
 	          error: error,
 	          loading: false
 	        });
@@ -55753,53 +55760,61 @@
 	  }, {
 	    key: "toggleManual",
 	    value: function toggleManual() {
-	      if (this.state.schedule.manual) {
-	        (0, _utilExtendState2["default"])(this, {
-	          schedule: {
-	            manual: false,
-	            pumpSchedule: this.state.originalPumpSchedule.slice()
-	          }
-	        });
-	      } else {
-	        (0, _utilExtendState2["default"])(this, {
-	          schedule: {
-	            manual: true,
-	            pumpSchedule: this.state.schedule.pumpSchedule
-	          }
-	        });
-	      }
+	      var originalSchedule = this.state.originalSchedule;
+
+	      this.setState({
+	        schedule: (0, _lodash.extend)((0, _lodash.cloneDeep)(originalSchedule), { manual: !this.state.schedule.manual })
+	      });
 	    }
 	  }, {
 	    key: "toggleLocal",
 	    value: function toggleLocal() {
-	      (0, _utilExtendState2["default"])(this, {
+	      this.setState({
 	        local: !this.state.local
 	      });
 	    }
 	  }, {
 	    key: "updatePumpSchedule",
 	    value: function updatePumpSchedule(newPumpSchedule) {
-	      (0, _utilExtendState2["default"])(this, {
-	        schedule: {
-	          manual: this.state.schedule.manual,
-	          pumpSchedule: newPumpSchedule
-	        }
+	      var _state$schedule = this.state.schedule;
+	      var manual = _state$schedule.manual;
+	      var schedule = _state$schedule.schedule;
+
+	      this.setState({
+	        schedule: (0, _lodash.extend)({}, schedule, _defineProperty({
+	          manual: manual
+	        }, manual ? "manualSchedule" : "automaticSchedule", newPumpSchedule))
+	      });
+	    }
+	  }, {
+	    key: "submit",
+	    value: function submit() {
+	      var _this2 = this;
+
+	      var schedule = this.state.schedule;
+	      var manual = schedule.manual;
+
+	      if (!manual) return;
+
+	      (0, _utilRequestObservable2["default"])((0, _superagent2["default"])("POST", "/api/schedule").send(this.state.schedule)).take(1).subscribe(function () {}, function (error) {
+	        _this2.setState({ error: error });
 	      });
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var _state = this.state;
 	      var error = _state.error;
 	      var loading = _state.loading;
 	      var schedule = _state.schedule;
-	      var originalPumpSchedule = _state.originalPumpSchedule;
 	      var local = _state.local;
 	      var manual = schedule.manual;
-	      var pumpSchedule = schedule.pumpSchedule;
+	      var manualSchedule = schedule.manualSchedule;
+	      var automaticSchedule = schedule.automaticSchedule;
 
+	      var currentSchedule = manual ? manualSchedule || [] : automaticSchedule || [];
 	      var formDisabled = loading || error;
 
 	      return _react2["default"].createElement(
@@ -55826,12 +55841,12 @@
 	        ),
 	        _react2["default"].createElement(_localCheckbox2["default"], { checked: local, onChange: this.toggleLocal, disabled: formDisabled }),
 	        _react2["default"].createElement(_manualCheckbox2["default"], { checked: manual, onChange: this.toggleManual, disabled: formDisabled }),
-	        _react2["default"].createElement(_scheduleTable2["default"], { pumpSchedule: pumpSchedule, disabled: formDisabled || !manual, local: local, onChange: function (v) {
-	            return _this2.updatePumpSchedule(v);
+	        _react2["default"].createElement(_scheduleTable2["default"], { pumpSchedule: currentSchedule, disabled: formDisabled || !manual, local: local, onChange: function (v) {
+	            return _this3.updatePumpSchedule(v);
 	          } }),
 	        _react2["default"].createElement(
 	          _spinnerButton2["default"],
-	          { disabled: formDisabled },
+	          { disabled: formDisabled, onClick: this.submit, style: submitButtonStyle },
 	          "Submit"
 	        )
 	      );
@@ -56643,25 +56658,25 @@
 	    }
 	  }, {
 	    key: "updateRow",
-	    value: function updateRow(jobToUpdate, newTimestamp) {
-	      this.props.onChange(this.props.pumpSchedule.map(function (job) {
-	        if (job === jobToUpdate) {
-	          return { timestamp: newTimestamp };
+	    value: function updateRow(index, newTimestamp) {
+	      this.props.onChange(this.props.pumpSchedule.map(function (timestamp, i) {
+	        if (i === index) {
+	          return newTimestamp;
 	        }
-	        return job;
+	        return timestamp;
 	      }));
 	    }
 	  }, {
 	    key: "removeRow",
-	    value: function removeRow(jobToRemove) {
-	      this.props.onChange(this.props.pumpSchedule.filter(function (job) {
-	        return job !== jobToRemove;
+	    value: function removeRow(indexToRemove) {
+	      this.props.onChange(this.props.pumpSchedule.filter(function (_, i) {
+	        return i !== indexToRemove;
 	      }));
 	    }
 	  }, {
 	    key: "addRow",
 	    value: function addRow() {
-	      this.props.onChange(this.props.pumpSchedule.concat({ timestamp: this.state.newTimestamp }));
+	      this.props.onChange(this.props.pumpSchedule.concat(this.state.newTimestamp));
 	    }
 	  }, {
 	    key: "render",
@@ -56710,30 +56725,26 @@
 	            "tbody",
 	            null,
 	            disabled ? null : _react2["default"].createElement(_appendTimeForm2["default"], { value: newTimestamp, onChange: this.updateNewTimestamp, onSubmit: this.addRow, local: local }),
-	            pumpSchedule.sort(function (jobA, jobB) {
-	              return jobA.timestamp - jobB.timestamp;
-	            }).map(function (job, i) {
-	              var timestamp = job.timestamp;
-
+	            pumpSchedule.map(function (timestamp, i) {
 	              return _react2["default"].createElement(
 	                "tr",
-	                { key: "entry-" + timestamp + "-" + i },
+	                { key: "entry-" + i },
 	                _react2["default"].createElement(
 	                  "td",
 	                  null,
-	                  _react2["default"].createElement(_dateInput2["default"], { local: local, disabled: disabled, value: timestamp, onChange: _this.updateRow.bind(_this, job) })
+	                  _react2["default"].createElement(_dateInput2["default"], { local: local, disabled: disabled, value: timestamp, onChange: _this.updateRow.bind(_this, i) })
 	                ),
 	                _react2["default"].createElement(
 	                  "td",
 	                  null,
-	                  _react2["default"].createElement(_timeInput2["default"], { local: local, disabled: disabled, value: timestamp, onChange: _this.updateRow.bind(_this, job) })
+	                  _react2["default"].createElement(_timeInput2["default"], { local: local, disabled: disabled, value: timestamp, onChange: _this.updateRow.bind(_this, i) })
 	                ),
 	                _react2["default"].createElement(
 	                  "td",
 	                  null,
 	                  disabled ? null : _react2["default"].createElement(
 	                    _elemental.Button,
-	                    { type: "danger", disabled: disabled, onClick: _this.removeRow.bind(_this, job) },
+	                    { type: "danger", disabled: disabled, onClick: _this.removeRow.bind(_this, i) },
 	                    "Remove"
 	                  )
 	                )

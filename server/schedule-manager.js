@@ -1,4 +1,5 @@
 import {BehaviorSubject} from "rx";
+import {writeFile} from "fs";
 import downloadTideData from "./download-tide-data";
 import {log} from "./log-manager";
 import delay from "./util/delay";
@@ -6,14 +7,22 @@ import formatRemaining from "./util/format-remaining";
 
 const stream = new BehaviorSubject(require("./schedule"));
 
+function writeSchedule(newSchedule) {
+  writeFile(`${__dirname}/schedule.json`, JSON.stringify(newSchedule, null, 2), (error) => {
+    log("error", `Failed to write new schedule to file system: ${error.message}`);
+  });
+}
+
 function enableManualMode(manualSchedule=[]) {
   const newSchedule = Object.assign({}, stream.getValue(), {manual: true, manualSchedule});
   stream.onNext(newSchedule);
+  writeSchedule(newSchedule);
 }
 
 function disableManualMode() {
   const newSchedule = Object.assign({}, stream.getValue(), {manual: false});
   stream.onNext(newSchedule);
+  writeSchedule(newSchedule);
 }
 
 function fetchNewData() {
@@ -49,20 +58,20 @@ function start() {
       log("error", "No valid times found in manual mode. Cannot schedule pump job.");
     } else {
       log("info", "No valid times found in automatic mode. Downloading new data.");
-      fetchNewData()
-      .subscribe(start, (error) => {
-        log("error", `Failed to download new tide data: ${error.message}`);
-        setTimeout(start, 1);
-      });
+      return fetchNewData()
+        .subscribe(start, (error) => {
+          log("error", `Failed to download new tide data: ${error.message}`);
+          setTimeout(start, 1);
+        });
     }
   } else {
-    const remaining = (nextPumpTime - Date.now());
+    const remaining = nextPumpTime - Date.now();
     log("info", `Scheduling pump job for ${new Date(nextPumpTime)}. ${formatRemaining(remaining)} remaining`);
-    
-    delay(remaining)
+
+    const subscription = delay(remaining)
       .flatMap(() => {
         log("info", "Running pump cycle");
-        return wait(5000);
+        return wait(5000); // TODO: Add actual pump code
       })
       .take(1)
       .subscribe(() => {

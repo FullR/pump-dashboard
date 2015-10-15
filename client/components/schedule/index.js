@@ -2,10 +2,9 @@ import React from "react";
 import SpinnerButton from "../spinnerButton";
 import Loader from "react-loader";
 import {Form, FormField, FormNote, FormInput, Table, Label, Checkbox, Alert} from "elemental";
-import {range} from "lodash";
+import {range, cloneDeep, extend} from "lodash";
 import request from "superagent";
 import requestObservable from "../../util/requestObservable";
-import extendState from "../../util/extendState";
 import bindEach from "../../util/bindEach";
 
 import ManualCheckbox from "./manualCheckbox";
@@ -22,6 +21,10 @@ const tableStyle = {
   marginBottom: 30
 };
 
+const submitButtonStyle = {
+  marginTop: 20
+};
+
 function requestSchedule() {
   return requestObservable(request("GET", "/api/schedule")).map((res) => res.body);
 }
@@ -29,16 +32,17 @@ function requestSchedule() {
 export default class Schedule extends React.Component {
   constructor(props) {
     super(props);
-    bindEach(this, "toggleManual", "toggleLocal", "updatePumpSchedule");
+    bindEach(this, "toggleManual", "toggleLocal", "updatePumpSchedule", "submit");
+
     if(cachedSchedule) {
       this.state = {
         error: null,
         loading: true,
         local: true,
-        originalPumpSchedule: cachedSchedule.pumpSchedule.slice(),
         schedule: {
           manual: cachedSchedule.manual,
-          pumpSchedule: cachedSchedule.pumpSchedule.slice()
+          manualSchedule: cachedSchedule.manualSchedule.slice(),
+          automaticSchedule: cachedSchedule.automaticSchedule.slice()
         }
       };
     } else {
@@ -46,38 +50,42 @@ export default class Schedule extends React.Component {
         error: null,
         loading: true,
         local: true,
-        originalPumpSchedule: [],
         schedule: {
           manual: false,
-          pumpSchedule: []
+          manualSchedule: [],
+          automaticSchedule: []
         }
       };
     }
   }
 
   getNearestTimestamp() {
-    const {originalPumpSchedule} = this.state;
-    if(!originalPumpSchedule.length) return null;
+    const {originalSchedule} = this.state;
+    if(!originalSchedule) {
+      return null;
+    };
+    const timestamps = originalSchedule.manual ? originalSchedule.manualSchedule : originalSchedule.automaticSchedule;
+    const now = Date.now();
+    if(!timestamps.length) {
+      return null;
+    }
 
-    return Math.min(...originalPumpSchedule.map((job) => job.timestamp));
+    return timestamps.filter((t) => t >= now).reduce((a, b) => Math.min(a, b));
   }
 
   componentDidMount() {
     requestSchedule().subscribe(
       (schedule) => {
-        cachedSchedule = {
-          manual: schedule.manual,
-          pumpSchedule: schedule.pumpSchedule.slice()
-        };
-        extendState(this, {
+        cachedSchedule = cloneDeep(schedule);
+        this.setState({
           schedule,
-          originalPumpSchedule: schedule.pumpSchedule.slice(), // keep a copy in case the user changes to manual mode and makes changes
+          originalSchedule: cloneDeep(schedule),
           error: null,
           loading: false
         });
       },
       (error) => {
-        extendState(this, {
+        this.setState({
           error,
           loading: false
         });
@@ -86,41 +94,44 @@ export default class Schedule extends React.Component {
   }
 
   toggleManual() {
-    if(this.state.schedule.manual) {
-      extendState(this, {
-        schedule: {
-          manual: false,
-          pumpSchedule: this.state.originalPumpSchedule.slice()
-        }
-      });
-    } else {
-      extendState(this, {
-        schedule: {
-          manual: true,
-          pumpSchedule: this.state.schedule.pumpSchedule
-        }
-      });
-    }
+    const {originalSchedule} = this.state;
+    this.setState({
+      schedule: extend(cloneDeep(originalSchedule), {manual: !this.state.schedule.manual})
+    });
   }
 
   toggleLocal() {
-    extendState(this, {
+    this.setState({
       local: !this.state.local
     });
   }
 
   updatePumpSchedule(newPumpSchedule) {
-    extendState(this, {
-      schedule: {
-        manual: this.state.schedule.manual,
-        pumpSchedule: newPumpSchedule
-      }
+    const {manual, schedule} = this.state.schedule;
+    this.setState({
+      schedule: extend({}, schedule, {
+        manual,
+        [manual ? "manualSchedule" : "automaticSchedule"]: newPumpSchedule
+      })
     });
   }
 
+  submit() {
+    const {schedule} = this.state;
+    const {manual} = schedule;
+    if(!manual) return;
+
+    requestObservable(request("POST", "/api/schedule").send(this.state.schedule))
+      .take(1)
+      .subscribe(() => {}, (error) => {
+        this.setState({error});
+      });
+  }
+
   render() {
-    const {error, loading, schedule, originalPumpSchedule, local} = this.state;
-    const {manual, pumpSchedule} = schedule;
+    const {error, loading, schedule, local} = this.state;
+    const {manual, manualSchedule, automaticSchedule} = schedule;
+    const currentSchedule = manual ? (manualSchedule || []) : (automaticSchedule || []);
     const formDisabled = loading || error;
 
     return (
@@ -129,8 +140,8 @@ export default class Schedule extends React.Component {
         <Countdown timestamp={this.getNearestTimestamp()}><strong>Time until next pump: </strong></Countdown>
         <LocalCheckbox checked={local} onChange={this.toggleLocal} disabled={formDisabled}/>
         <ManualCheckbox checked={manual} onChange={this.toggleManual} disabled={formDisabled}/>
-        <ScheduleTable pumpSchedule={pumpSchedule} disabled={formDisabled || !manual} local={local} onChange={(v) => this.updatePumpSchedule(v)}/>
-        <SpinnerButton disabled={formDisabled}>Submit</SpinnerButton>
+        <ScheduleTable pumpSchedule={currentSchedule} disabled={formDisabled || !manual} local={local} onChange={(v) => this.updatePumpSchedule(v)}/>
+        <SpinnerButton disabled={formDisabled} onClick={this.submit} style={submitButtonStyle}>Submit</SpinnerButton>
       </div>
     );
   }
