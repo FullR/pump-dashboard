@@ -30,22 +30,17 @@ function getHighTideTimes() {
   var endTime = _ref$endTime === undefined ? Date.now() + oneMonth : _ref$endTime;
   var stationId = _ref.stationId;
 
-  return _rx.Observable.create(function (observer) {
+  return new Promise(function (resolve, reject) {
     var params = ["service=SOS", "request=GetObservation", "version=1.0.0", "observedProperty=sea_surface_height_amplitude_due_to_equilibrium_ocean_tide", "offering=urn:ioos:station:NOAA.NOS.CO-OPS:" + stationId, "responseFormat=text%2Fcsv", "eventTime=" + getEventTime(startTime, endTime), "result=VerticalDatum%3D%3Durn:ioos:def:datum:noaa::MLLW", "dataType=HighLowTidePredictions", "unit=Meters"];
     var url = baseUrl + "?" + params.join("&");
     var req = _request2["default"].get(url, function (error, res, body) {
       if (error) {
-        observer.onError(error);
+        reject(error);
       } else {
-        observer.onNext(body);
-        observer.onCompleted();
+        resolve(body);
       }
     });
-
-    return function () {
-      return req.abort();
-    };
-  }).map(parseHighTideData);
+  }).then(parseHighTideData);
 }
 
 function parseHighTideData(data) {

@@ -6,12 +6,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _fs = require("fs");
 
+var _child_process = require("child_process");
+
 var _rx = require("rx");
 
 var _chalk = require("chalk");
 
 var filename = __dirname + "/logs";
-var logText = (0, _fs.readFileSync)(filename).toString();
+var logText = undefined;
+try {
+  logText = (0, _fs.readFileSync)(filename).toString();
+} catch (error) {
+  logText = "";
+  console.log("Failed to load existing logs from file. Clearing log file");
+  (0, _child_process.exec)("rm " + filename, function (error) {
+    if (error) {
+      console.log("Failed to remove existing log file: " + error.message);
+    } else {
+      console.log("Suceessfully removed invalid log file");
+    }
+  });
+}
 var logs = JSON.parse("[" + logText.trim().split("\n").join(",") + "]");
 
 function writeLog(_ref) {
@@ -21,7 +36,7 @@ function writeLog(_ref) {
 
   (0, _fs.appendFile)(filename, "\n{\"timestamp\": " + timestamp + ", \"level\": \"" + level + "\", \"message\": \"" + message + "\"}", { flag: "a+" }, function (error) {
     if (error) {
-      console.log("Failed to append log to file:", error);
+      console.log("Failed to append log entry to log file:", error);
     }
   });
 }
@@ -49,7 +64,7 @@ exports["default"] = {
     var logObj = { timestamp: timestamp, level: level, message: message };
     writeLog(logObj);
     if (level === "error") {
-      console.log((0, _chalk.gray)(new Date(timestamp)) + " [" + levelColors.error(level) + "]: " + white(message), console.trace());
+      console.log((0, _chalk.gray)(new Date(timestamp)) + " [" + levelColors.error(level) + "]: " + message, console.trace());
     } else {
       console.log((0, _chalk.gray)(new Date(timestamp)) + " [" + (levelColors[level] || levelColors.defaults)(level) + "]: " + message);
     }

@@ -24,7 +24,7 @@ exports["default"] = {
   stream: settingsStream,
   update: function update(newSettings) {
     writeSettings(newSettings);
-    settingsStream.onNext(newSettings);
+    settingsStream.onNext(Object.assign({}, settingsStream.getValue(), newSettings));
   }
 };
 module.exports = exports["default"];

@@ -7,7 +7,7 @@ describe("downloadTideData", () => {
       startTime: Date.now(),
       endTime: Date.now() + (1000 * 60 * 60 * 24 * 7)
     })
-    .subscribe((data) => {
+    .then((data) => {
       if(!Array.isArray(data)) {
         done(new Error("Data is not an array"));
       } else if(!data.length) {

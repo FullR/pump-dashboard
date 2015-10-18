@@ -13,7 +13,7 @@ export default function getHighTideTimes({
   endTime = Date.now() + oneMonth,
   stationId
 } = {}) {
-  return Observable.create((observer) => {
+  return new Promise((resolve, reject) => {
     const params = [
       "service=SOS",
       "request=GetObservation",
@@ -29,15 +29,12 @@ export default function getHighTideTimes({
     const url = `${baseUrl}?${params.join("&")}`;
     const req = request.get(url, (error, res, body) => {
       if(error) {
-        observer.onError(error);
+        reject(error);
       } else {
-        observer.onNext(body);
-        observer.onCompleted();
+        resolve(body);
       }
     });
-
-    return () => req.abort();
-  }).map(parseHighTideData);
+  }).then(parseHighTideData);
 }
 
 function parseHighTideData(data) {

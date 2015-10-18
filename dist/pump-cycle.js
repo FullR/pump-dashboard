@@ -13,10 +13,6 @@ var _rx2 = _interopRequireDefault(_rx);
 
 var _lodash = require("lodash");
 
-var _utilIsTrue = require("./util/isTrue");
-
-var _utilIsTrue2 = _interopRequireDefault(_utilIsTrue);
-
 var _utilAutoObservable = require("./util/autoObservable");
 
 var _utilAutoObservable2 = _interopRequireDefault(_utilAutoObservable);
@@ -37,6 +33,9 @@ var fromArray = Observable.fromArray;
 var concat = Observable.concat;
 
 var blankObserver = Observer.create(_lodash.noop, _lodash.noop, _lodash.noop);
+var isTrue = function isTrue(v) {
+  return !!v;
+};
 
 function runCycle() {
   var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -82,7 +81,7 @@ function runCycle() {
     function closeValves() {
       return Observable.create(function (observer) {
         log("Closing valves...");
-        var sub = valvesClosed.filter(_utilIsTrue2["default"]).take(1).subscribe(function () {
+        var sub = valvesClosed.filter(isTrue).take(1).subscribe(function () {
           log("Valves closed");
           observer.onNext();
           observer.onCompleted();
@@ -105,7 +104,7 @@ function runCycle() {
 
     function waitForPrime() {
       log("Waiting for prime signal...");
-      return inputs.primeComplete.filter(_utilIsTrue2["default"]).take(1)["do"](function () {
+      return inputs.primeComplete.filter(isTrue).take(1)["do"](function () {
         log("Prime signal received");
       });
     }
@@ -131,12 +130,12 @@ function runCycle() {
     function monitorTankAndPressure() {
       return Observable.create(function (observer) {
         log("Waiting for tank full and monitoring pressure");
-        var lowPressureObs = inputs.lowPressure.filter(_utilIsTrue2["default"]).take(1).map(function () {
+        var lowPressureObs = inputs.lowPressure.filter(isTrue).take(1).map(function () {
           throw new Error("low pressure");
         })["do"](function () {
           return log("Low pressure signal received");
         });
-        var tankFullObs = inputs.tankIsFull.filter(_utilIsTrue2["default"]).take(1);
+        var tankFullObs = inputs.tankIsFull.filter(isTrue).take(1);
 
         var sub = tankFullObs.merge(lowPressureObs).subscribe(function () {
           log("Finished pumping (tank is full)");
@@ -187,7 +186,7 @@ function runCycle() {
       cycleObserver.onCompleted();
     });
 
-    var emergencyStopSub = inputs.emergencyStop.filter(_utilIsTrue2["default"]).take(1).subscribe(function () {
+    var emergencyStopSub = inputs.emergencyStop.filter(isTrue).take(1).subscribe(function () {
       var error = new Error("Emergency stop signal received");
       error._isEmergencyStopError = true; // for testing only
       cycleObserver.onError(error);
