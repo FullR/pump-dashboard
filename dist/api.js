@@ -44,9 +44,9 @@ router.get("/api/logout", function (req, res) {
 });
 
 router.route("/api/schedule").get(_auth2["default"], function (req, res) {
-  res.json(_scheduleManager2["default"].stream.getValue());
+  res.json(_scheduleManager2["default"].model);
 }).post(_auth2["default"], function (req, res) {
-  console.log("Received schedule from client:", req.body);
+  log("info", "Received schedule settings from web client");
   var _req$body = req.body;
   var manual = _req$body.manual;
   var manualSchedule = _req$body.manualSchedule;
@@ -57,7 +57,7 @@ router.route("/api/schedule").get(_auth2["default"], function (req, res) {
     })) {
       res.status(400).json({ error: "Invalid times" });
     } else {
-      _scheduleManager2["default"].enableManualMode(manualSchedule);
+      _scheduleManager2["default"].enableManual(manualSchedule);
       res.end();
     }
   } else {

@@ -8,9 +8,13 @@ export default class ScheduleManager extends EventEmitter {
     this.manual = manual;
   }
 
-  get json() {
+  get model() {
     const {automaticSchedule, manualSchedule, manual} = this;
-    return JSON.stringify({automaticSchedule, manualSchedule, manual}, null, 2);
+    return {automaticSchedule, manualSchedule, manual};
+  }
+
+  get json() {
+    return JSON.stringify(this.model, null, 2);
   }
 
   get currentSchedule() {
@@ -21,8 +25,11 @@ export default class ScheduleManager extends EventEmitter {
     this.emit("change", this);
   }
 
-  enableManual() {
+  enableManual(newManualSchedule) {
     this.manual = true;
+    if(newManualSchedule) {
+      this.manualSchedule = newManualSchedule;
+    }
     this._change();
   }
 

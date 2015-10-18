@@ -42,8 +42,11 @@ var ScheduleManager = (function (_EventEmitter) {
     }
   }, {
     key: "enableManual",
-    value: function enableManual() {
+    value: function enableManual(newManualSchedule) {
       this.manual = true;
+      if (newManualSchedule) {
+        this.manualSchedule = newManualSchedule;
+      }
       this._change();
     }
   }, {
@@ -69,13 +72,18 @@ var ScheduleManager = (function (_EventEmitter) {
       this._change();
     }
   }, {
-    key: "json",
+    key: "model",
     get: function get() {
       var automaticSchedule = this.automaticSchedule;
       var manualSchedule = this.manualSchedule;
       var manual = this.manual;
 
-      return JSON.stringify({ automaticSchedule: automaticSchedule, manualSchedule: manualSchedule, manual: manual }, null, 2);
+      return { automaticSchedule: automaticSchedule, manualSchedule: manualSchedule, manual: manual };
+    }
+  }, {
+    key: "json",
+    get: function get() {
+      return JSON.stringify(this.model, null, 2);
     }
   }, {
     key: "currentSchedule",

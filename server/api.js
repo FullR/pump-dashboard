@@ -20,16 +20,16 @@ router.get("/api/logout", (req, res) => {
 
 router.route("/api/schedule")
   .get(auth, (req, res) => {
-    res.json(scheduleManager.stream.getValue());
+    res.json(scheduleManager.model);
   })
   .post(auth, (req, res) => {
-    console.log("Received schedule from client:", req.body);
+    log("info", "Received schedule settings from web client");
     const {manual, manualSchedule} = req.body;
     if(req.body && req.body.manual) {
       if(manualSchedule.some((t) => typeof t !== "number")) {
         res.status(400).json({error: "Invalid times"});
       } else {
-        scheduleManager.enableManualMode(manualSchedule);
+        scheduleManager.enableManual(manualSchedule);
         res.end();
       }
     } else {
