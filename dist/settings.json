@@ -23,5 +23,6 @@
   "pumpTimeout": 180000,
   "primeDelay": 80004,
   "postPumpValveDelay": 50000,
-  "pressureMonitorDelay": 300000
+  "pressureMonitorDelay": 300000,
+  "preTideDelay": 7200000
 }

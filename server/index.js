@@ -9,6 +9,7 @@ import scheduleManager from "./schedule-manager";
 import downloadTideData from "./download-tide-data";
 import testSystem from "./test-system";
 import pumpManager from "./pump-manager";
+import settingManager from "./setting-manager";
 
 const stationId = 9432780;
 const port = 8080;
@@ -28,16 +29,22 @@ server(port)
 
 function scheduleNextPump() {
   const {manual, currentSchedule} = scheduleManager;
+  const {preTideDelay} = settingManager.model;
+
   if(scheduler) {
     scheduler.stop();
   }
-  scheduler = new Scheduler(currentSchedule);
-  const {remaining, nextTime} = scheduler;
-  log("info", `Scheduling next pump job in ${manual ? "manual" : "automatic"} mode for ${new Date(nextTime)}. ${remaining < 0 ? "" : formatRemaining(remaining) + " remaining"}`);
+
+  scheduler = manual ? 
+    new Scheduler(currentSchedule) : 
+    new Scheduler(currentSchedule.map((t) => t - (preTideDelay || 0)));
+
+  log("info", `Scheduling next pump job in ${manual ? "manual" : "automatic"} mode for ${new Date(scheduler.nextTime)}. ${scheduler.remaining ? formatRemaining(scheduler.remaining) + " remaining" : ""}`);
 
   scheduler
     .once("empty", () => {
       scheduler.removeAllListeners();
+
       if(scheduleManager.manual) {
         log("error", "No remaining manual times. Please add new times or switch to automatic mode");
       } else {

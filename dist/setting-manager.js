@@ -4,27 +4,40 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _rx = require("rx");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _settingManagerClass = require("./setting-manager-class");
+
+var _settingManagerClass2 = _interopRequireDefault(_settingManagerClass);
 
 var _fs = require("fs");
 
-var settingsStream = new _rx.BehaviorSubject(require("./settings"));
+var _logManager = require("./log-manager");
 
-function writeSettings(settings) {
-  (0, _fs.writeFile)("./settings.json", JSON.stringify(settings, null, 2), function (error) {
+var filename = __dirname + "/settings.json";
+var settings = undefined;
+
+try {
+  settings = JSON.parse((0, _fs.readFileSync)(filename));
+} catch (error) {
+  (0, _logManager.log)("error", "Failed to load settings from file system: " + error);
+  settings = {};
+}
+
+var settingManager = new _settingManagerClass2["default"](settings);
+
+settingManager.on("change", saveSettings);
+
+function saveSettings() {
+  (0, _logManager.log)("info", "Writing new settings to file system");
+  (0, _fs.writeFile)(filename, settingManager.json, function (error) {
     if (error) {
-      console.log("Failed to write settings to file system:", error);
+      (0, _logManager.log)("error", "Failed to write settings to file system: " + error.message);
     } else {
-      console.log("Successfully wrote new settings to file system");
+      (0, _logManager.log)("info", "Settings successfully written to file system");
     }
   });
 }
 
-exports["default"] = {
-  stream: settingsStream,
-  update: function update(newSettings) {
-    writeSettings(newSettings);
-    settingsStream.onNext(Object.assign({}, settingsStream.getValue(), newSettings));
-  }
-};
+exports["default"] = settingManager;
 module.exports = exports["default"];

@@ -1,21 +1,30 @@
-import {BehaviorSubject} from "rx";
-import {writeFile} from "fs";
-const settingsStream = new BehaviorSubject(require("./settings"));
+import SettingManager from "./setting-manager-class";
+import {writeFile, readFileSync} from "fs";
+import {log} from "./log-manager";
 
-function writeSettings(settings) {
-  writeFile("./settings.json", JSON.stringify(settings, null, 2), (error) => {
+const filename = `${__dirname}/settings.json`;
+let settings;
+
+try {
+  settings = JSON.parse(readFileSync(filename));
+} catch(error) {
+  log("error", `Failed to load settings from file system: ${error}`);
+  settings = {};
+}
+
+const settingManager = new SettingManager(settings);
+
+settingManager.on("change", saveSettings);
+
+function saveSettings() {
+  log("info", "Writing new settings to file system");
+  writeFile(filename, settingManager.json, (error) => {
     if(error) {
-      console.log("Failed to write settings to file system:", error);
+      log("error", `Failed to write settings to file system: ${error.message}`);
     } else {
-      console.log("Successfully wrote new settings to file system");
+      log("info", "Settings successfully written to file system");
     }
   });
 }
 
-export default {
-  stream: settingsStream,
-  update(newSettings) {
-    writeSettings(newSettings);
-    settingsStream.onNext(Object.assign({}, settingsStream.getValue(), newSettings));
-  }
-};
+export default settingManager;

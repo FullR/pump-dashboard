@@ -7,8 +7,9 @@ import getEventValue from "../../util/getEventValue";
 import extendState from "../../util/extendState";
 import request from "superagent";
 import requestObservable from "../../util/requestObservable";
-const getEventOverZero = (event) => Math.max(0, getEventValue(event));
+
 let cachedSettings = null;
+const getEventOverZero = (event) => Math.max(0, getEventValue(event));
 
 function requestSettings() {
   return requestObservable(request("GET", "/api/settings")).map((res) => res.body);
@@ -22,10 +23,11 @@ export default class Settings extends React.Component {
   constructor(props) {
     super(props);
     if(cachedSettings) {
-      this.state = extend({}, cachedSettings, {loading: true});
+      this.state = extend({}, cachedSettings, {loading: true, message: null});
     } else {
       this.state = {
-        loading: true
+        loading: true,
+        message: null
       };
     }
 
@@ -40,7 +42,8 @@ export default class Settings extends React.Component {
       pumpTimeout: getEventOverZero,
       primeDelay: getEventOverZero,
       postPumpValveDelay: getEventOverZero,
-      pressureMonitorDelay: getEventOverZero
+      pressureMonitorDelay: getEventOverZero,
+      preTideDelay: getEventOverZero
     });
 
     this.submit = this.submit.bind(this);
@@ -49,12 +52,14 @@ export default class Settings extends React.Component {
   componentDidMount() {
     requestSettings().subscribe(
       (settings) => {
-        console.log("Got ", settings);
         cachedSettings = settings;
-        extendState(this, settings, {loading: false, error: null});
+        this.setState({
+          ...settings,
+          loading: false,
+          error: null
+        });
       },
       (error) => {
-        console.log("error", error);
         extendState(this, {error, loading: false});
       }
     );
@@ -63,10 +68,10 @@ export default class Settings extends React.Component {
   submit(event) {
     event.preventDefault();
     console.log("Submitting");
-    const {dynamic, ip, subnet, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay} = this.state;
+    const {dynamic, ip, subnet, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay, preTideDelay} = this.state;
     postSettings({dynamic, ip, subnet, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay})
       .subscribe(() => {
-        console.log("Settings submitted successfully");
+        this.setState({message: "Settings successfully submitted"});
       }, (error) => {
         console.log("Failed to submit settings:", error);
       });
@@ -74,17 +79,19 @@ export default class Settings extends React.Component {
 
   render() {
     const {
-      loading, error,
+      loading, error, message,
       dynamic, ip, subnet, gateway,
       closeValvesTimeout, primeTimeout, pumpTimeout,
-      primeDelay, pressureMonitorDelay, postPumpValveDelay
+      primeDelay, pressureMonitorDelay, postPumpValveDelay,
+      preTideDelay
     } = this.state;
     const formDisabled = error || loading;
     const {update} = this;
 
     return (
       <div>
-        {error && error.message ? <Alert type="danger"><strong>Error: </strong>{error.message}</Alert>: null}
+        {error ? <Alert type="danger"><strong>Error: </strong>{error.message || error}</Alert> : null}
+        {message ? <Alert type="info">{message}</Alert> : null}
         <Form type="horizontal" onSubmit={this.submit}>
           <FormField label="Network Settings">
             <FormField>
@@ -123,6 +130,10 @@ export default class Settings extends React.Component {
             <FormField label="Post-pump Delay" htmlFor="postPumpValveDelay">
               <FormInput type="number" disabled={formDisabled} pattern="[0-9]*" name="postPumpValveDelay" value={postPumpValveDelay} onChange={update.postPumpValveDelay}/>
               <FormNote>How long to wait after filling the tank to close the valves</FormNote>
+            </FormField>
+            <FormField label="Post-pump Delay" htmlFor="preTideDelay">
+              <FormInput type="number" disabled={formDisabled} pattern="[0-9]*" name="preTideDelay" value={preTideDelay} onChange={update.preTideDelay}/>
+              <FormNote>How long before the high tide to start the pump process (only in automatic mode)</FormNote>
             </FormField>
           </FormField>
 

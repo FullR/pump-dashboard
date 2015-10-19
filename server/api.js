@@ -5,6 +5,7 @@ import auth from "./auth";
 import logManager from "./log-manager";
 import settingManager from "./setting-manager";
 import scheduleManager from "./schedule-manager";
+import pumpManager from "./pump-manager";
 
 const {log} = logManager;
 const router = express.Router();
@@ -39,16 +40,30 @@ router.route("/api/schedule")
 
 router.route("/api/settings")
   .get(auth, (req, res) => {
-    res.json(settingManager.stream.getValue());
+    res.json(settingManager.model);
   })
   .post(auth, (req, res) => {
-    settingManager.update(req.body);
+    settingManager.set(req.body);
     res.end();
   });
 
 router.route("/api/logs")
   .get(auth, (req, res) => {
     res.json(logManager.getLogs());
+  });
+
+router.route("/api/pump")
+  .post(auth, (req, res) => {
+    log("info", "Received manual pump signal from client. Starting pump cycle");
+    pumpManager.start()
+      .then(() => {
+        log("info", "Pumping completed");
+      })
+      .catch((error) => {
+        log("error", `Pumping failed: ${error.message}`);
+      });
+
+    res.end();
   });
 
 router.get("/", (req, res) => {

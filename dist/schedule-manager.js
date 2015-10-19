@@ -14,13 +14,29 @@ var _scheduleManagerClass2 = _interopRequireDefault(_scheduleManagerClass);
 
 var _logManager = require("./log-manager");
 
-var scheduleManager = new _scheduleManagerClass2["default"](require("./schedule")).on("change", saveScheduleSettings);
+var scheduleManager = undefined;
+var scheduleData = undefined;
+
+try {
+  scheduleData = require("./schedule");
+} catch (error) {
+  (0, _logManager.log)("error", "Failed to load schedule settings from file system: " + error.message);
+  scheduleData = {
+    manual: false,
+    automaticSchedule: [],
+    manualSchedule: []
+  };
+}
+
+scheduleManager = new _scheduleManagerClass2["default"](scheduleData).on("change", saveScheduleSettings);
 
 function saveScheduleSettings() {
   (0, _logManager.log)("info", "Writing new schedule settings to file system");
   (0, _fs.writeFile)(__dirname + "/schedule.json", scheduleManager.json, function (error) {
     if (error) {
-      (0, _logManager.log)("error", "Failed to write schedule settings to file: " + error.message);
+      (0, _logManager.log)("error", "Failed to write schedule settings to file system: " + error.message);
+    } else {
+      (0, _logManager.log)("info", "Schedule settings successfully written to file system");
     }
   });
 }

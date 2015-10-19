@@ -30,6 +30,10 @@ var _scheduleManager = require("./schedule-manager");
 
 var _scheduleManager2 = _interopRequireDefault(_scheduleManager);
 
+var _pumpManager = require("./pump-manager");
+
+var _pumpManager2 = _interopRequireDefault(_pumpManager);
+
 var log = _logManager2["default"].log;
 
 var router = _express2["default"].Router();
@@ -66,14 +70,25 @@ router.route("/api/schedule").get(_auth2["default"], function (req, res) {
 });
 
 router.route("/api/settings").get(_auth2["default"], function (req, res) {
-  res.json(_settingManager2["default"].stream.getValue());
+  res.json(_settingManager2["default"].model);
 }).post(_auth2["default"], function (req, res) {
-  _settingManager2["default"].update(req.body);
+  _settingManager2["default"].set(req.body);
   res.end();
 });
 
 router.route("/api/logs").get(_auth2["default"], function (req, res) {
   res.json(_logManager2["default"].getLogs());
+});
+
+router.route("/api/pump").post(_auth2["default"], function (req, res) {
+  log("info", "Received manual pump signal from client. Starting pump cycle");
+  _pumpManager2["default"].start().then(function () {
+    log("info", "Pumping completed");
+  })["catch"](function (error) {
+    log("error", "Pumping failed: " + error.message);
+  });
+
+  res.end();
 });
 
 router.get("/", function (req, res) {

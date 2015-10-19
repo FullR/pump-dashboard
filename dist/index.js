@@ -16,9 +16,9 @@ var _utilFormatRemaining = require("./util/format-remaining");
 
 var _utilFormatRemaining2 = _interopRequireDefault(_utilFormatRemaining);
 
-var _scheduler2 = require("./scheduler");
+var _scheduler = require("./scheduler");
 
-var _scheduler3 = _interopRequireDefault(_scheduler2);
+var _scheduler2 = _interopRequireDefault(_scheduler);
 
 var _scheduleManager = require("./schedule-manager");
 
@@ -35,6 +35,10 @@ var _testSystem2 = _interopRequireDefault(_testSystem);
 var _pumpManager = require("./pump-manager");
 
 var _pumpManager2 = _interopRequireDefault(_pumpManager);
+
+var _settingManager = require("./setting-manager");
+
+var _settingManager2 = _interopRequireDefault(_settingManager);
 
 var stationId = 9432780;
 var port = 8080;
@@ -53,16 +57,18 @@ scheduleNextPump();
 function scheduleNextPump() {
   var manual = _scheduleManager2["default"].manual;
   var currentSchedule = _scheduleManager2["default"].currentSchedule;
+  var preTideDelay = _settingManager2["default"].model.preTideDelay;
 
   if (scheduler) {
     scheduler.stop();
   }
-  scheduler = new _scheduler3["default"](currentSchedule);
-  var _scheduler = scheduler;
-  var remaining = _scheduler.remaining;
-  var nextTime = _scheduler.nextTime;
 
-  (0, _logManager.log)("info", "Scheduling next pump job in " + (manual ? "manual" : "automatic") + " mode for " + new Date(nextTime) + ". " + (remaining < 0 ? "" : (0, _utilFormatRemaining2["default"])(remaining) + " remaining"));
+  scheduler = manual ? new _scheduler2["default"](currentSchedule) : new _scheduler2["default"](currentSchedule.map(function (t) {
+    return t - (preTideDelay || 0);
+  }));
+
+  (0, _logManager.log)("info", "preTideDelay = " + preTideDelay);
+  (0, _logManager.log)("info", "Scheduling next pump job in " + (manual ? "manual" : "automatic") + " mode for " + new Date(scheduler.nextTime) + ". " + (scheduler.remaining ? (0, _utilFormatRemaining2["default"])(scheduler.remaining) + " remaining" : ""));
 
   scheduler.once("empty", function () {
     scheduler.removeAllListeners();
