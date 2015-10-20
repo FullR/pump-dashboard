@@ -8,7 +8,7 @@ export default class Scheduler extends EventEmitter {
 
   get nextTime() {
     const now = Date.now();
-    const validTimes = this.times.filter((t) => t >= now);
+    const validTimes = this.times.filter((t) => t > now);
     if(!validTimes.length) {
       return null;
     }
@@ -27,8 +27,8 @@ export default class Scheduler extends EventEmitter {
       this.emit("empty");
     } else {
       this._timeout = setTimeout(() => {
-        this.emit("interval");
-        this.next();
+        this.emit("interval", nextTime);
+        this.scheduleNext();
       }, nextTime - now);
     }
 

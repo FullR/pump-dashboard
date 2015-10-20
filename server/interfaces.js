@@ -1,32 +1,53 @@
-import cp from "child_process";
-import {normalize, join} from "path";
-import network from "network";
+const s = "\\s+"
+const ipMatch = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}";
+const parseIp = (s) => s.split(".").map((c) => parseInt(c));
 
-const local = (path) => normalize(join(__dirname, path));
-const readScript = local("/network-scripts/read-interface.awk");
-const writeScript = local("/network-scripts/write-interface.awk");
+function getDeviceRegExp(device) {
+  const deviceMatch = `[^#]iface${s}${device}${s}inet${s}(static|dhcp|manual)`;
+  const staticMatch = `address${s}(${ipMatch})${s}netmask${s}(${ipMatch})${s}gateway${s}(${ipMatch})`;
+  const manualMatch = `(up|down)${s}(.*)${s}(up|down)${s}(.*)`;
 
-function execFile(filename, args, options) {
-  return new Promise((resolve, reject) => {
-    cp.execFile(filename, args, options, (error, stdout, stderr) => {
-      if(error) reject(error);
-      else resolve({stdout, stderr});
-    });
-  });
+  return new RegExp(`${deviceMatch}${s}(?:(?:${staticMatch})|(?:${manualMatch}))?`);
 }
 
-function read(interfacesPath, interfaceName) {
-  return new Promise((resolve, reject) => {
-    network.get_interfaces_list((error, data) => {
-      console.log(data);
-      if(error) reject(error);
-      else resolve(data);
-    });
-  });
+function parseInterface(ifaceData, device) {
+  const deviceRegExp = getDeviceRegExp(device);
+  const match = ifaceData.match(deviceRegExp);
+  let type;
+
+  if(!match) {
+    throw new Error("device not found or malformed interfaces string");
+  } else {
+    type = match[1];
+  }
+
+  switch(type) {
+    case "manual": return {
+      type, 
+      up: match[6], 
+      down: match[8]
+    };
+    case "static": return {
+      type, 
+      address: parseIp(match[2]),
+      netmask: parseIp(match[3]),
+      gateway: parseIp(match[4])
+    }
+    default: return {type};
+  }
 }
 
-function write(interfaceName, {auto, ip, subnet, gateway}={}) {
-
+function replaceInterface(ifaceData, device, {type="dhcp", address, netmask, gateway, up, down}) {
+  const deviceRegExp = getDeviceRegExp(device);
+  if(type === "dhcp") {
+    return ifaceData.replace(deviceRegExp, () => `iface ${device} inet dhcp`);
+  } else if(type === "static") {
+    return ifaceData.replace(deviceRegExp, () => `iface ${device} inet static\n  address ${address.join(".")}\n  netmask ${netmask.join(".")}\n  gateway ${gateway.join(".")}`);
+  } else if(type === "manual") {
+    return ifaceData.replace(deviceRegExp, () => `iface ${device} inet manual\n  up ${up}\n  down ${down}`);
+  } else {
+    throw new Error(`Unrecoginzed interface type: ${type}`);
+  }
 }
 
-export default {read, write};
+export default {parseInterface, replaceInterface};

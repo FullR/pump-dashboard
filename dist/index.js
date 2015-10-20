@@ -67,11 +67,11 @@ function scheduleNextPump() {
     return t - (preTideDelay || 0);
   }));
 
-  (0, _logManager.log)("info", "preTideDelay = " + preTideDelay);
   (0, _logManager.log)("info", "Scheduling next pump job in " + (manual ? "manual" : "automatic") + " mode for " + new Date(scheduler.nextTime) + ". " + (scheduler.remaining ? (0, _utilFormatRemaining2["default"])(scheduler.remaining) + " remaining" : ""));
 
   scheduler.once("empty", function () {
     scheduler.removeAllListeners();
+
     if (_scheduleManager2["default"].manual) {
       (0, _logManager.log)("error", "No remaining manual times. Please add new times or switch to automatic mode");
     } else {

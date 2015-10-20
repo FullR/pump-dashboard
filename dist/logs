@@ -140,3 +140,10 @@
 {"timestamp": 1445297369920, "level": "info", "message": "preTideDelay = 7200000"}
 {"timestamp": 1445297369921, "level": "info", "message": "Scheduling next pump job in automatic mode for Tue Oct 20 2015 04:34:00 GMT-0700 (PDT). 12 hours, 4 minutes remaining"}
 {"timestamp": 1445297369923, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1445357425616, "level": "info", "message": "Scheduling next pump job in automatic mode for Wed Dec 31 1969 16:00:00 GMT-0800 (PST). -16729 day, -17 hour remaining"}
+{"timestamp": 1445357425619, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1445357425982, "level": "info", "message": "Web server successfully started on port 8080"}
+{"timestamp": 1445357426527, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1445357426528, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1445357426529, "level": "info", "message": "Scheduling next pump job in automatic mode for Tue Oct 20 2015 15:41:00 GMT-0700 (PDT). 6 hours, 30 minutes remaining"}
+{"timestamp": 1445357426531, "level": "info", "message": "Schedule settings successfully written to file system"}

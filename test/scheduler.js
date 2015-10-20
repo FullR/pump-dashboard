@@ -18,7 +18,7 @@ describe("scheduler", () => {
 
     scheduler.scheduleNext();
 
-    setTimeout(() => done(new Error("Scheduler didn't emit empty")), 1000);
+    setTimeout(() => done(new Error("Scheduler didn't emit empty")), 5000);
   });
 
   it("should wait for the closest time in its times and emit 'interval'", (done) => {
@@ -32,18 +32,23 @@ describe("scheduler", () => {
       now + 3000
     ];
     const scheduler = new Scheduler(times);
-    scheduler.once("interval", () => {
+    scheduler
+    .once("interval", () => {
       if(isNearNow(nextTime)) {
         done();
       } else {
         done(new Error("interval emitted at the wrong time: " + (Date.now() - nextTime)));
       }
-    }).scheduleNext();
+    })
+    .once("empty", () => {
+      done(new Error("Scheduler emitted empty"));
+    })
+    .scheduleNext();
 
-    setTimeout(() => done(new Error("Scheduler took too long")), 500);
+    setTimeout(() => done(new Error("Scheduler took too long")), 5000);
   });
 
-  it("should requeue the next closest time after each interval then emit empty once it's complete", () => {
+  it("should requeue the next closest time after each interval then emit empty once it's complete", (done) => {
     const now = Date.now();
     const first = now + 100;
     const second = now + 200;
@@ -51,39 +56,24 @@ describe("scheduler", () => {
     const times = [first, second, third];
     const scheduler = new Scheduler(times);
     const fail = () => done("Emitted interval at the wrong time");
-    let firstDone = false;
-    let secondDone = false;
-    let thirdDone = false;
+    const fired = [];
 
-    scheduler.once("interval", () => {
-      if(isNearNow(first)) {
-        firstDone = true;
-        scheduler.once("interval", () => {
-          if(isNearNow(second)) {
-            secondDone = true;
-            scheduler.once("interval", () => {
-              thirdDone = true;
-              if(!isNearNow()) {
-                fail();
-              }
-            });
-          } else {
-            fail();
-          }
-        });
-      } else {
-        fail();
-      }
+    scheduler.on("interval", (time) => {
+      fired.push(time);
     });
 
     scheduler.once("empty", () => {
-      if(firstDone && secondDone && thirdDone) {
-        done();
+      if(times.length !== fired.length) {
+        done(new Error("Scheduler emitted an incorrect number of interval events"));
+      } else if(times.some((v, i) => v !== fired[i])) {
+        done(new Error("Scheduler emitted interval events in an incorrect order: " + fired + " " + times));
       } else {
-        done(new Error("Scheduler emitted empty before completing all valid scheduled times"));
+        done();
       }
     });
 
-    setTimeout(() => done(new Error("Took too long")), (third - now) + 1000);
+    scheduler.scheduleNext();
+
+    setTimeout(() => done(new Error("Took too long")), (third - now) + 5000);
   });
 })
