@@ -1,12 +1,12 @@
 {
   "dynamic": false,
-  "ip": [
+  "address": [
     184,
     168,
     1,
     2
   ],
-  "subnet": [
+  "natmask": [
     255,
     255,
     255,

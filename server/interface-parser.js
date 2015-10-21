@@ -40,11 +40,11 @@ function parseInterface(ifaceData, device) {
 function replaceInterface(ifaceData, device, {type="dhcp", address, netmask, gateway, up, down}) {
   const deviceRegExp = getDeviceRegExp(device);
   if(type === "dhcp") {
-    return ifaceData.replace(deviceRegExp, () => `iface ${device} inet dhcp`);
+    return ifaceData.replace(deviceRegExp, () => `\n\niface ${device} inet dhcp\n`);
   } else if(type === "static") {
-    return ifaceData.replace(deviceRegExp, () => `iface ${device} inet static\n  address ${address.join(".")}\n  netmask ${netmask.join(".")}\n  gateway ${gateway.join(".")}`);
+    return ifaceData.replace(deviceRegExp, () => `\n\niface ${device} inet static\n  address ${address.join(".")}\n  netmask ${netmask.join(".")}\n  gateway ${gateway.join(".")}\n`);
   } else if(type === "manual") {
-    return ifaceData.replace(deviceRegExp, () => `iface ${device} inet manual\n  up ${up}\n  down ${down}`);
+    return ifaceData.replace(deviceRegExp, () => `\n\niface ${device} inet manual\n  up ${up}\n  down ${down}\n`);
   } else {
     throw new Error(`Unrecoginzed interface type: ${type}`);
   }

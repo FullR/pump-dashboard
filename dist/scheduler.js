@@ -39,8 +39,8 @@ var Scheduler = (function (_EventEmitter) {
         this.emit("empty");
       } else {
         this._timeout = setTimeout(function () {
-          _this.emit("interval");
-          _this.next();
+          _this.emit("interval", nextTime);
+          _this.scheduleNext();
         }, nextTime - now);
       }
 
@@ -56,7 +56,7 @@ var Scheduler = (function (_EventEmitter) {
     get: function get() {
       var now = Date.now();
       var validTimes = this.times.filter(function (t) {
-        return t >= now;
+        return t > now;
       });
       if (!validTimes.length) {
         return null;

@@ -12,8 +12,8 @@ function isAddrDiff(addr1=[], addr2=[]) {
 export default class SettingManager extends EventEmitter {
   constructor({
     auto=true, 
-    ip=[0, 0, 0, 0], 
-    subnet=[255, 255, 255, 0], 
+    address=[0, 0, 0, 0], 
+    netmask=[255, 255, 255, 0], 
     gateway=[192, 168, 1, 1],
     closeValvesTimeout=0,
     primeTimeout=0,
@@ -26,8 +26,8 @@ export default class SettingManager extends EventEmitter {
     super();
     this.model = {
       auto,
-      ip,
-      subnet,
+      address,
+      netmask,
       gateway,
       closeValvesTimeout,
       primeTimeout,
@@ -48,8 +48,8 @@ export default class SettingManager extends EventEmitter {
     const model = this.model = Object.assign({}, this.model, newSettings);
 
     if((!!model.auto) !== (!!lastModel.auto) || 
-      isAddrDiff(model.ip, lastModel.ip) || 
-      isAddrDiff(model.subnet, lastModel.subnet) || 
+      isAddrDiff(model.address, lastModel.address) || 
+      isAddrDiff(model.netmask, lastModel.netmask) || 
       isAddrDiff(model.gateway, lastModel.gateway)) {
       this.emit("network-change", this.model);
     }

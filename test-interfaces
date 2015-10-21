@@ -21,5 +21,8 @@ iface eth2 inet static
     address 192.168.1.2
     netmask 255.255.255.0
     gateway 192.168.1.254
- 
-iface eth0 inet dhcp
+
+iface eth0 inet static
+  address 3.0.0.0
+  netmask 0.0.0.0
+  gateway 0.0.0.0

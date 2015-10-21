@@ -6,27 +6,27 @@ describe("SettingManager", () => {
 
     settingManager.once("change", () => done());
     settingManager.set({
-      ip: [1,1,1,1]
+      address: [1,1,1,1]
     });
     setTimeout(() => done(new Error("SettingManager did not emit a change event when modified")), 1000);
   });
 
   it("should emit a network-change event when any network setting changes", (done) => {
-    const settingManager = new SettingManager({ip: [2, 3, 4, 5]});
+    const settingManager = new SettingManager({address: [2, 3, 4, 5]});
 
     settingManager.once("network-change", () => done());
     settingManager.set({
-      ip: [1,1,1,1]
+      address: [1,1,1,1]
     });
     setTimeout(() => done(new Error("SettingManager did not emit a change event when modified")), 1000);
   });
 
   it("should not emit a network-change event when replacing a network value with an identical value", () => {
-    const settingManager = new SettingManager({ip: [1, 1, 1, 1]});
+    const settingManager = new SettingManager({address: [1, 1, 1, 1]});
 
     settingManager.once("network-change", () => done(new Error("emitted a network-change event despite the new value being identical to the old value")));
     settingManager.set({
-      ip: [1,1,1,1]
+      address: [1,1,1,1]
     });
     setTimeout(() => done(new Error()), 300);
   });

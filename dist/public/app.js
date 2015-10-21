@@ -31198,7 +31198,8 @@
 	var tableStyle = {
 	  maxHeight: 700,
 	  overflow: "auto",
-	  marginBottom: 30
+	  marginBottom: 30,
+	  borderBottom: "1px solid #aaa"
 	};
 
 	var levelColors = {
@@ -31207,9 +31208,16 @@
 	  error: "#AA0000"
 	};
 
+	var downloadStyle = {
+	  display: "inline-block"
+	};
+
 	function requestLogs() {
 	  return (0, _utilRequestObservable2["default"])((0, _superagent2["default"])("GET", "/api/logs")).map(function (res) {
-	    return res.body;
+	    return res.body.map(function (log, i) {
+	      log.id = i;
+	      return log;
+	    });
 	  });
 	}
 
@@ -31295,6 +31303,11 @@
 	          )
 	        ),
 	        _react2["default"].createElement(
+	          _elemental.Button,
+	          { href: (0, _utilJsonDownloadURL2["default"])(filteredLogs), download: "logs-" + (filter || "all") + "-" + Date.now() + ".json", style: downloadStyle },
+	          "Download"
+	        ),
+	        _react2["default"].createElement(
 	          "div",
 	          { style: tableStyle },
 	          _react2["default"].createElement(
@@ -31333,7 +31346,9 @@
 	            _react2["default"].createElement(
 	              "tbody",
 	              null,
-	              filteredLogs.map(function (_ref) {
+	              filteredLogs.sort(function (a, b) {
+	                return b.timestamp - a.timestamp;
+	              }).map(function (_ref) {
 	                var timestamp = _ref.timestamp;
 	                var level = _ref.level;
 	                var message = _ref.message;
@@ -31364,11 +31379,6 @@
 	            ),
 	            _react2["default"].createElement("tfoot", null)
 	          )
-	        ),
-	        _react2["default"].createElement(
-	          _elemental.Button,
-	          { href: (0, _utilJsonDownloadURL2["default"])(filteredLogs), download: "logs-" + (filter || "all") + "-" + Date.now() + ".json" },
-	          "Download"
 	        )
 	      );
 	    }
@@ -57288,7 +57298,11 @@
 
 	function requestSettings() {
 	  return (0, _utilRequestObservable2["default"])((0, _superagent2["default"])("GET", "/api/settings")).map(function (res) {
-	    return res.body;
+	    return (0, _lodash.defaults)(res.body || {}, {
+	      address: [0, 0, 0, 0],
+	      netmask: [0, 0, 0, 0],
+	      gateway: [0, 0, 0, 0]
+	    });
 	  });
 	}
 
@@ -57314,9 +57328,9 @@
 
 	    this.update = _utilStateUpdater2["default"].many(this, {
 	      loading: _lodash.identity,
-	      dynamic: _lodash.identity,
-	      ip: _lodash.identity,
-	      subnet: _lodash.identity,
+	      auto: _lodash.identity,
+	      address: _lodash.identity,
+	      netmask: _lodash.identity,
 	      gateway: _lodash.identity,
 	      closeValvesTimeout: getEventOverZero,
 	      primeTimeout: getEventOverZero,
@@ -57353,9 +57367,9 @@
 	      event.preventDefault();
 	      console.log("Submitting");
 	      var _state = this.state;
-	      var dynamic = _state.dynamic;
-	      var ip = _state.ip;
-	      var subnet = _state.subnet;
+	      var auto = _state.auto;
+	      var address = _state.address;
+	      var netmask = _state.netmask;
 	      var gateway = _state.gateway;
 	      var closeValvesTimeout = _state.closeValvesTimeout;
 	      var primeTimeout = _state.primeTimeout;
@@ -57365,7 +57379,7 @@
 	      var pressureMonitorDelay = _state.pressureMonitorDelay;
 	      var preTideDelay = _state.preTideDelay;
 
-	      postSettings({ dynamic: dynamic, ip: ip, subnet: subnet, gateway: gateway, closeValvesTimeout: closeValvesTimeout, primeTimeout: primeTimeout, pumpTimeout: pumpTimeout, primeDelay: primeDelay, postPumpValveDelay: postPumpValveDelay, pressureMonitorDelay: pressureMonitorDelay }).subscribe(function () {
+	      postSettings({ auto: auto, address: address, netmask: netmask, gateway: gateway, closeValvesTimeout: closeValvesTimeout, primeTimeout: primeTimeout, pumpTimeout: pumpTimeout, primeDelay: primeDelay, postPumpValveDelay: postPumpValveDelay, pressureMonitorDelay: pressureMonitorDelay }).subscribe(function () {
 	        _this2.setState({ message: "Settings successfully submitted" });
 	      }, function (error) {
 	        console.log("Failed to submit settings:", error);
@@ -57378,9 +57392,9 @@
 	      var loading = _state2.loading;
 	      var error = _state2.error;
 	      var message = _state2.message;
-	      var dynamic = _state2.dynamic;
-	      var ip = _state2.ip;
-	      var subnet = _state2.subnet;
+	      var auto = _state2.auto;
+	      var address = _state2.address;
+	      var netmask = _state2.netmask;
 	      var gateway = _state2.gateway;
 	      var closeValvesTimeout = _state2.closeValvesTimeout;
 	      var primeTimeout = _state2.primeTimeout;
@@ -57423,17 +57437,15 @@
 	              _react2["default"].createElement(
 	                "div",
 	                { className: "inline-controls" },
-	                _react2["default"].createElement(_elemental.Radio, { label: "Static", checked: !dynamic, onChange: function () {
-	                    return update.dynamic(false);
+	                _react2["default"].createElement(_elemental.Radio, { label: "Static", checked: !auto, onChange: function () {
+	                    return update.auto(false);
 	                  } }),
-	                _react2["default"].createElement(_elemental.Radio, { label: "Dynamic", checked: dynamic, onChange: function () {
-	                    return update.dynamic(true);
+	                _react2["default"].createElement(_elemental.Radio, { label: "DHCP", checked: auto, onChange: function () {
+	                    return update.auto(true);
 	                  } })
 	              )
 	            ),
-	            _react2["default"].createElement(_ipInput2["default"], { label: "Ip Address", disabled: formDisabled || dynamic, value: ip, onChange: update.ip }),
-	            _react2["default"].createElement(_ipInput2["default"], { label: "Subnet Mask", disabled: formDisabled || dynamic, value: subnet, onChange: update.subnet }),
-	            _react2["default"].createElement(_ipInput2["default"], { label: "Default Gateway", disabled: formDisabled || dynamic, value: gateway, onChange: update.gateway })
+	            auto ? null : [_react2["default"].createElement(_ipInput2["default"], { label: "Ip Address", disabled: formDisabled || auto, value: address, onChange: update.address }), _react2["default"].createElement(_ipInput2["default"], { label: "Subnet Mask", disabled: formDisabled || auto, value: netmask, onChange: update.netmask }), _react2["default"].createElement(_ipInput2["default"], { label: "Default Gateway", disabled: formDisabled || auto, value: gateway, onChange: update.gateway })]
 	          ),
 	          _react2["default"].createElement("hr", null),
 	          _react2["default"].createElement(

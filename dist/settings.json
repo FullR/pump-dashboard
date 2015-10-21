@@ -1,22 +1,22 @@
 {
-  "dynamic": false,
-  "ip": [
-    184,
-    168,
-    1,
-    2
+  "auto": false,
+  "address": [
+    3,
+    0,
+    0,
+    0
   ],
-  "subnet": [
-    255,
-    255,
-    255,
+  "netmask": [
+    0,
+    0,
+    0,
     0
   ],
   "gateway": [
-    192,
-    168,
-    1,
-    1
+    0,
+    0,
+    0,
+    0
   ],
   "closeValvesTimeout": 30000,
   "primeTimeout": 120000,

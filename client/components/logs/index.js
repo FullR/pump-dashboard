@@ -16,7 +16,8 @@ const filters = {
 const tableStyle = {
   maxHeight: 700,
   overflow: "auto",
-  marginBottom: 30
+  marginBottom: 30,
+  borderBottom: "1px solid #aaa"
 };
 
 const levelColors = {
@@ -25,8 +26,15 @@ const levelColors = {
   error: "#AA0000"
 };
 
+const downloadStyle = {
+  display: "inline-block"
+};
+
 function requestLogs() {
-  return requestObservable(request("GET", "/api/logs")).map((res) => res.body);
+  return requestObservable(request("GET", "/api/logs")).map((res) => res.body.map((log, i) => {
+    log.id = i;
+    return log;
+  }));
 }
 
 export default class Logs extends React.Component {
@@ -74,6 +82,7 @@ export default class Logs extends React.Component {
             <Radio label="error" checked={filter === "error"} onChange={() => this.setFilter("error")}/>
           </div>
         </FormField>
+        <Button href={jsonDownloadURL(filteredLogs)} download={`logs-${filter || "all"}-${Date.now()}.json`} style={downloadStyle}>Download</Button>
         <div style={tableStyle}>
           <Table>
             <colgroup>
@@ -89,7 +98,7 @@ export default class Logs extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {filteredLogs.map(({timestamp, level, message}) => {
+              {filteredLogs.sort((a, b) => b.timestamp - a.timestamp).map(({timestamp, level, message}) => {
                 const levelStyle = {
                   color: levelColors[level]
                 };
@@ -105,7 +114,6 @@ export default class Logs extends React.Component {
             <tfoot></tfoot>
           </Table>
         </div>
-        <Button href={jsonDownloadURL(filteredLogs)} download={`logs-${filter || "all"}-${Date.now()}.json`}>Download</Button>
       </div>
     );
   }

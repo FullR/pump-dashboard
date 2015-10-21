@@ -34,10 +34,10 @@ var SettingManager = (function (_EventEmitter) {
 
     var _ref$auto = _ref.auto;
     var auto = _ref$auto === undefined ? true : _ref$auto;
-    var _ref$ip = _ref.ip;
-    var ip = _ref$ip === undefined ? [0, 0, 0, 0] : _ref$ip;
-    var _ref$subnet = _ref.subnet;
-    var subnet = _ref$subnet === undefined ? [255, 255, 255, 0] : _ref$subnet;
+    var _ref$address = _ref.address;
+    var address = _ref$address === undefined ? [0, 0, 0, 0] : _ref$address;
+    var _ref$netmask = _ref.netmask;
+    var netmask = _ref$netmask === undefined ? [255, 255, 255, 0] : _ref$netmask;
     var _ref$gateway = _ref.gateway;
     var gateway = _ref$gateway === undefined ? [192, 168, 1, 1] : _ref$gateway;
     var _ref$closeValvesTimeout = _ref.closeValvesTimeout;
@@ -60,8 +60,8 @@ var SettingManager = (function (_EventEmitter) {
     _get(Object.getPrototypeOf(SettingManager.prototype), "constructor", this).call(this);
     this.model = {
       auto: auto,
-      ip: ip,
-      subnet: subnet,
+      address: address,
+      netmask: netmask,
       gateway: gateway,
       closeValvesTimeout: closeValvesTimeout,
       primeTimeout: primeTimeout,
@@ -71,7 +71,6 @@ var SettingManager = (function (_EventEmitter) {
       pressureMonitorDelay: pressureMonitorDelay,
       preTideDelay: preTideDelay
     };
-    console.log(this.model);
   }
 
   _createClass(SettingManager, [{
@@ -82,7 +81,7 @@ var SettingManager = (function (_EventEmitter) {
       var lastModel = this.model;
       var model = this.model = Object.assign({}, this.model, newSettings);
 
-      if (!!model.auto !== !!lastModel.auto || isAddrDiff(model.ip, lastModel.ip) || isAddrDiff(model.subnet, lastModel.subnet) || isAddrDiff(model.gateway, lastModel.gateway)) {
+      if (!!model.auto !== !!lastModel.auto || isAddrDiff(model.address, lastModel.address) || isAddrDiff(model.netmask, lastModel.netmask) || isAddrDiff(model.gateway, lastModel.gateway)) {
         this.emit("network-change", this.model);
       }
 

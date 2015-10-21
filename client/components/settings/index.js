@@ -1,6 +1,6 @@
 import React from "react";
 import {Form, FormField, FormInput, FormNote, Button, Label, Checkbox, Alert, Radio} from "elemental";
-import {identity, extend} from "lodash";
+import {identity, extend, defaults} from "lodash";
 import IpInput from "./ipInput";
 import stateUpdater from "../../util/stateUpdater";
 import getEventValue from "../../util/getEventValue";
@@ -12,7 +12,13 @@ let cachedSettings = null;
 const getEventOverZero = (event) => Math.max(0, getEventValue(event));
 
 function requestSettings() {
-  return requestObservable(request("GET", "/api/settings")).map((res) => res.body);
+  return requestObservable(request("GET", "/api/settings")).map((res) => {
+    return defaults(res.body || {}, {
+      address: [0, 0, 0, 0],
+      netmask: [0, 0, 0, 0],
+      gateway: [0, 0, 0, 0]
+    });
+  });
 }
 
 function postSettings(settings) {
@@ -33,9 +39,9 @@ export default class Settings extends React.Component {
 
     this.update = stateUpdater.many(this, {
       loading: identity,
-      dynamic: identity,
-      ip: identity,
-      subnet: identity,
+      auto: identity,
+      address: identity,
+      netmask: identity,
       gateway: identity,
       closeValvesTimeout: getEventOverZero,
       primeTimeout: getEventOverZero,
@@ -68,8 +74,8 @@ export default class Settings extends React.Component {
   submit(event) {
     event.preventDefault();
     console.log("Submitting");
-    const {dynamic, ip, subnet, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay, preTideDelay} = this.state;
-    postSettings({dynamic, ip, subnet, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay})
+    const {auto, address, netmask, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay, preTideDelay} = this.state;
+    postSettings({auto, address, netmask, gateway, closeValvesTimeout, primeTimeout, pumpTimeout, primeDelay, postPumpValveDelay, pressureMonitorDelay})
       .subscribe(() => {
         this.setState({message: "Settings successfully submitted"});
       }, (error) => {
@@ -80,7 +86,7 @@ export default class Settings extends React.Component {
   render() {
     const {
       loading, error, message,
-      dynamic, ip, subnet, gateway,
+      auto, address, netmask, gateway,
       closeValvesTimeout, primeTimeout, pumpTimeout,
       primeDelay, pressureMonitorDelay, postPumpValveDelay,
       preTideDelay
@@ -96,13 +102,15 @@ export default class Settings extends React.Component {
           <FormField label="Network Settings">
             <FormField>
               <div className="inline-controls">
-                <Radio label="Static" checked={!dynamic} onChange={() => update.dynamic(false)}/>
-                <Radio label="Dynamic" checked={dynamic} onChange={() => update.dynamic(true)}/>
+                <Radio label="Static" checked={!auto} onChange={() => update.auto(false)}/>
+                <Radio label="DHCP" checked={auto} onChange={() => update.auto(true)}/>
               </div>
             </FormField>
-            <IpInput label="Ip Address" disabled={formDisabled || dynamic} value={ip} onChange={update.ip}/>
-            <IpInput label="Subnet Mask" disabled={formDisabled || dynamic} value={subnet} onChange={update.subnet}/>
-            <IpInput label="Default Gateway" disabled={formDisabled || dynamic} value={gateway} onChange={update.gateway}/>
+            {auto ? null : [
+              <IpInput label="Ip Address" disabled={formDisabled || auto} value={address} onChange={update.address}/>,
+              <IpInput label="Subnet Mask" disabled={formDisabled || auto} value={netmask} onChange={update.netmask}/>,
+              <IpInput label="Default Gateway" disabled={formDisabled || auto} value={gateway} onChange={update.gateway}/>
+            ]}
           </FormField>
           <hr/>
           <FormNote>All times are in milliseconds</FormNote>
