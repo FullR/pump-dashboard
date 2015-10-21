@@ -37,7 +37,6 @@ export default class SettingManager extends EventEmitter {
       pressureMonitorDelay,
       preTideDelay
     };
-    console.log(this.model);
   }
 
   get json() {
