@@ -6,8 +6,5 @@
 ## Build
 `npm run build`
 
-## Develop
-`npm run watch`
-
 ## Test
 `npm run test`

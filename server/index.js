@@ -63,7 +63,7 @@ function scheduleNextPump() {
       pumpManager.start()
         .then(() => {
           log("info", "Pump cycle completed successfully");
-          scheduleNextPump();
+          scheduler.scheduleNext();
         }, (error) => {
           log("error", `Pump cycle failed: ${error.message}. Restart the system when the issue has been resolved`);
           scheduler.removeAllListeners();

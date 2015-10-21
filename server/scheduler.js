@@ -28,7 +28,6 @@ export default class Scheduler extends EventEmitter {
     } else {
       this._timeout = setTimeout(() => {
         this.emit("interval", nextTime);
-        this.scheduleNext();
       }, nextTime - now);
     }
 

@@ -40,7 +40,6 @@ var Scheduler = (function (_EventEmitter) {
       } else {
         this._timeout = setTimeout(function () {
           _this.emit("interval", nextTime);
-          _this.scheduleNext();
         }, nextTime - now);
       }
 

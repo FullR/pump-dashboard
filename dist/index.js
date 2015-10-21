@@ -88,7 +88,7 @@ function scheduleNextPump() {
   }).on("interval", function () {
     _pumpManager2["default"].start().then(function () {
       (0, _logManager.log)("info", "Pump cycle completed successfully");
-      scheduleNextPump();
+      scheduler.scheduleNext();
     }, function (error) {
       (0, _logManager.log)("error", "Pump cycle failed: " + error.message + ". Restart the system when the issue has been resolved");
       scheduler.removeAllListeners();
