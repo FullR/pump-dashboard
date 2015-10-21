@@ -1,22 +1,22 @@
 {
-  "auto": false,
+  "dynamic": false,
   "address": [
-    3,
-    0,
-    0,
-    0
+    184,
+    168,
+    1,
+    2
   ],
-  "netmask": [
-    0,
-    0,
-    0,
+  "natmask": [
+    255,
+    255,
+    255,
     0
   ],
   "gateway": [
-    0,
-    0,
-    0,
-    0
+    192,
+    168,
+    1,
+    1
   ],
   "closeValvesTimeout": 30000,
   "primeTimeout": 120000,

@@ -61,15 +61,15 @@ function replaceInterface(ifaceData, device, _ref) {
   var deviceRegExp = getDeviceRegExp(device);
   if (type === "dhcp") {
     return ifaceData.replace(deviceRegExp, function () {
-      return "\n\niface " + device + " inet dhcp";
+      return "\n\niface " + device + " inet dhcp\n";
     });
   } else if (type === "static") {
     return ifaceData.replace(deviceRegExp, function () {
-      return "\n\niface " + device + " inet static\n  address " + address.join(".") + "\n  netmask " + netmask.join(".") + "\n  gateway " + gateway.join(".");
+      return "\n\niface " + device + " inet static\n  address " + address.join(".") + "\n  netmask " + netmask.join(".") + "\n  gateway " + gateway.join(".") + "\n";
     });
   } else if (type === "manual") {
     return ifaceData.replace(deviceRegExp, function () {
-      return "\n\niface " + device + " inet manual\n  up " + up + "\n  down " + down;
+      return "\n\niface " + device + " inet manual\n  up " + up + "\n  down " + down + "\n";
     });
   } else {
     throw new Error("Unrecoginzed interface type: " + type);
