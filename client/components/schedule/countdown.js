@@ -4,6 +4,7 @@ function pad(s) {
   const str = ""+s;
   return str.length < 2 ? `0${str}` : str;
 }
+
 function formatMs(ms) {
   const {floor} = Math;
   const totalSeconds = floor(ms / 1000);
