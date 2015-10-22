@@ -67,8 +67,6 @@ function scheduleNextPump() {
     return t - (preTideDelay || 0);
   }));
 
-  (0, _logManager.log)("info", "Scheduling next pump job in " + (manual ? "manual" : "automatic") + " mode for " + new Date(scheduler.nextTime) + ". " + (scheduler.remaining ? (0, _utilFormatRemaining2["default"])(scheduler.remaining) + " remaining" : ""));
-
   scheduler.once("empty", function () {
     scheduler.removeAllListeners();
 
@@ -88,10 +86,20 @@ function scheduleNextPump() {
   }).on("interval", function () {
     _pumpManager2["default"].start().then(function () {
       (0, _logManager.log)("info", "Pump cycle completed successfully");
-      scheduler.scheduleNext();
+      next();
     }, function (error) {
       (0, _logManager.log)("error", "Pump cycle failed: " + error.message + ". Restart the system when the issue has been resolved");
       scheduler.removeAllListeners();
     });
-  }).scheduleNext();
+  });
+
+  next();
+
+  function next() {
+    if (scheduler.nextTime) {
+      (0, _logManager.log)("info", "Scheduling next pump job in " + (manual ? "manual" : "automatic") + " mode for " + new Date(scheduler.nextTime) + ". " + (0, _utilFormatRemaining2["default"])(scheduler.remaining) + " remaining");
+    }
+
+    scheduler.scheduleNext();
+  }
 }

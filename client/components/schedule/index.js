@@ -42,8 +42,9 @@ export default class Schedule extends React.Component {
         schedule: {
           manual: cachedSchedule.manual,
           manualSchedule: cachedSchedule.manualSchedule.slice(),
-          automaticSchedule: cachedSchedule.automaticSchedule.slice()
-        }
+          automaticSchedule: cachedSchedule.automaticSchedule.slice(),
+          preTideDelay: cachedSchedule.preTideDelay
+        },
       };
     } else {
       this.state = {
@@ -64,13 +65,15 @@ export default class Schedule extends React.Component {
     if(!originalSchedule) {
       return null;
     };
+    const preTideDelay = originalSchedule.preTideDelay || 0;
     const timestamps = originalSchedule.manual ? originalSchedule.manualSchedule : originalSchedule.automaticSchedule;
     const now = Date.now();
-    if(!timestamps.length) {
+    const times = (originalSchedule.manual ? timestamps : timestamps.map((t) => t - preTideDelay)).filter((t) => t > now);
+    if(!times.length) {
       return null;
     }
 
-    return timestamps.filter((t) => t >= now).reduce((a, b) => Math.min(a, b));
+    return times.reduce((a, b) => Math.min(a, b));
   }
 
   componentDidMount() {

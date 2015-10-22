@@ -1,4 +1,5 @@
 import testSystem from "./test-system";
+import {noop} from "lodash";
 import {log} from "./log-manager";
 
 let pumpDisposable = null;

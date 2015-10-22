@@ -55710,7 +55710,8 @@
 	        schedule: {
 	          manual: cachedSchedule.manual,
 	          manualSchedule: cachedSchedule.manualSchedule.slice(),
-	          automaticSchedule: cachedSchedule.automaticSchedule.slice()
+	          automaticSchedule: cachedSchedule.automaticSchedule.slice(),
+	          preTideDelay: cachedSchedule.preTideDelay
 	        }
 	      };
 	    } else {
@@ -55735,15 +55736,19 @@
 	      if (!originalSchedule) {
 	        return null;
 	      };
+	      var preTideDelay = originalSchedule.preTideDelay || 0;
 	      var timestamps = originalSchedule.manual ? originalSchedule.manualSchedule : originalSchedule.automaticSchedule;
 	      var now = Date.now();
-	      if (!timestamps.length) {
+	      var times = (originalSchedule.manual ? timestamps : timestamps.map(function (t) {
+	        return t - preTideDelay;
+	      })).filter(function (t) {
+	        return t > now;
+	      });
+	      if (!times.length) {
 	        return null;
 	      }
 
-	      return timestamps.filter(function (t) {
-	        return t >= now;
-	      }).reduce(function (a, b) {
+	      return times.reduce(function (a, b) {
 	        return Math.min(a, b);
 	      });
 	    }

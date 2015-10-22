@@ -39,8 +39,6 @@ function scheduleNextPump() {
     new Scheduler(currentSchedule) : 
     new Scheduler(currentSchedule.map((t) => t - (preTideDelay || 0)));
 
-  log("info", `Scheduling next pump job in ${manual ? "manual" : "automatic"} mode for ${new Date(scheduler.nextTime)}. ${scheduler.remaining ? formatRemaining(scheduler.remaining) + " remaining" : ""}`);
-
   scheduler
     .once("empty", () => {
       scheduler.removeAllListeners();
@@ -63,12 +61,20 @@ function scheduleNextPump() {
       pumpManager.start()
         .then(() => {
           log("info", "Pump cycle completed successfully");
-          scheduler.scheduleNext();
+          next();
         }, (error) => {
           log("error", `Pump cycle failed: ${error.message}. Restart the system when the issue has been resolved`);
           scheduler.removeAllListeners();
         });
-    })
-    .scheduleNext();
-}
+    });
 
+  next();
+
+  function next() {
+    if(scheduler.nextTime) {
+      log("info", `Scheduling next pump job in ${manual ? "manual" : "automatic"} mode for ${new Date(scheduler.nextTime)}. ${formatRemaining(scheduler.remaining)} remaining`);
+    }
+
+    scheduler.scheduleNext();
+  }
+}

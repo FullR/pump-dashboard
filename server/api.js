@@ -21,11 +21,15 @@ router.get("/api/logout", (req, res) => {
 
 router.route("/api/schedule")
   .get(auth, (req, res) => {
-    res.json(scheduleManager.model);
+    res.json({
+      ...scheduleManager.model, 
+      preTideDelay: settingManager.model.preTideDelay
+    });
   })
   .post(auth, (req, res) => {
-    log("info", "Received schedule settings from web client");
     const {manual, manualSchedule} = req.body;
+    log("info", "Received schedule settings from web client");
+
     if(req.body && req.body.manual) {
       if(manualSchedule.some((t) => typeof t !== "number")) {
         res.status(400).json({error: "Invalid times"});
@@ -68,6 +72,7 @@ router.route("/api/pump")
 
 router.get("/", (req, res) => {
   const user = req.user || {};
+  const isAuthenticated = req.isAuthenticated();
   res.set("Content-Type", "text/html").end(`
     <!doctype html>
     <html>
@@ -76,7 +81,7 @@ router.get("/", (req, res) => {
     </head>
     <body>
       <script type="text/javascript">
-        window.USER = ${req.isAuthenticated() ? JSON.stringify(user, null, 2) : null};
+        window.USER = ${isAuthenticated ? JSON.stringify(user, null, 2) : null};
       </script>
       <script src="app.js" type="text/javascript"></script>
     </body>

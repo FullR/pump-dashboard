@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var _express = require("express");
@@ -48,12 +50,15 @@ router.get("/api/logout", function (req, res) {
 });
 
 router.route("/api/schedule").get(_auth2["default"], function (req, res) {
-  res.json(_scheduleManager2["default"].model);
+  res.json(_extends({}, _scheduleManager2["default"].model, {
+    preTideDelay: _settingManager2["default"].model.preTideDelay
+  }));
 }).post(_auth2["default"], function (req, res) {
-  log("info", "Received schedule settings from web client");
   var _req$body = req.body;
   var manual = _req$body.manual;
   var manualSchedule = _req$body.manualSchedule;
+
+  log("info", "Received schedule settings from web client");
 
   if (req.body && req.body.manual) {
     if (manualSchedule.some(function (t) {
@@ -93,7 +98,8 @@ router.route("/api/pump").post(_auth2["default"], function (req, res) {
 
 router.get("/", function (req, res) {
   var user = req.user || {};
-  res.set("Content-Type", "text/html").end("\n    <!doctype html>\n    <html>\n    <head>\n      <title>SmartPump</title>\n    </head>\n    <body>\n      <script type=\"text/javascript\">\n        window.USER = " + (req.isAuthenticated() ? JSON.stringify(user, null, 2) : null) + ";\n      </script>\n      <script src=\"app.js\" type=\"text/javascript\"></script>\n    </body>\n    </html>\n  ");
+  var isAuthenticated = req.isAuthenticated();
+  res.set("Content-Type", "text/html").end("\n    <!doctype html>\n    <html>\n    <head>\n      <title>SmartPump</title>\n    </head>\n    <body>\n      <script type=\"text/javascript\">\n        window.USER = " + (isAuthenticated ? JSON.stringify(user, null, 2) : null) + ";\n      </script>\n      <script src=\"app.js\" type=\"text/javascript\"></script>\n    </body>\n    </html>\n  ");
 });
 
 exports["default"] = router;
