@@ -12,8 +12,10 @@ var _rx = require("rx");
 
 var _chalk = require("chalk");
 
+var appendQueue = Promise.resolve();
 var filename = __dirname + "/logs";
 var logText = undefined;
+
 try {
   logText = (0, _fs.readFileSync)(filename).toString();
 } catch (error) {
@@ -27,17 +29,30 @@ try {
     }
   });
 }
+
+var enqueue = function enqueue(fn) {
+  appendQueue = appendQueue.then(fn);
+};
 var logs = JSON.parse("[" + logText.trim().split("\n").join(",") + "]");
+
+function append(filename, data, options) {
+  return new Promise(function (resolve, reject) {
+    (0, _fs.appendFile)(filename, data, options, function (error) {
+      if (error) reject(error);else resolve();
+    });
+  });
+}
 
 function writeLog(_ref) {
   var timestamp = _ref.timestamp;
   var level = _ref.level;
   var message = _ref.message;
 
-  (0, _fs.appendFile)(filename, "\n{\"timestamp\": " + timestamp + ", \"level\": \"" + level + "\", \"message\": \"" + message + "\"}", { flag: "a+" }, function (error) {
-    if (error) {
-      console.log("Failed to append log entry to log file:", error);
-    }
+  var errorHandler = function errorHandler() {
+    return console.log("Failed to append log entry to log file:", error);
+  };
+  enqueue(function () {
+    return append(filename, "\n{\"timestamp\": " + timestamp + ", \"level\": \"" + level + "\", \"message\": \"" + message + "\"}", { flag: "a+" })["catch"](errorHandler);
   });
 }
 

@@ -2,8 +2,11 @@ import {readFileSync, appendFile} from "fs";
 import {exec} from "child_process";
 import {BehaviorSubject} from "rx";
 import {red, yellow, green, gray} from "chalk";
+let appendQueue = Promise.resolve();
 const filename = __dirname + "/logs";
 let logText;
+
+
 try {
   logText = readFileSync(filename).toString();
 } catch(error) {
@@ -17,13 +20,24 @@ try {
     }
   })
 }
+
+const enqueue = (fn) => {appendQueue = appendQueue.then(fn);};
 const logs = JSON.parse(`[${logText.trim().split("\n").join(",")}]`);
 
+function append(filename, data, options) {
+  return new Promise((resolve, reject) => {
+    appendFile(filename, data, options, (error) => {
+      if(error) reject(error);
+      else resolve();
+    })
+  });
+}
+
 function writeLog({timestamp, level, message}) {
-  appendFile(filename, `\n{"timestamp": ${timestamp}, "level": "${level}", "message": "${message}"}`, {flag: "a+"}, (error) => {
-    if(error) {
-      console.log("Failed to append log entry to log file:", error);
-    }
+  const errorHandler = () => console.log("Failed to append log entry to log file:", error);
+  enqueue(() => {
+    return append(filename, `\n{"timestamp": ${timestamp}, "level": "${level}", "message": "${message}"}`, {flag: "a+"})
+      .catch(errorHandler);
   });
 }
 
