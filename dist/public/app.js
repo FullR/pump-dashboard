@@ -57171,6 +57171,7 @@
 	  var str = "" + s;
 	  return str.length < 2 ? "0" + str : str;
 	}
+
 	function formatMs(ms) {
 	  var floor = Math.floor;
 
@@ -57865,22 +57866,104 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _elemental = __webpack_require__(401);
+
+	var _superagent = __webpack_require__(466);
+
+	var _superagent2 = _interopRequireDefault(_superagent);
+
 	var style = {
+	  position: "relative",
 	  marginBottom: 20
+	};
+
+	var buttonContainerStyle = {
+	  position: "absolute",
+	  right: 0,
+	  top: 0
 	};
 
 	var Header = (function (_React$Component) {
 	  _inherits(Header, _React$Component);
 
-	  function Header() {
+	  function Header(props) {
 	    _classCallCheck(this, Header);
 
-	    _get(Object.getPrototypeOf(Header.prototype), "constructor", this).apply(this, arguments);
+	    _get(Object.getPrototypeOf(Header.prototype), "constructor", this).call(this, props);
+	    this.state = {
+	      loading: true,
+	      error: null,
+	      status: null
+	    };
+	    this.startPumps = this.startPumps.bind(this);
+	    this.stopPumps = this.stopPumps.bind(this);
+	    this.update = this.update.bind(this);
 	  }
 
 	  _createClass(Header, [{
+	    key: "update",
+	    value: function update() {
+	      var _this = this;
+
+	      (0, _superagent2["default"])("GET", "/api/status").end(function (error, res) {
+	        if (error) {
+	          _this.setState({
+	            loading: false,
+	            error: error,
+	            status: null
+	          });
+	        } else {
+	          _this.setState({
+	            loading: false,
+	            error: null,
+	            status: res.body
+	          });
+	        }
+	      });
+	    }
+	  }, {
+	    key: "startPumps",
+	    value: function startPumps() {
+	      var _this2 = this;
+
+	      (0, _superagent2["default"])("POST", "/api/start-pumps").end(function (error, res) {
+	        if (error) {
+	          console.log("Failed to start pumps:", error);
+	        }
+	        _this2.update();
+	      });
+	    }
+	  }, {
+	    key: "stopPumps",
+	    value: function stopPumps() {
+	      var _this3 = this;
+
+	      (0, _superagent2["default"])("POST", "/api/stop-pumps").end(function (error, res) {
+	        if (error) {
+	          console.log("Failed to stop pumps:", error);
+	        }
+	        _this3.update();
+	      });
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this._interval = setInterval(this.update, 3000);
+	      this.update();
+	    }
+	  }, {
+	    key: "componentWillUnmount",
+	    value: function componentWillUnmount() {
+	      clearInterval(this._interval);
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
+	      var _state = this.state;
+	      var loading = _state.loading;
+	      var error = _state.error;
+	      var status = _state.status;
+
 	      return _react2["default"].createElement(
 	        "div",
 	        { style: style },
@@ -57889,6 +57972,26 @@
 	          "h3",
 	          null,
 	          "SmartPumps"
+	        ),
+	        loading || error ? null : _react2["default"].createElement(
+	          "div",
+	          { style: buttonContainerStyle },
+	          _react2["default"].createElement(
+	            "p",
+	            null,
+	            "Pump Status: ",
+	            status.pumping ? "pumping" : "idle"
+	          ),
+	          _react2["default"].createElement(
+	            _elemental.Button,
+	            { onClick: this.startPumps },
+	            "Start Pump"
+	          ),
+	          _react2["default"].createElement(
+	            _elemental.Button,
+	            { onClick: this.stopPumps },
+	            "Stop Pump"
+	          )
 	        )
 	      );
 	    }

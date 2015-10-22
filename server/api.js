@@ -56,7 +56,14 @@ router.route("/api/logs")
     res.json(logManager.getLogs());
   });
 
-router.route("/api/pump")
+router.route("/api/status")
+  .get(auth, (req, res) => {
+    res.json({
+      pumping: pumpManager.isRunning()
+    });
+  });
+
+router.route("/api/start-pumps")
   .post(auth, (req, res) => {
     log("info", "Received manual pump signal from client. Starting pump cycle");
     pumpManager.start()
@@ -67,6 +74,12 @@ router.route("/api/pump")
         log("error", `Pumping failed: ${error.message}`);
       });
 
+    res.end();
+  });
+
+router.route("/api/stop-pumps")
+  .post(auth, (req, res) => {
+    pumpManager.stop();
     res.end();
   });
 

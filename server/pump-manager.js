@@ -38,4 +38,8 @@ function stop() {
   }
 }
 
-export default {start, stop};
+function isRunning() {
+  return !!pumpPromise;
+}
+
+export default {start, stop, isRunning};

@@ -85,7 +85,13 @@ router.route("/api/logs").get(_auth2["default"], function (req, res) {
   res.json(_logManager2["default"].getLogs());
 });
 
-router.route("/api/pump").post(_auth2["default"], function (req, res) {
+router.route("/api/status").get(_auth2["default"], function (req, res) {
+  res.json({
+    pumping: _pumpManager2["default"].isRunning()
+  });
+});
+
+router.route("/api/start-pumps").post(_auth2["default"], function (req, res) {
   log("info", "Received manual pump signal from client. Starting pump cycle");
   _pumpManager2["default"].start().then(function () {
     log("info", "Pumping completed");
@@ -93,6 +99,11 @@ router.route("/api/pump").post(_auth2["default"], function (req, res) {
     log("error", "Pumping failed: " + error.message);
   });
 
+  res.end();
+});
+
+router.route("/api/stop-pumps").post(_auth2["default"], function (req, res) {
+  _pumpManager2["default"].stop();
   res.end();
 });
 

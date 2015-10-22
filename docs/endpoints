@@ -54,3 +54,16 @@ All Timestamp values are expressed using universal time (number of milliseconds 
       timestamp: Timestamp
       level: String
       message: String
+
+/status
+  GET
+    Returns the pump status. Body is of this shape:
+      pumping: Boolean
+
+/start-pumps
+  POST
+    Manually starts the pump process
+
+/stop-pumps
+  POST
+    Stops the pump cycle if its running.

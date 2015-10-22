@@ -46,5 +46,9 @@ function stop() {
   }
 }
 
-exports["default"] = { start: start, stop: stop };
+function isRunning() {
+  return !!pumpPromise;
+}
+
+exports["default"] = { start: start, stop: stop, isRunning: isRunning };
 module.exports = exports["default"];
