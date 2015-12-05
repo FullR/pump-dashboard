@@ -23,8 +23,6 @@ export default function runCycle({
   timeouts = {},
   log = noop
 }={}) {
-  const valvesClosed = Observable.combineLatest([inputs.valve1Closed, inputs.valve2Closed], (a, b) => a && b);
-
   timeouts = defaults({}, timeouts, {
     closeValvesTimeout: 0,
     primeTimeout: 0,
@@ -45,6 +43,14 @@ export default function runCycle({
     function closeValves() {
       return Observable.create((observer) => {
         log("Closing valves...");
+        const valvesClosed = Observable.combineLatest(
+          inputs.valve1Closed.do(() => log("Valve 1 closed")),
+          inputs.valve2Closed.do(() => log("Valve 2 closed")),
+          (a, b) => {
+            console.log("a =" + a,"b =" + b);
+            return a && b;
+          }
+        );
         const sub = valvesClosed.filter(isTrue).take(1).subscribe(() => {
           log("Valves closed");
           observer.onNext();
@@ -123,7 +129,7 @@ export default function runCycle({
       outputs.closeValves.onNext(false);
     }
 
-    const sub =  maybeTimeout(closeValves(), timeouts.closeValvesTimeout, "Close valves timeout reached")
+    const sub = maybeTimeout(closeValves(), timeouts.closeValvesTimeout, "Close valves timeout reached")
       .do(() => log(`Waiting ${timeouts.primeDelay}ms to begin prime...`))
       .flatMap(() => delay(timeouts.primeDelay))
       .flatMap(startPrimePump)

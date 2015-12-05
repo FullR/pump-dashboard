@@ -1,28 +1,28 @@
 {
-  "auto": true,
+  "dynamic": false,
   "address": [
-    3,
-    0,
-    0,
-    0
+    184,
+    168,
+    1,
+    2
   ],
-  "netmask": [
-    0,
-    0,
-    0,
+  "natmask": [
+    255,
+    255,
+    255,
     0
   ],
   "gateway": [
-    0,
-    0,
-    0,
-    0
+    192,
+    168,
+    1,
+    1
   ],
-  "closeValvesTimeout": 30000,
+  "closeValvesTimeout": 300000,
   "primeTimeout": 120000,
   "pumpTimeout": 180000,
-  "primeDelay": 80004,
+  "primeDelay": 800,
   "postPumpValveDelay": 50000,
-  "pressureMonitorDelay": 300000,
+  "pressureMonitorDelay": 300,
   "preTideDelay": 7200000
 }

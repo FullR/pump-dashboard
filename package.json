@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "clean": "rm -rf dist/*",
+    "postinstall": "npm run build && npm run test",
     "build:client": "node ./node_modules/webpack/bin/webpack.js --progress --colors",
-    "build:server": "node ./node_modules/babel/bin/babel.js --stage=1 server -d dist && touch dist/logs && cp settings.json dist && cp schedule.json dist",
+    "build:server": "node ./node_modules/babel/bin/babel.js --stage=1 server -d dist && touch dist/logs && cp settings.json dist && cp schedule.json dist && cp pin-config.json dist",
     "build": "npm run build:client && npm run build:server && cp -R server/network-scripts dist",
     "start": "npm run build && node dist",
     "package": "node pack.js",

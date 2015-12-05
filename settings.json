@@ -18,11 +18,11 @@
     1,
     1
   ],
-  "closeValvesTimeout": 30000,
+  "closeValvesTimeout": 300000,
   "primeTimeout": 120000,
   "pumpTimeout": 180000,
-  "primeDelay": 80004,
+  "primeDelay": 800,
   "postPumpValveDelay": 50000,
-  "pressureMonitorDelay": 300000,
+  "pressureMonitorDelay": 300,
   "preTideDelay": 7200000
 }

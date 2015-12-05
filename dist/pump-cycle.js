@@ -57,10 +57,6 @@ function runCycle() {
   var _ref$log = _ref.log;
   var log = _ref$log === undefined ? _lodash.noop : _ref$log;
 
-  var valvesClosed = Observable.combineLatest([inputs.valve1Closed, inputs.valve2Closed], function (a, b) {
-    return a && b;
-  });
-
   timeouts = (0, _lodash.defaults)({}, timeouts, {
     closeValvesTimeout: 0,
     primeTimeout: 0,
@@ -81,6 +77,14 @@ function runCycle() {
     function closeValves() {
       return Observable.create(function (observer) {
         log("Closing valves...");
+        var valvesClosed = Observable.combineLatest(inputs.valve1Closed["do"](function () {
+          return log("Valve 1 closed");
+        }), inputs.valve2Closed["do"](function () {
+          return log("Valve 2 closed");
+        }), function (a, b) {
+          console.log("a =" + a, "b =" + b);
+          return a && b;
+        });
         var sub = valvesClosed.filter(isTrue).take(1).subscribe(function () {
           log("Valves closed");
           observer.onNext();
