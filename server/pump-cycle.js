@@ -44,8 +44,8 @@ export default function runCycle({
       return Observable.create((observer) => {
         log("Closing valves...");
         const valvesClosed = Observable.combineLatest(
-          inputs.valve1Closed.do(() => log("Valve 1 closed")),
-          inputs.valve2Closed.do(() => log("Valve 2 closed")),
+          inputs.valve1Closed,
+          inputs.valve2Closed,
           (a, b) => {
             console.log("a =" + a,"b =" + b);
             return a && b;

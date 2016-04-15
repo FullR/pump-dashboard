@@ -1,21 +1,74 @@
 {
-  "inputs": {
-    "valve1Closed": {"pin": "P9_23"},
-    "valve2Closed": {"pin": "P9_26"},
-    "valve1Opened": {"pin": "P9_17"},
-    "valve2Opened": {"pin": "P9_19"},
-    "tankIsFull": {"pin": "P9_28"},
-    "lowPressure": {"pin": "P9_27"},
-    "emergencyStop": {"pin": "P9_31"},
-    "primeComplete": {"pin": "P9_25"}
-  },
   "outputs": {
-    "startPump1": {"pin": "P9_20"},
-    "startPump2": {"pin": "P9_22"},
-    "openValve1": {"pin": "P9_16"},
-    "openValve2": {"pin": "P9_18"},
-    "closeValve1": {"pin": "P9_12"},
-    "closeValve2": {"pin": "P9_14"},
-    "runPrime": {"pin": "P9_24"}    
+    "startPump1": {
+        "pinName": "P9_12",
+        "pin": "28"
+    },
+    "startPump2": {
+        "pinName": "P9_27",
+        "pin": "19"
+    },
+    "openValve1": {
+        "pinName": "P9_15",
+        "pin": "16"
+    },
+    "closeValve1": {
+        "pinName": "P9_23",
+        "pin": "17"
+    },
+    "openValve2": {
+        "pinName": "P8_7",
+        "pin": "2"
+    },
+    "closeValve2": {
+        "pinName": "P9_41",
+        "pin": "20"
+    },
+    "runPrime": {
+        "pinName": "P8_9",
+        "pin": "5"
+    }
+  },
+  "inputs": {
+      "emergencyStop": {
+        "pinName": "P8_12",
+        "pin": "12",
+        "inverted": false
+      },
+      "lowPressure": {
+        "pinName": "P8_14",
+        "pin": "26",
+        "inverted": true
+      },
+      "primeComplete": {
+        "pinName": "P8_11",
+        "pin": "13",
+        "inverted": false
+      },
+      "tankIsFull": {
+        "pinName": "P8_15",
+        "pin": "15",
+        "inverted": true
+      },
+      "valve1Opened": {
+        "pinName": "P8_16",
+        "pin": "14",
+        "inverted": false
+      },
+      "valve1Closed": {
+        "pinName": "P8_17",
+        "pin": "27",
+        "inverted": false
+      },
+      "valve2Opened": {
+        "pinName": "P8_18",
+        "pin": "1",
+        "inverted": false
+      },
+      "valve2Closed": {
+        "pinName": "P8_26",
+        "pin": "61",
+        "inverted": false
+      }
   }
 }

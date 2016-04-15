@@ -12,7 +12,7 @@ import pumpManager from "./pump-manager";
 import settingManager from "./setting-manager";
 
 const stationId = 9432780;
-const port = 8080;
+const port = 8081;
 let scheduler = null;
 let pumpDisposable = null;
 
