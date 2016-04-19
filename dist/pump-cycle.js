@@ -44,6 +44,7 @@ function runCycle() {
   var inputs = _ref$inputs === undefined ? {
     valve1Closed: valve1Closed,
     valve2Closed: valve2Closed,
+    valveClosed: valveClosed,
     valveOpened: valveOpened,
     lowPressure: lowPressure,
     primeComplete: primeComplete,
@@ -77,15 +78,21 @@ function runCycle() {
     function closeValves() {
       return Observable.create(function (observer) {
         log("Closing valves...");
-        var valvesClosed = Observable.combineLatest(inputs.valve1Closed, inputs.valve2Closed, function (a, b) {
-          console.log("a =" + a, "b =" + b);
-          return a && b;
-        });
+        // const valvesClosed = Observable.combineLatest(
+        //   inputs.valve1Closed,
+        //   inputs.valve2Closed,
+        //   (a, b) => {
+        //     console.log("a = " + a,"b = " + b);
+        //     return a && b;
+        //   }
+        // );
+        var valvesClosed = inputs.valve1Closed;
         var sub = valvesClosed.filter(isTrue).take(1).subscribe(function () {
           log("Valves closed");
           observer.onNext();
           observer.onCompleted();
         });
+
         outputs.closeValves.onNext(true);
 
         return function () {
@@ -113,6 +120,12 @@ function runCycle() {
       return Observable.create(function (observer) {
         log("Opening valve");
         outputs.openValve.onNext(true);
+
+        var disposable = (0, _utilDelay2["default"])(30000).subscribe(function () {
+          log("Valve opened");
+          outputs.openValve.onNext(false);
+        });
+
         observer.onNext();
         observer.onCompleted();
       });
@@ -168,11 +181,17 @@ function runCycle() {
       return (0, _utilDelay2["default"])(timeouts.primeDelay);
     }).flatMap(startPrimePump).flatMap(function () {
       return (0, _utilMaybeTimeout2["default"])(waitForPrime(), timeouts.primeTimeout, "Priming timeout reached");
-    }).flatMap(openValve).flatMap(function () {
+    }).flatMap(function () {
+      log("Waiting 60 seconds to start pump...");
+      return (0, _utilDelay2["default"])(60000);
+    }).flatMap(function () {
       return startPump()["do"](function () {
         return log("Waiting " + timeouts.pressureMonitorDelay + "ms to monitor pressure...");
       });
     }).flatMap(function () {
+      log("Waiting 30 seconds to open valve...");
+      return (0, _utilDelay2["default"])(30000);
+    }).flatMap(openValve).flatMap(function () {
       return (0, _utilDelay2["default"])(timeouts.pressureMonitorDelay);
     }).flatMap(function () {
       return (0, _utilMaybeTimeout2["default"])(monitorTankAndPressure(), timeouts.pumpTimeout, "Pumping timeout reached")["do"](function () {

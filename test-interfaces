@@ -23,4 +23,5 @@ iface eth2 inet static
     gateway 192.168.1.254
 
 
+
 iface eth0 inet dhcp

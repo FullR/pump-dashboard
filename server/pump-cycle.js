@@ -13,6 +13,7 @@ export default function runCycle({
   inputs = {
     valve1Closed,
     valve2Closed,
+    valveClosed,
     valveOpened,
     lowPressure,
     primeComplete,
@@ -43,19 +44,21 @@ export default function runCycle({
     function closeValves() {
       return Observable.create((observer) => {
         log("Closing valves...");
-        const valvesClosed = Observable.combineLatest(
-          inputs.valve1Closed,
-          inputs.valve2Closed,
-          (a, b) => {
-            console.log("a =" + a,"b =" + b);
-            return a && b;
-          }
-        );
+        // const valvesClosed = Observable.combineLatest(
+        //   inputs.valve1Closed,
+        //   inputs.valve2Closed,
+        //   (a, b) => {
+        //     console.log("a = " + a,"b = " + b);
+        //     return a && b;
+        //   }
+        // );
+        const valvesClosed = inputs.valve1Closed;
         const sub = valvesClosed.filter(isTrue).take(1).subscribe(() => {
           log("Valves closed");
           observer.onNext();
           observer.onCompleted();
         });
+
         outputs.closeValves.onNext(true);
 
         return () => {
@@ -83,6 +86,12 @@ export default function runCycle({
       return Observable.create((observer) => {
         log("Opening valve");
         outputs.openValve.onNext(true);
+        
+        const disposable = delay(30000).subscribe(() => {
+          log("Valve opened");
+          outputs.openValve.onNext(false);
+        });
+         
         observer.onNext();
         observer.onCompleted();
       });
@@ -134,10 +143,18 @@ export default function runCycle({
       .flatMap(() => delay(timeouts.primeDelay))
       .flatMap(startPrimePump)
       .flatMap(() => maybeTimeout(waitForPrime(), timeouts.primeTimeout, "Priming timeout reached"))
-      .flatMap(openValve)
+      .flatMap(() => {
+        log("Waiting 60 seconds to start pump...");
+        return delay(60000);
+      })
       .flatMap(() => {
         return startPump().do(() => log(`Waiting ${timeouts.pressureMonitorDelay}ms to monitor pressure...`))
       })
+      .flatMap(() => {
+        log("Waiting 30 seconds to open valve...");
+        return delay(30000);
+      })
+      .flatMap(openValve)
       .flatMap(() => delay(timeouts.pressureMonitorDelay))
       .flatMap(() => {
         return maybeTimeout(monitorTankAndPressure(), timeouts.pumpTimeout, "Pumping timeout reached")

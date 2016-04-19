@@ -11,6 +11,8 @@ var _request = require("request");
 
 var _request2 = _interopRequireDefault(_request);
 
+var _fs = require("fs");
+
 var _rx = require("rx");
 
 // test request: http://opendap.co-ops.nos.noaa.gov/ioos-dif-sos/SOS?service=SOS&request=GetObservation&version=1.0.0&observedProperty=sea_surface_height_amplitude_due_to_equilibrium_ocean_tide&offering=urn:ioos:station:NOAA.NOS.CO-OPS:9432780&responseFormat=text%2Fcsv&eventTime=2013-03-06T00:00:00Z/2013-03-12T23:59:00Z&result=VerticalDatum%3D%3Durn:ioos:def:datum:noaa::MLLW&dataType=HighLowTidePredictions&unit=Meters
@@ -40,7 +42,16 @@ function getHighTideTimes() {
         resolve(body);
       }
     });
-  }).then(parseHighTideData);
+  }).then(cacheRawTideData).then(parseHighTideData);
+}
+
+function cacheRawTideData(tideDataString) {
+  (0, _fs.writeFile)("./last-tide-download.csv", tideDataString, function (error) {
+    if (error) {
+      console.log("Failed to cache raw tide data: " + error);
+    }
+  });
+  return tideDataString;
 }
 
 function parseHighTideData(data) {
@@ -59,7 +70,11 @@ function parseHighTideData(data) {
 
 function parseNOAATimestamp(line) {
   var match = line.match(lineRegex);
-  return match ? new Date(match[1]).getTime() : null;
+  if (match) {
+    return new Date(match[1]);
+  }
+  console.log("Failed to parse line \"" + line + "\"");
+  return null;
 }
 
 function getNOAAExceptionText(data) {

@@ -36,7 +36,7 @@ function readPinFile(pinId, filename) {
 
 function runPinUtil(pinId, command, arg) {
   return new Promise(function (resolve, reject) {
-    exec("./pin.exe " + pinId + " " + command + " " + arg, function (error, stdout, stderr) {
+    exec("/var/lib/cloud9/pump-dashboard/pin.exe " + pinId + " " + command + " " + arg, function (error, stdout, stderr) {
       if (error) {
         reject(error);
       } else {

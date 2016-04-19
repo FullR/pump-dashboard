@@ -261,3 +261,233 @@
 {"timestamp": 1460762300447, "level": "info", "message": "Starting pump cycle"}
 {"timestamp": 1460762300959, "level": "info", "message": "Pumping completed"}
 {"timestamp": 1460762320523, "level": "info", "message": "Stopping pump cycle"}
+{"timestamp": 1460762570457, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460762571529, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460762571973, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460762748525, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460762748983, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460762749172, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460762887170, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460762887625, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460762887815, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460763185404, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763185414, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763185455, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:10:00 GMT+0000 (UTC). 3 hours, 36 minutes remaining"}
+{"timestamp": 1460763185490, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763318033, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763318043, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763318064, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:15:00 GMT+0000 (UTC). 3 hours, 39 minutes remaining"}
+{"timestamp": 1460763318148, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763318152, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763318162, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:15:00 GMT+0000 (UTC). 3 hours, 39 minutes remaining"}
+{"timestamp": 1460763318170, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763318193, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763369983, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763369990, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763369996, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:15:00 GMT+0000 (UTC). 3 hours, 38 minutes remaining"}
+{"timestamp": 1460763370039, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763370047, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763370051, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:15:00 GMT+0000 (UTC). 3 hours, 38 minutes remaining"}
+{"timestamp": 1460763370059, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763370080, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763427945, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:15:00 GMT+0000 (UTC). 3 hours, 37 minutes remaining"}
+{"timestamp": 1460763428717, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460762826500, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 03:15:00 GMT+0000 (UTC). 3 hours, 47 minutes remaining"}
+{"timestamp": 1460762826877, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460763046323, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763046335, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763046368, "level": "error", "message": "No remaining manual times. Please add new times or switch to automatic mode"}
+{"timestamp": 1460763046427, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763081153, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763081160, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763081172, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 00:46:00 GMT+0000 (UTC). 1 hour, 14 minutes remaining"}
+{"timestamp": 1460763081200, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763127834, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763127839, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763127850, "level": "error", "message": "No remaining manual times. Please add new times or switch to automatic mode"}
+{"timestamp": 1460763127888, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763160116, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460763160118, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460763160126, "level": "info", "message": "Scheduling next pump job in manual mode for Fri Apr 15 2016 23:35:00 GMT+0000 (UTC). 2 minutes, 19 seconds remaining"}
+{"timestamp": 1460763160150, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460763300009, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460763390436, "level": "info", "message": "Pump cycle completed successfully"}
+{"timestamp": 1460763390443, "level": "error", "message": "No remaining manual times. Please add new times or switch to automatic mode"}
+{"timestamp": 1460763862454, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460763863449, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460763863867, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460763905012, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460763905019, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460763907246, "level": "error", "message": "Pumping failed: log is not a function"}
+{"timestamp": 1460764065103, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460764066099, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460764066514, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460764094559, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460764094567, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460764096782, "level": "error", "message": "Pumping failed: Command failed: ./pin.exe 61 export undefined
+/bin/sh: 1: ./pin.exe: not found
+"}
+{"timestamp": 1460764303310, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460764303746, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460764303933, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460764330511, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460764330516, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460764332717, "level": "error", "message": "Pumping failed: Command failed: ./pin.exe 61 unexport undefined
+/bin/sh: 1: ./pin.exe: not found
+"}
+{"timestamp": 1460764506958, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460764507898, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460764508351, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460764520966, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460764520980, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460764634281, "level": "error", "message": "Pumping failed: low pressure"}
+{"timestamp": 1460764771658, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460764771665, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460764884476, "level": "error", "message": "Pumping failed: low pressure"}
+{"timestamp": 1460765217643, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765217656, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765217691, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 00:50:00 GMT+0000 (UTC). 43 minutes, 2 seconds remaining"}
+{"timestamp": 1460765217732, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765263520, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765263526, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765263536, "level": "error", "message": "No remaining manual times. Please add new times or switch to automatic mode"}
+{"timestamp": 1460765263574, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765288330, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765288336, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765288345, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 00:10:00 GMT+0000 (UTC). 1 minute, 51 seconds remaining"}
+{"timestamp": 1460765288371, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765291068, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765291070, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765291078, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 00:10:00 GMT+0000 (UTC). 1 minute, 48 seconds remaining"}
+{"timestamp": 1460765291099, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765400004, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460765503132, "level": "error", "message": "Pump cycle failed: low pressure. Restart the system when the issue has been resolved"}
+{"timestamp": 1460765614908, "level": "info", "message": "Writing network interfaces to file system"}
+{"timestamp": 1460765614916, "level": "info", "message": "Writing new settings to file system"}
+{"timestamp": 1460765615052, "level": "info", "message": "Writing new settings to file system"}
+{"timestamp": 1460765615064, "level": "info", "message": "Network interfaces successfully written to file system"}
+{"timestamp": 1460765615070, "level": "info", "message": "Settings successfully written to file system"}
+{"timestamp": 1460765615115, "level": "info", "message": "Settings successfully written to file system"}
+{"timestamp": 1460765715983, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765715987, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765715995, "level": "error", "message": "No remaining manual times. Please add new times or switch to automatic mode"}
+{"timestamp": 1460765716036, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765743634, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765743636, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765743639, "level": "error", "message": "No remaining manual times. Please add new times or switch to automatic mode"}
+{"timestamp": 1460765743698, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765779312, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765779314, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765779317, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 00:18:00 GMT+0000 (UTC). 1 minute, 40 seconds remaining"}
+{"timestamp": 1460765779341, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765803580, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460765803584, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460765803596, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 00:17:00 GMT+0000 (UTC). 16 seconds remaining"}
+{"timestamp": 1460765803613, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460765820001, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460765935094, "level": "error", "message": "Pump cycle failed: low pressure. Restart the system when the issue has been resolved"}
+{"timestamp": 1460766033532, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460766033536, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460766217103, "level": "info", "message": "Writing new settings to file system"}
+{"timestamp": 1460766217133, "level": "info", "message": "Settings successfully written to file system"}
+{"timestamp": 1460766310683, "level": "info", "message": "Pumping completed"}
+{"timestamp": 1460766339638, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460766339644, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460766339648, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 01:17:00 GMT+0000 (UTC). 51 minutes, 20 seconds remaining"}
+{"timestamp": 1460766339669, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460766341534, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460766341540, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460766341550, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 01:17:00 GMT+0000 (UTC). 51 minutes, 18 seconds remaining"}
+{"timestamp": 1460766341568, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460766376699, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460766376707, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460766376723, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 01:00:00 GMT+0000 (UTC). 33 minutes, 43 seconds remaining"}
+{"timestamp": 1460766376768, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460766639761, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460766639765, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460766639773, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 10:33:00 GMT+0000 (UTC). 10 hours, 2 minutes remaining"}
+{"timestamp": 1460766639803, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460766947724, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460766947728, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460766947737, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 10:33:00 GMT+0000 (UTC). 9 hours, 57 minutes remaining"}
+{"timestamp": 1460766947761, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460767350120, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460767350123, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460767922800, "level": "info", "message": "Received schedule settings from web client"}
+{"timestamp": 1460767922805, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460767922815, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 10:33:00 GMT+0000 (UTC). 9 hours, 40 minutes remaining"}
+{"timestamp": 1460767922855, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460768346178, "level": "info", "message": "Scheduling next pump job in manual mode for Sat Apr 16 2016 10:33:00 GMT+0000 (UTC). 9 hours, 33 minutes remaining"}
+{"timestamp": 1460768346523, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460768672198, "level": "info", "message": "Stopping pump cycle"}
+{"timestamp": 1460768712559, "level": "info", "message": "Stopping pump cycle"}
+{"timestamp": 1460893897984, "level": "info", "message": "Scheduling next pump job in manual mode for Sun Apr 17 2016 12:40:00 GMT+0000 (UTC). 48 minutes, 22 seconds remaining"}
+{"timestamp": 1460893898338, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460894046582, "level": "info", "message": "Scheduling next pump job in manual mode for Sun Apr 17 2016 12:40:00 GMT+0000 (UTC). 45 minutes, 53 seconds remaining"}
+{"timestamp": 1460894046925, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460894276626, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460894276632, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460894644172, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460894644611, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460894644800, "level": "error", "message": "Failed to download new tide data: getaddrinfo ENOTFOUND opendap.co-ops.nos.noaa.gov opendap.co-ops.nos.noaa.gov:80"}
+{"timestamp": 1460894700207, "level": "info", "message": "Received manual pump signal from client. Starting pump cycle"}
+{"timestamp": 1460894700214, "level": "info", "message": "Starting pump cycle"}
+{"timestamp": 1460922187362, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460922187396, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460922187741, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460922187742, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460922187743, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 58 minutes remaining"}
+{"timestamp": 1460922187745, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460922590398, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 52 minutes remaining"}
+{"timestamp": 1460922590425, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923129231, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460923129265, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923129683, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460923129683, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460923129685, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 43 minutes remaining"}
+{"timestamp": 1460923129686, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460923299334, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460923299367, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923299756, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460923299756, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460923299758, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 40 minutes remaining"}
+{"timestamp": 1460923299760, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460923624236, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460923624270, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923624615, "level": "error", "message": "Failed to download new tide data: Cannot read property 'match' of undefined"}
+{"timestamp": 1460923657636, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460923657669, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923658140, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460923658140, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460923658142, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 34 minutes remaining"}
+{"timestamp": 1460923658144, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460923830316, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460923830348, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923830829, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460923830829, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460923830831, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 31 minutes remaining"}
+{"timestamp": 1460923830833, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460923863212, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460923863245, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460923863615, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460923863615, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460923863617, "level": "info", "message": "Scheduling next pump job in automatic mode for Mon Apr 18 2016 03:42:00 GMT-0700 (PDT). 14 hours, 30 minutes remaining"}
+{"timestamp": 1460923863618, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460924154972, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460924155006, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460924155563, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460924155563, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460924155565, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 26 minutes remaining"}
+{"timestamp": 1460924155567, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460924290625, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460924290658, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460924291013, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460924291013, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460924291015, "level": "info", "message": "Scheduling next pump job in automatic mode for Sun Apr 17 2016 20:42:00 GMT-0700 (PDT). 7 hours, 23 minutes remaining"}
+{"timestamp": 1460924291016, "level": "info", "message": "Schedule settings successfully written to file system"}
+{"timestamp": 1460947889756, "level": "info", "message": "No remaining automatic times. Downloading new data from NOAA"}
+{"timestamp": 1460947890149, "level": "info", "message": "Web server successfully started on port 8081"}
+{"timestamp": 1460947890698, "level": "info", "message": "Tide data downloaded successfully (58 high tide entries)"}
+{"timestamp": 1460947890703, "level": "info", "message": "Writing new schedule settings to file system"}
+{"timestamp": 1460947890744, "level": "info", "message": "Scheduling next pump job in automatic mode for Mon Apr 18 2016 03:42:00 GMT+0000 (UTC). 50 minutes, 29 seconds remaining"}
+{"timestamp": 1460947890774, "level": "info", "message": "Schedule settings successfully written to file system"}

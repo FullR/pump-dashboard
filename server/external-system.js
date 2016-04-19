@@ -13,7 +13,7 @@ function inputObservable(pinId, inverted) {
     var stopWatching = gpio.watchPin(pinId, (value) => {
       observer.onNext(inverted ? !value : value);
     });
-      
+
     return () => {
       if(stopWatching) {
         stopWatching();
@@ -25,14 +25,14 @@ function inputObservable(pinId, inverted) {
 
 function outputObserver(pinId) {
   return Observer.create(
-    (value) => gpio.setPinValue(pinId, value),
+    (value) => gpio.setPinValue(pinId, value).catch(log),
     log
   );
 }
 
 export default function externalSystem({
   timeouts={},
-  log,
+  log=console.log,
   pump="1"
 }={}) {
   const outputsConfigured = Promise.all(map(pinConfig.outputs, ({pin, pinName}, hardwareName) => {
@@ -53,17 +53,27 @@ export default function externalSystem({
   const inputObservables =  transform(pinConfig.inputs, (inputs, {pin, inverted}, pinId) => {
     inputs[pinId] = inputObservable(pin, inverted);
   });
-  
+
   const outputObservers = transform(pinConfig.outputs, (outputs, {pin}, pinId) => {
     outputs[pinId] = outputObserver(pin);
   });
-  
+
+  outputObservers.closeValves = Observer.create(
+    (value) => {
+      outputObservers.closeValve1.onNext(value);
+      outputObservers.closeValve2.onNext(value);
+    }
+  );
+
+  outputObservers.runPump = outputObservers["startPump" + pump];
+  outputObservers.openValve = outputObservers["openValve" + pump];
+
+  inputObservables.valveOpened = inputObservables["valve" + pump + "Opened"];
   return Observable.fromPromise(Promise.all([outputsConfigured, inputsConfigured]))
     .flatMap(() => pumpCycle({
-      inputs: inputObservables, 
-      outputs: outputObservers, 
-      timeouts, 
+      inputs: inputObservables,
+      outputs: outputObservers,
+      timeouts,
       log
     }))
 }
-

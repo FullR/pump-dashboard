@@ -2,57 +2,57 @@
   "outputs": {
     "startPump1": {
         "pinName": "P9_12",
-        "pin": "28"
+        "pin": "60"
     },
     "startPump2": {
         "pinName": "P9_27",
-        "pin": "19"
+        "pin": "115"
     },
     "openValve1": {
         "pinName": "P9_15",
-        "pin": "16"
+        "pin": "48"
     },
     "closeValve1": {
         "pinName": "P9_23",
-        "pin": "17"
+        "pin": "49"
     },
     "openValve2": {
         "pinName": "P8_7",
-        "pin": "2"
+        "pin": "66"
     },
     "closeValve2": {
         "pinName": "P9_41",
-        "pin": "20"
+        "pin": "116"
     },
     "runPrime": {
         "pinName": "P8_9",
-        "pin": "5"
+        "pin": "69"
     }
   },
   "inputs": {
-      "emergencyStop": {
-        "pinName": "P8_12",
-        "pin": "12",
-        "inverted": false
+      "tankIsFull": {
+        "pinName": "P8_15",
+        "pin": "44",
+        "inverted": true
       },
       "lowPressure": {
         "pinName": "P8_14",
         "pin": "26",
         "inverted": true
       },
-      "primeComplete": {
+      "emergencyStop": {
         "pinName": "P8_11",
-        "pin": "13",
+        "pin": "45",
         "inverted": false
       },
-      "tankIsFull": {
-        "pinName": "P8_15",
-        "pin": "15",
-        "inverted": true
+      "primeComplete": {
+        "pinName": "P8_12",
+        "pin": "47",
+        "inverted": false
       },
-      "valve1Opened": {
+      "valve2Opened": {
         "pinName": "P8_16",
-        "pin": "14",
+        "pin": "46",
         "inverted": false
       },
       "valve1Closed": {
@@ -60,9 +60,9 @@
         "pin": "27",
         "inverted": false
       },
-      "valve2Opened": {
+      "valve1Opened": {
         "pinName": "P8_18",
-        "pin": "1",
+        "pin": "65",
         "inverted": false
       },
       "valve2Closed": {

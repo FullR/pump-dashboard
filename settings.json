@@ -1,4 +1,5 @@
 {
+  "isPC": true,
   "dynamic": false,
   "address": [
     184,
@@ -19,10 +20,10 @@
     1
   ],
   "closeValvesTimeout": 300000,
-  "primeTimeout": 120000,
+  "primeTimeout": 1200000,
   "pumpTimeout": 180000,
   "primeDelay": 800,
   "postPumpValveDelay": 50000,
-  "pressureMonitorDelay": 300,
+  "pressureMonitorDelay": 180000,
   "preTideDelay": 7200000
 }

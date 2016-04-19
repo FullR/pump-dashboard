@@ -7,7 +7,6 @@ import formatRemaining from "./util/format-remaining";
 import Scheduler from "./scheduler";
 import scheduleManager from "./schedule-manager";
 import downloadTideData from "./download-tide-data";
-import testSystem from "./test-system";
 import pumpManager from "./pump-manager";
 import settingManager from "./setting-manager";
 
@@ -35,8 +34,8 @@ function scheduleNextPump() {
     scheduler.stop();
   }
 
-  scheduler = manual ? 
-    new Scheduler(currentSchedule) : 
+  scheduler = manual ?
+    new Scheduler(currentSchedule) :
     new Scheduler(currentSchedule.map((t) => t - (preTideDelay || 0)));
 
   scheduler

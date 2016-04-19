@@ -48,7 +48,7 @@ function inputObservable(pinId, inverted) {
 
 function outputObserver(pinId) {
   return _rx.Observer.create(function (value) {
-    return _gpio2["default"].setPinValue(pinId, value);
+    return _gpio2["default"].setPinValue(pinId, value)["catch"](log);
   }, log);
 }
 
@@ -57,7 +57,8 @@ function externalSystem() {
 
   var _ref$timeouts = _ref.timeouts;
   var timeouts = _ref$timeouts === undefined ? {} : _ref$timeouts;
-  var log = _ref.log;
+  var _ref$log = _ref.log;
+  var log = _ref$log === undefined ? console.log : _ref$log;
   var _ref$pump = _ref.pump;
   var pump = _ref$pump === undefined ? "1" : _ref$pump;
 
@@ -99,6 +100,15 @@ function externalSystem() {
     outputs[pinId] = outputObserver(pin);
   });
 
+  outputObservers.closeValves = _rx.Observer.create(function (value) {
+    outputObservers.closeValve1.onNext(value);
+    outputObservers.closeValve2.onNext(value);
+  });
+
+  outputObservers.runPump = outputObservers["startPump" + pump];
+  outputObservers.openValve = outputObservers["openValve" + pump];
+
+  inputObservables.valveOpened = inputObservables["valve" + pump + "Opened"];
   return _rx.Observable.fromPromise(Promise.all([outputsConfigured, inputsConfigured])).flatMap(function () {
     return (0, _pumpCycle2["default"])({
       inputs: inputObservables,
