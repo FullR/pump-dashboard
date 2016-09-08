@@ -1,44 +1,57 @@
-var webpack = require("webpack");
+const webpack = require("webpack");
+const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const local = (p) => path.join(__dirname, p);
+const truthy = (v) => !!v;
 
-function extentions() {
-  var exts = [];
-  var length = arguments.length;
-  for(var i = 0; i < length; i++) {
-    exts.push(arguments[i]);
-  }
-  return new RegExp("\.(?:" + exts.join("|") + ")$");
-}
+const PROD = process.env.NODE_ENV === "production";
+const ifProd = (v, elseV=null) => PROD ? v : elseV;
 
 module.exports = {
-  context: __dirname + "/client",
-  entry: [
-    "./app.js"
-  ],
+  entry: "./src/app.js",
   resolve: {
-    root: __dirname + "/client",
-    extensions: ["", ".js"]
+    root: [
+      path.resolve("./src")
+    ]
   },
   output: {
-    path: __dirname + "/dist/public",
-    filename: "app.js"
+    path: local("build"),
+    filename: "bundle.js"
   },
   module: {
     loaders: [
-      {test: extentions("js"), exclude: /node_modules/, loaders: ["react-hot", "babel-loader?stage=1"]},
-      {test: extentions("scss"), loader: "style!css!sass"},
-      {test: extentions("less"), loader: "style!css!less"},
-      {test: extentions("png", "jpg", "gif"), loader: "file-loader?name=images/[name].[hash].[ext]"}
+      {
+        test: /\.js$/,
+        loader: "babel",
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          "classnames",
+          ExtractTextPlugin.extract("css?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]")
+        ]
+      },
+      {
+        test: /\.json$/,
+        loader: "json"
+      },
+      {
+        test: /\.html$/,
+        loader: "file?name=[name].[ext]"
+      },
+      {
+        test: /\.(png|gif|jpeg|mp3|ogg)$/,
+        loader: "file"
+      }
     ]
   },
   plugins: [
-    //new webpack.HotModuleReplacementPlugin(),
-    //new webpack.NoErrorsPlugin()
-  ],
-  devServer: {
-    progress: true,
-    colors: true,
-    proxy: {
-      "*": "http://localhost:9090"
-    }
-  }
+    new ExtractTextPlugin("styles.css"),
+    ifProd(new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    }))
+  ].filter(truthy)
 };
