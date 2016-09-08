@@ -1,4 +1,4 @@
-An app for creating and organizing customer issue tickets. Work in progress.
+OIMB Salt water pump controller.
 
 ## Commands
 * `clean` - Deletes the previous build files
