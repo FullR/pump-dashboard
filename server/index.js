@@ -2,6 +2,7 @@ const apiServer = require("./api-server");
 const devServer = require("./dev-server");
 const setupDBTables = require("./setup-db-tables");
 const createUserIfNotExists = require("./db-util/create-user-if-not-exists");
+const updateAutoPumpTimes = require("./update-auto-pump-times");
 const log = require("./log");
 const config = require("../config");
 
@@ -24,5 +25,6 @@ function createAdminUser() {
 setupDBTables()
   .then(createAdminUser)
   .then(startServers)
+  .then(() => updateAutoPumpTimes(config.noaaStationId, config.prePumpDelay))
   .then(() => log.startClearLoop())
   .catch(console.log.bind(console));

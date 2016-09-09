@@ -1,4 +1,6 @@
 {
   "defaultAdminPassword": "OIMB45",
-  "manualScheduleMode": false
+  "manualScheduleMode": false,
+  "noaaStationId": "9432780",
+  "prePumpDelay": 7200000
 }
