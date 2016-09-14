@@ -25,6 +25,6 @@ function createAdminUser() {
 setupDBTables()
   .then(createAdminUser)
   .then(startServers)
-  .then(() => updateAutoPumpTimes(config.noaaStationId, config.prePumpDelay))
+  .then(updateAutoPumpTimes)
   .then(() => log.startClearLoop())
   .catch(console.log.bind(console));

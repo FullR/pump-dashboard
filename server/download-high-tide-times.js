@@ -1,4 +1,5 @@
 const request = require("request");
+const {writeFile, readFile} = require("fs-promise");
 
 const isoStringMSRegex = /\.\d\d\dZ$/; // needed to remove milliseconds from date#toISOString
 const lowTideRegex = /,L,/; // for filtering low tide entries
@@ -6,13 +7,24 @@ const lineRegex = /,(\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\dZ)/; // for capturing tide
 const noaaErrorRegex = /<ExceptionText>(.*)<\/ExceptionText>/;
 const baseUrl = "http://opendap.co-ops.nos.noaa.gov/ioos-dif-sos/SOS";
 const oneMonth = (1000 * 60 * 60 * 24 * 30);
+const noop = () => {};
+const cacheFile = __dirname + "/../cached-noaa-data.csv";
+
+function loadTimesFromCacheFile() {
+  return readFile(cacheFile)
+    .then((data) => parseHighTideData(data.toString()));
+}
 
 module.exports = function downloadHighTideTimes({
-  startTime = Date.now(),
-  endTime = Date.now() + oneMonth,
+  startTime=Date.now(),
+  endTime=Date.now() + oneMonth,
+  log=noop,
+  logError=noop,
   stationId
 }={}) {
   if(!stationId) return Promise.reject("downloadHighTideTimes requires stationId option");
+  return loadTimesFromCacheFile(); // for offline testing
+
   return new Promise((resolve, reject) => {
     const params = [
       "service=SOS",
@@ -27,10 +39,15 @@ module.exports = function downloadHighTideTimes({
       "unit=Meters"
     ];
     const url = `${baseUrl}?${params.join("&")}`;
+    log(`Requesting NOAA tide data from station ${stationId}`);
     const req = request.get(url, (error, res, body) => {
       if(error) {
+        logError(`NOAA request failed: ${error}`);
         reject(error);
       } else {
+        log("NOAA Request suceeded");
+        writeFile(cacheFile, body)
+          .catch((error) => logError(`Failed to cache NOAA response: ${error}`));
         resolve(body);
       }
     });
