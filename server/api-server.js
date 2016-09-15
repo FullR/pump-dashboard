@@ -25,11 +25,15 @@ module.exports = (port) => {
   }));
   app.use("/api", getAPI());
 
-  app.listen(port, (error) => {
-    if(error) {
-      log.error(`Webserver failed to start: ${error}`);
-    } else {
-      log(`Webserver started successfully on port ${port}`);
-    }
+  return new Promise((resolve, reject) => {
+    app.listen(port, (error) => {
+      if(error) {
+        log.error(`Webserver failed to start: ${error}`);
+        reject(error);
+      } else {
+        log(`Webserver started successfully on port ${port}`);
+        resolve();
+      }
+    });
   });
 };

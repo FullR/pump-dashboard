@@ -23,7 +23,7 @@ module.exports = function downloadHighTideTimes({
   stationId
 }={}) {
   if(!stationId) return Promise.reject("downloadHighTideTimes requires stationId option");
-  return loadTimesFromCacheFile(); // for offline testing
+  //return loadTimesFromCacheFile(); // for offline testing
 
   return new Promise((resolve, reject) => {
     const params = [

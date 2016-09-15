@@ -13,11 +13,15 @@ module.exports = (port, apiPort) => {
     }
   });
 
-  server.listen(port, (error) => {
-    if(error) {
-      console.error(error);
-    } else {
-      console.log(`Dev server listening on port ${port}`);
-    }
+  return new Promise((resolve, reject) => {
+    server.listen(port, (error) => {
+      if(error) {
+        console.error(error);
+        reject(error);
+      } else {
+        console.log(`Dev server listening on port ${port}`);
+        resolve();
+      }
+    });
   });
 };
