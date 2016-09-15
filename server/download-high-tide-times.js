@@ -44,7 +44,7 @@ module.exports = function downloadHighTideTimes({
         log.email.error(`NOAA request failed: ${error}`);
         reject(error);
       } else {
-        log.info("NOAA Request suceeded");
+        log.info("NOAA Request succeeded");
         writeFile(cacheFile, body)
           .catch((error) => log.email.error(`Failed to cache NOAA response: ${error}`, error));
         resolve(body);

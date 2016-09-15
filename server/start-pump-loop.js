@@ -14,7 +14,7 @@ function pump() {
     .then(() => {
       log.email.info("Pump job finished successfully");
     })
-    .catch((error) => fatal("Pump job failed", error));
+    .catch((error) => fatal.email("Pump job failed", error));
 }
 
 const schedulePumpJob = co.wrap(function* () {
@@ -29,6 +29,6 @@ module.exports = function startPumpLoop() {
   schedulePumpJob()
     .then(
       startPumpLoop,
-      (error) => fatal("Failed to schedule pump job", error)
+      (error) => fatal.email("Failed to schedule pump job", error)
     );
 }

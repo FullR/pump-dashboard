@@ -28,10 +28,10 @@ module.exports = (port) => {
   return new Promise((resolve, reject) => {
     app.listen(port, (error) => {
       if(error) {
-        log.error(`Webserver failed to start: ${error}`);
+        log.error(`Failed to start API server: ${error}`);
         reject(error);
       } else {
-        log.info(`Webserver started successfully on port ${port}`);
+        log.info(`API server listening on port ${port}`);
         resolve();
       }
     });
