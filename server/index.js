@@ -8,7 +8,10 @@ const config = require("../config");
 
 // to avoid storing the password on github, it will be passed as an environmental variable
 if(!process.env.PUMP_EMAIL_PASSWORD) {
-  log.verbose('Error: You must define an environmental variable for the email password. Example: export PUMP_EMAIL_PASSWORD="email password"');
+  log.verbose('Warning: You must define an environmental variable for the email password. Example: export PUMP_EMAIL_PASSWORD="email password"');
+}
+if(process.env.BEAGLEBONE !== "true") {
+  log.verbose('Warning: Beaglebone not detected. BEAGLEBONE environmental variable must be set to "true" for GPIO to function properly. Example: export BEAGLEBONE="true" (Note: for change to be active, you must recompile GPIO utils by running "npm run compile-gpio-util")');
 }
 
 const PORT = process.env.PORT || 8080;
@@ -33,6 +36,7 @@ function createAdminUser() {
 
 setupDBTables()
   .then(createAdminUser)
+  .then(log.enableDatabaseLogging) // keep log module from trying to write to db before its initialized
   .then(startServers).catch(() => {}) // if the web server fails, the system should continue
   .then(() => {
     if(!config.manual) {

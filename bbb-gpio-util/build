@@ -1,3 +1,12 @@
 #!/bin/bash
 
-gcc ./bbb-gpio-util/index.c -o server/gpio.exe
+if [ "$BEAGLEBONE" = "true" ];
+then
+  PROD=true
+  echo "Compiling for Beaglebone (production)"
+else
+  PROD=false
+  echo "Compiling for desktop (development)"
+fi
+
+gcc ./bbb-gpio-util/index.c -o server/gpio.exe -D"PROD=$PROD"

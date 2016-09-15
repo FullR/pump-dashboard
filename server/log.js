@@ -5,6 +5,7 @@ const lt = require("long-timeout");
 const sendEmail = require("./send-email");
 
 const logLevels = ["verbose", "info", "error"];
+let databaseLogging = false;
 
 function insertLogObject(logObj) {
   return knex("logs").insert(logObj)
@@ -22,7 +23,7 @@ function log(level, message) {
   }
   console.log(getLogString(level, message));
 
-  if(level !== "verbose") { // no need to store verbose logs
+  if(databaseLogging && level !== "verbose") { // no need to store verbose logs
     return insertLogObject({
       level,
       message
@@ -51,6 +52,10 @@ function clearOldLogs() {
 // once a week, delete all logs that are more than a week old
 function startClearLoop() {
   lt.setInterval(clearOldLogs, WEEK);
+}
+
+log.enableDatabaseLogging = () => {
+  databaseLogging = true;
 }
 
 log.email = {};

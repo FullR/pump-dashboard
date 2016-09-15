@@ -5,7 +5,7 @@ const intervals = ["MONTH", "DAY", "HOUR", "MINUTE"];
 const intervalKeyMap = intervals.reduce((map, key) => {
   map[key] = key.toLowerCase();
   return map;
-}, {})
+}, {});
 
 // takes a number of milliseconds and formats it as "x months x days x hours x minutes" omiting any that are 0
 module.exports = function formatTimeInterval(ms) {

@@ -1,9 +1,11 @@
 const fs = require("fs");
+const path = require("path");
 const exec = require("child_process").exec;
 const readFile = fs.readFile;
 const stat = fs.stat;
 const validDirections = ["high", "low", "in", "out"];
-const gpioExe = __dirname + "/gpio.exe";
+const gpioExe = path.join(__dirname, "gpio.exe");
+const gpioPath = process.env.BEAGLEBONE === "true" ? "/sys/class/gpio" : path.resolve(__dirname + "/../bbb-gpio-util/test-gpio");
 
 function fileExists(filename) {
   return new Promise((resolve) => {
@@ -15,7 +17,7 @@ function fileExists(filename) {
 }
 
 function pinDir(pinId) {
-  return `/sys/class/gpio/gpio${pinId}`;
+  return `${gpioPath}/gpio${pinId}`;
 }
 
 function pinFile(pinId, filename) {

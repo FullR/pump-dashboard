@@ -2,10 +2,22 @@
 #include <string.h>
 #include <stdbool.h>
 
-// #define GPIO_PATH "/home/james/projects/pump-dashboard/bbb-gpio-util/test-gpio"
-#define GPIO_PATH "/sys/class/gpio"
+#if PROD==true
+  #define GPIO_PATH "/sys/class/gpio"
+#else
+  #define GPIO_PATH "/home/james/projects/pump-dashboard/bbb-gpio-util/test-gpio"
+#endif
 #define EXPORT_PATH GPIO_PATH "/export"
 #define UNEXPORT_PATH GPIO_PATH "/unexport"
+#define USAGE_TEXT "Beaglebone Black GPIO Utilities\n"\
+  "GPIO path:" GPIO_PATH "\n"\
+  "Usage:\n"\
+  "  gpio (pinId) (command) [commandArg]\n"\
+  "  Commands:\n"\
+  "    export - Export the given pin to make it available for IO\n"\
+  "    unexport - Unexport the given pin to disable it for IO\n"\
+  "    set-direction - Set the direction for a pin (valid values: high, low, up, down)\n"\
+  "    set-value - Set the value for a pin (valid values: 1, 0)\n"
 
 char* validDirections[] = {"in", "out", "high", "low"};
 
@@ -70,14 +82,8 @@ bool isValidValue(char* value) {
   return strEq(value, "0") || strEq(value, "1");
 }
 
-void printUsage(char* command) {
-  printf("Usage:\n");
-  printf("  %s (pinId) (command) [commandArg]\n", command);
-  printf("  Commands:\n");
-  printf("    export - Export the given pin to make it available for IO\n");
-  printf("    unexport - Unexport the given pin to disable it for IO\n");
-  printf("    set-direction - Set the direction for a pin (valid values: high, low, up, down)\n");
-  printf("    set-value - Set the value for a pin (valid values: 1, 0)\n");
+void printUsage() {
+  printf(USAGE_TEXT);
 }
 
 bool exportPin(char* pin) {
@@ -142,11 +148,10 @@ bool setValue(char* pin, char* value) {
 }
 
 int main(size_t argc, char* argv[]) {
-  // printf("export path = %s\nunexport path = %s\n", EXPORT_PATH, UNEXPORT_PATH);
   bool errorFlag;
 
   if(argc <= 2 || strEq("--help", argv[1])) {
-    printUsage(argv[0]);
+    printUsage();
   } else {
     char* pin = argv[1];
     char* command = argv[2];
@@ -174,7 +179,7 @@ int main(size_t argc, char* argv[]) {
     } else {
       errorFlag = true;
       printf("Unrecognized command: %s\n", command);
-      printUsage(argv[0]);
+      printUsage();
     }
   }
 
