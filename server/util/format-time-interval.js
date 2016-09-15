@@ -1,7 +1,7 @@
 const {entries} = require("lodash");
 const tc = require("../time-constants");
 
-const intervals = ["MONTH", "DAY", "HOUR", "MINUTE"];
+const intervals = ["MONTH", "DAY", "HOUR", "MINUTE", "SECOND", "MILLISECOND"];
 const intervalKeyMap = intervals.reduce((map, key) => {
   map[key] = key.toLowerCase();
   return map;

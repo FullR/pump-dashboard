@@ -1,5 +1,6 @@
 const Rx = require("rx");
 const {noop, defaults} = require("lodash");
+const formatTimeInterval = require("./util/format-time-interval");
 const autoObservable = require("./util/auto-observable");
 const maybeTimeout = require("./util/maybe-timeout");
 const delay = require("./util/delay");
@@ -139,7 +140,7 @@ module.exports = function runCycle({
     }
 
     const sub = maybeTimeout(closeValves(), timeouts.closeValvesTimeout, "Close valves timeout reached")
-      .do(() => log(`Waiting ${timeouts.primeDelay}ms to begin prime...`))
+      .do(() => log(`Waiting ${formatTimeInterval(timeouts.primeDelay)} to begin prime...`))
       .flatMap(() => delay(timeouts.primeDelay))
       .flatMap(startPrimePump)
       .flatMap(() => maybeTimeout(waitForPrime(), timeouts.primeTimeout, "Priming timeout reached"))
@@ -148,7 +149,7 @@ module.exports = function runCycle({
         return delay(60000);
       })
       .flatMap(() => {
-        return startPump().do(() => log(`Waiting ${timeouts.pressureMonitorDelay}ms to monitor pressure...`))
+        return startPump().do(() => log(`Waiting ${formatTimeInterval(timeouts.pressureMonitorDelay)} to monitor pressure...`))
       })
       .flatMap(() => {
         log("Waiting 30 seconds to open valve...");
@@ -158,7 +159,7 @@ module.exports = function runCycle({
       .flatMap(() => delay(timeouts.pressureMonitorDelay))
       .flatMap(() => {
         return maybeTimeout(monitorTankAndPressure(), timeouts.pumpTimeout, "Pumping timeout reached")
-          .do(() => log(`Waiting ${timeouts.postPumpValveDelay}ms to close valves...`));
+          .do(() => log(`Waiting ${formatTimeInterval(timeouts.postPumpValveDelay)} to close valves...`));
       })
       .flatMap(() => delay(timeouts.postPumpValveDelay))
       .flatMap(closeValves)
