@@ -5,12 +5,12 @@ const createUserIfNotExists = require("./db-util/create-user-if-not-exists");
 const updateAutoPumpTimes = require("./update-auto-pump-times");
 const startPumpLoop = require("./start-pump-loop");
 const log = require("./log");
+const fatal = require("./fatal");
 const config = require("../config");
 
 // to avoid storing the password on github, it will be passed as an environmental variable
 if(!process.env.PUMP_EMAIL_PASSWORD) {
-  console.log('Error: You must define an environmental variable for the email password. Example: export PUMP_EMAIL_PASSWORD="email password"');
-  process.exit();
+  fatal('Error: You must define an environmental variable for the email password. Example: export PUMP_EMAIL_PASSWORD="email password"');
 }
 
 const PORT = process.env.PORT || 8080;

@@ -8,7 +8,7 @@ module.exports = () => {
   const auth = passport.authenticate("local");
 
   router.post("/login", auth, (req, res) => {
-    log(`User ${req.user.username} logged in successfully`);
+    log.info(`User ${req.user.username} logged in successfully`);
     res.json({success: true, user: req.user});
   });
 

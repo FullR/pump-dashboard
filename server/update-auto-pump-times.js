@@ -6,11 +6,11 @@ const {noaaStationId, prePumpDelay} = require("../config");
 
 // downloads high tide times, removes pre-pump delay, filters times before now, and stores times in the database
 module.exports = co.wrap(function* () {
-  log("Downloading tide data from NOAA");
+  log.info("Downloading tide data from NOAA");
   const highTideTimes = yield downloadHighTideTimes({stationId: noaaStationId});
   const pumpTimes = highTideTimes
     .map((highTideTime) => new Date(highTideTime.getTime() - prePumpDelay));
-  log(`Tide data downloaded successfully (${pumpTimes.length} high tides)`);
+  log.info(`Tide data downloaded successfully (${pumpTimes.length} high tides)`, pumpTimes.join("\n"));
 
   return yield insertPumpTimes(pumpTimes, false);
 });

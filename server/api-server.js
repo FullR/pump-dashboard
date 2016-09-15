@@ -31,7 +31,7 @@ module.exports = (port) => {
         log.error(`Webserver failed to start: ${error}`);
         reject(error);
       } else {
-        log(`Webserver started successfully on port ${port}`);
+        log.info(`Webserver started successfully on port ${port}`);
         resolve();
       }
     });

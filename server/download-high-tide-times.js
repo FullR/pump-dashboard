@@ -1,5 +1,6 @@
 const request = require("request");
 const {writeFile, readFile} = require("fs-promise");
+const log = require("./log");
 
 const isoStringMSRegex = /\.\d\d\dZ$/; // needed to remove milliseconds from date#toISOString
 const lowTideRegex = /,L,/; // for filtering low tide entries
@@ -18,8 +19,6 @@ function loadTimesFromCacheFile() {
 module.exports = function downloadHighTideTimes({
   startTime=Date.now(),
   endTime=Date.now() + oneMonth,
-  log=noop,
-  logError=noop,
   stationId
 }={}) {
   if(!stationId) return Promise.reject("downloadHighTideTimes requires stationId option");
@@ -39,15 +38,15 @@ module.exports = function downloadHighTideTimes({
       "unit=Meters"
     ];
     const url = `${baseUrl}?${params.join("&")}`;
-    log(`Requesting NOAA tide data from station ${stationId}`);
+    log.info(`Requesting NOAA tide data from station ${stationId}`);
     const req = request.get(url, (error, res, body) => {
       if(error) {
-        logError(`NOAA request failed: ${error}`);
+        log.email.error(`NOAA request failed: ${error}`);
         reject(error);
       } else {
-        log("NOAA Request suceeded");
+        log.info("NOAA Request suceeded");
         writeFile(cacheFile, body)
-          .catch((error) => logError(`Failed to cache NOAA response: ${error}`));
+          .catch((error) => log.email.error(`Failed to cache NOAA response: ${error}`, error));
         resolve(body);
       }
     });

@@ -56,6 +56,7 @@
     "howler": "^2.0.0",
     "knex": "^0.11.10",
     "lodash": "^4.15.0",
+    "long-timeout": "^0.1.1",
     "material-ui": "^0.15.4",
     "morgan": "^1.7.0",
     "nodemailer": "^2.6.0",
