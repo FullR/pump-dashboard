@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gcc ./bbb-gpio-util/index.c -o server/gpio.exe

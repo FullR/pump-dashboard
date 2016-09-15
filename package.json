@@ -8,8 +8,10 @@
     "clean": "rm -rf build/*",
     "build": "npm run clean && NODE_ENV=production webpack -p",
     "build:dev": "npm run clean && webpack",
+    "compile-gpio-util": "./bbb-gpio-util/build",
     "start": "node ./server",
-    "start:prod": "npm run build && NODE_ENV=production npm run start"
+    "start:prod": "npm run build && NODE_ENV=production npm run start",
+    "postinstall": "npm run compile-gpio-util"
   },
   "keywords": [],
   "author": "",
