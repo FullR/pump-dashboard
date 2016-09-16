@@ -9,6 +9,7 @@ const intervalKeyMap = intervals.reduce((map, key) => {
 
 // takes a number of milliseconds and formats it as "x months x days x hours x minutes" omiting any that are 0
 module.exports = function formatTimeInterval(ms) {
+  if(typeof ms !== "number" || ms !== ms) return "[Invalid Interval]";
   return intervals.reduce((s, key, index) => {
     const intervalTime = tc[key];
     const count = index ?
