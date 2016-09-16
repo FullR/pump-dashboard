@@ -8,7 +8,7 @@ function mapStateToProps({user}) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: ({username, password}) => dispatch(actions.login(username, password, "/counter"))
+    onSubmit: ({username, password}) => dispatch(actions.login(username, password))
   };
 }
 
