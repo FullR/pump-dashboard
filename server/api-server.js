@@ -12,17 +12,18 @@ const log = require("./log");
 module.exports = (port) => {
   const app = express();
   app.use(express.static(__dirname + "/../build"));
+  app.use(session({
+    secret: "fj890fj89wj890js0uajk9rj0q",
+    resave: false,
+    saveUninitialized: false
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(morgan("dev"));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
-  app.use(session({
-    secret: "fj890fj89wj890js0uajk9rj0q",
-    resave: false,
-    saveUninitialized: false
-  }));
+
   app.use("/api", getAPI());
 
   return new Promise((resolve, reject) => {

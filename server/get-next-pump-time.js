@@ -2,7 +2,7 @@ const co = require("co");
 const {isNaN} = require("lodash");
 const getPumpTimes = require("./db-util/get-pump-times");
 const updateAutoPumpTimes = require("./update-auto-pump-times");
-const {manual} = require("../config");
+const config = require("./config");
 const log = require("./log");
 const compareDates = (a, b) => a - b;
 
@@ -34,7 +34,7 @@ const getNextManualPumpTime = co.wrap(function* () {
 });
 
 module.exports = function getNextPumpTime() {
-  return manual ?
+  return config.get("manual") ?
     getNextManualPumpTime() :
     getNextAutomaticPumpTime();
 }

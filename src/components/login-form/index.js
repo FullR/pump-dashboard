@@ -1,11 +1,12 @@
 import React, {PropTypes} from "react";
+import request from "superagent";
 import cx from "./style.css";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 
 export default class LoginForm extends React.Component {
   static defaultProps = {onSubmit: window.noop};
-  state = {username: "admin", password: "password"};
+  state = {username: "admin", password: "password", pumpTimes: []};
   handleUsernameChange = (e, v) => this.setState({username: v});
   handlePasswordChange = (e, v) => this.setState({password: v});
   handleSubmit = (e) => {
@@ -13,9 +14,37 @@ export default class LoginForm extends React.Component {
     this.props.onSubmit(this.state);
   };
 
+  startPump = () => {
+    request.post("/api/start-pump")
+      .end((error, response) => console.log(error || response));
+  };
+
+  stopPump = () => {
+    request.post("/api/stop-pump")
+      .end((error, response) => console.log(error || response))
+  };
+
+  getPumpTimes() {
+    request.get("/api/pump-times")
+      .end((error, response) => {
+        if(error) {
+          console.log(error);
+        } else {
+          console.log(response);
+          this.setState({pumpTimes: response.body});
+        }
+      });
+  }
+
+  componentDidUpdate(lastProps) {
+    if(this.props.user && !lastProps.user) {
+      this.getPumpTimes();
+    }
+  }
+
   render() {
     const {user, error, children, className} = this.props;
-    const {username, password} = this.state;
+    const {username, password, pumpTimes} = this.state;
     const classNames = cx(className, "root");
 
     return (
@@ -33,6 +62,20 @@ export default class LoginForm extends React.Component {
           <TextField id="password" name="password" value={password} onChange={this.handlePasswordChange}/>
           <RaisedButton onClick={this.handleSubmit}>Login</RaisedButton>
         </form>
+
+        <ul>
+          {pumpTimes.map((entry) =>
+            <li key={entry.id}>{entry.pumpTime.toString()}</li>
+          )}
+        </ul>
+
+        {user ?
+          <div>
+            <button onClick={this.startPump}>Start Pumps</button>
+            <button onClick={this.stopPump}>Stop Pumps</button>
+          </div> :
+          null
+        }
       </div>
     );
   }

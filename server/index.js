@@ -1,10 +1,10 @@
 const setupDBTables = require("./setup-db-tables");
 const createUserIfNotExists = require("./db-util/create-user-if-not-exists");
 const updateAutoPumpTimes = require("./update-auto-pump-times");
-const startPumpLoop = require("./start-pump-loop");
+const pumpLoop = require("./pump-loop");
 const log = require("./log");
 const fatal = require("./fatal");
-const config = require("../config");
+const config = require("./config");
 
 // to avoid storing the password on github, it will be passed as an environmental variable
 if(!process.env.PUMP_EMAIL_PASSWORD) {
@@ -31,7 +31,7 @@ function startServers() {
 }
 
 function createAdminUser() {
-  return createUserIfNotExists("admin", config.defaultAdminPassword);
+  return createUserIfNotExists("admin", config.get("defaultAdminPassword"));
 }
 
 setupDBTables()
@@ -39,12 +39,12 @@ setupDBTables()
   .then(log.enableDatabaseLogging) // keep log module from trying to write to db before its initialized
   .then(startServers).catch(() => {}) // if the web server fails, the system should continue
   .then(() => {
-    if(!config.manual) {
+    if(!config.get("manual")) {
       return updateAutoPumpTimes();
     }
   })
   .then(log.startClearLoop) // clear old logs once a week
-  .then(startPumpLoop)
+  .then(pumpLoop.start)
   .catch((error) => {
     fatal.email(`Pump controller crash: ${error}`, error);
   });

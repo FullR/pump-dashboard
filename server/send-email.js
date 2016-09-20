@@ -1,7 +1,10 @@
 const nodemailer = require("nodemailer");
 const log = require("./log");
-const {controllerEmail, emailList} = require("../config");
+const config = require("./config");
 const password = process.env.PUMP_EMAIL_PASSWORD;
+
+const controllerEmail = config.get("controllerEmail");
+const emailList = config.get("emailList");
 
 // if address/password/recipients aren't provided, disable email support
 if(password && controllerEmail && emailList && emailList.length) {
