@@ -8,6 +8,7 @@ const pumpManager = require("./pump-manager");
 
 const wait = require("./util/wait");
 const {HOUR} = require("./time-constants");
+const never = new Promise(() => {}); // never resolves/rejects
 let currentPumpJob = null;
 
 class PumpJob {
@@ -54,8 +55,12 @@ function schedulePumpJob() {
     .then(cancelPumpJob)
     .then(getNextPumpTime)
     .then((pumpTime) => {
-      currentPumpJob = new PumpJob(pumpTime);
-      return currentPumpJob.schedule();
+      if(pumpTime) {
+        currentPumpJob = new PumpJob(pumpTime);
+        return currentPumpJob.schedule();
+      } else {
+        return never;
+      }
     });
 }
 

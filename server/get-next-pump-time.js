@@ -29,7 +29,8 @@ const getNextManualPumpTime = co.wrap(function* () {
   if(validPumpTimes.length) {
     return validPumpTimes.sort(compareDates)[0];
   } else {
-    throw new Error(`No manual pump times found. Add some using the web interface and restart the server.`);
+    log.email.error("No valid manual pump times found. Add some using the web interface and save.");
+    return null;
   }
 });
 
