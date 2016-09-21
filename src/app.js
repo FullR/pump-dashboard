@@ -2,7 +2,7 @@ import "babel-polyfill";
 import "index.html";
 import ReactDOM from "react-dom";
 import React from "react";
-import Router from "router";
+import Application from "./components/application";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -12,7 +12,7 @@ window.noop = function() {};
 function App() {
   return (
     <MuiThemeProvider>
-      <Router/>
+      <Application/>
     </MuiThemeProvider>
   );
 }
