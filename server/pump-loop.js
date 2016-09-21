@@ -33,7 +33,7 @@ class PumpJob {
 
   cancel() {
     if(this.pumpTimeout) {
-      log.info("Cancelling schedules pump job");
+      log.info("Cancelling scheduled pump job");
       lt.clearTimeout(this.pumpTimeout);
     }
   }
