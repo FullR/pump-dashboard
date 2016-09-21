@@ -29,6 +29,10 @@ function PumpTime(props) {
   );
 }
 
+function getTimeRemaining() {
+
+}
+
 let newPumpTimeIdCounter = 0;
 function newPumpTimeId() {
   return `new-${newPumpTimeIdCounter++}`;
@@ -40,6 +44,7 @@ export default class Application extends React.Component {
     loggedIn: false,
     pumpTimes: [],
     manual: false,
+    serverManual: false,
     user: null,
     error: null
   };
@@ -61,6 +66,7 @@ export default class Application extends React.Component {
               pumpTime: new Date(pumpTime.pumpTime)
             })),
             manual: res.body.manual,
+            serverManual: res.body.manual,
             loggedIn: true
           });
         }
@@ -96,8 +102,23 @@ export default class Application extends React.Component {
     this.setState({saveDialogOpen: true});
   };
 
-  handleSaveConfirm = () => {
-    this.setState({saveDialogOpen: false});
+  handleEnableAutomatic = () => {
+    this.closeSaveDialogModal();
+    request
+      .post("/api/set-automatic")
+      .set("Accept", "application/json")
+      .end((error) => {
+        if(error) {
+          console.log(error);
+          this.setState({error});
+        } else {
+          this.setState({serverManual: false});
+        }
+      });
+  };
+
+  handleEnableManual = () => {
+    this.closeSaveDialogModal();
     request
       .post("/api/set-manual-times")
       .set("Accept", "application/json")
@@ -106,6 +127,8 @@ export default class Application extends React.Component {
         if(error) {
           console.log(error);
           this.setState({error});
+        } else {
+          this.setState({serverManual: true});
         }
       });
   };
@@ -113,6 +136,10 @@ export default class Application extends React.Component {
   handleSaveCancel = () => {
     this.setState({saveDialogOpen: false});
   };
+
+  closeSaveDialogModal() {
+    if(this.state.saveDialogOpen) this.setState({saveDialogOpen: false});
+  }
 
   areManualTimesValid() {
     const now = Date.now();
@@ -122,7 +149,7 @@ export default class Application extends React.Component {
 
   render() {
     const {children, className} = this.props;
-    const {loggedIn, pumpTimes, manual, user, saveDialogOpen, error} = this.state;
+    const {loggedIn, pumpTimes, manual, serverManual, user, saveDialogOpen, error} = this.state;
 
     const classNames = cx(className, "root");
 
@@ -151,21 +178,21 @@ export default class Application extends React.Component {
           null
         }
 
-        {manual ?
-          <RaisedButton label="Save" onClick={this.handleSave} disabled={!this.areManualTimesValid()}/> :
+        {manual || serverManual !== manual ?
+          <RaisedButton label="Save" onClick={this.handleSave} disabled={manual && !this.areManualTimesValid()}/> :
           null
         }
 
         <Dialog
           actions={[
             <FlatButton label="Cancel" onClick={this.handleSaveCancel}/>,
-            <FlatButton label="Confirm" onClick={this.handleSaveConfirm}/>
+            <FlatButton label="Confirm" onClick={manual ? this.handleEnableManual : this.handleEnableAutomatic}/>
           ]}
           open={saveDialogOpen}
           title="Switching to manual scheduling mode"
           modal
         >
-          Are you sure? By saving, the system will switch to manual mode and will only pump at the times specified.
+          Are you sure you want the server to run in {manual ? "manual" : "automatic"} mode?
         </Dialog>
 
       </div>

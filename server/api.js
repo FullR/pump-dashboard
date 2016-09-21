@@ -56,6 +56,11 @@ module.exports = () => {
       .catch((error) => res.status(400).json({error}))
   });
 
+  router.post("/set-automatic", auth, (req, res) => {
+    setManualMode(false);
+    res.json({success: true});
+  });
+
   router.get("/pump-times", auth, (req, res) => {
     getAllPumpTimes()
       .then((pumpTimes) => res.json(pumpTimes))
