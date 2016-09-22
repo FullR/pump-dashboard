@@ -1,6 +1,6 @@
 {
   "defaultAdminPassword": "OIMB45",
-  "manual": true,
+  "manual": false,
   "noaaStationId": "9432780",
   "prePumpDelay": 7200000,
   "controllerEmail": "oimb.pumps@gmail.com",

@@ -19,7 +19,7 @@ const getNextAutomaticPumpTime = co.wrap(function* () {
   } else {
     log.info("No valid automatic pump times found. Downloading new tide data.");
     yield updateAutoPumpTimes();
-    return yield getAutomaticPumpTime();
+    return yield getNextAutomaticPumpTime();
   }
 });
 

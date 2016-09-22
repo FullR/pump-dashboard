@@ -9,6 +9,7 @@ import TimePicker from "material-ui/TimePicker";
 import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 import Dialog from "material-ui/Dialog";
+import ReadableCountdown from "../readable-countdown";
 
 function PumpTime(props) {
   const {pumpTime, onChange, onRemove} = props;
@@ -27,10 +28,6 @@ function PumpTime(props) {
       }
     </tr>
   );
-}
-
-function getTimeRemaining() {
-
 }
 
 let newPumpTimeIdCounter = 0;
@@ -125,10 +122,15 @@ export default class Application extends React.Component {
       .send({pumpTimes: this.state.pumpTimes.filter((pumpTime) => pumpTime.manual)})
       .end((error) => {
         if(error) {
-          console.log(error);
           this.setState({error});
         } else {
-          this.setState({serverManual: true});
+          this.setState({
+            serverManual: true,
+            pumpTimes: replaceWhere(this.state.pumpTimes, ({isNew}) => isNew, (pumpTime) => ({
+              ...pumpTime,
+              isNew: false
+            }))
+          });
         }
       });
   };
@@ -147,6 +149,13 @@ export default class Application extends React.Component {
     return manualPumpTimes.length && manualPumpTimes.every((pumpTime) => pumpTime.pumpTime.getTime() > now);
   }
 
+  getNextPumpTime() {
+    const {pumpTimes, serverManual} = this.state;
+    const now = Date.now();
+    const usedPumpTimes = pumpTimes.filter((pumpTime) => !!pumpTime.manual === !!serverManual && !pumpTime.isNew);
+    return usedPumpTimes.map(({pumpTime}) => pumpTime.getTime()).filter((time) => time > now).sort()[0];
+  }
+
   render() {
     const {children, className} = this.props;
     const {loggedIn, pumpTimes, manual, serverManual, user, saveDialogOpen, error} = this.state;
@@ -157,9 +166,14 @@ export default class Application extends React.Component {
       <LoginForm onSubmit={this.handleLoginSubmit}/>
     );
     const visiblePumpTimes = pumpTimes.filter((pumpTime) => !!pumpTime.manual === !!manual);
+    const nextPumpTime = this.getNextPumpTime();
 
     return (
       <div className={classNames}>
+        {nextPumpTime ?
+          <div>Time until next pump: <ReadableCountdown date={nextPumpTime}/></div> :
+          null
+        }
         <Checkbox label="Manual Scheduling Mode" onCheck={this.handleManualChange} checked={manual}/>
         <table>
           <tbody>
@@ -194,7 +208,6 @@ export default class Application extends React.Component {
         >
           Are you sure you want the server to run in {manual ? "manual" : "automatic"} mode?
         </Dialog>
-
       </div>
     );
   }
