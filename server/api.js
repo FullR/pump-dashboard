@@ -1,6 +1,7 @@
 const passport = require("./passport");
 const log = require("./log");
 const pumpManager = require("./pump-manager");
+const pumpLoop = require("./pump-loop");
 const getAllPumpTimes = require("./db-util/get-all-pump-times");
 const insertPumpTimes = require("./db-util/insert-pump-times");
 const setManualMode = require("./set-manual-mode");
@@ -30,18 +31,26 @@ module.exports = () => {
 
   router.post("/start-pump", auth, (req, res) => {
     if(pumpManager.isPumping()) {
-      log.error("Pump request from web client denied: Pumps are already running");
+      log.error("Pump request from web client denied: Pumps are already running (request ignored)");
       res.status(400).json({error: "Pumps are busy"});
     } else {
       log.info("Received pump start request from web client");
-      pumpManager.start();
+      pumpLoop.stop();
+      pumpManager.start()
+        .then(() => {
+          log.info("Finished running manually started pump job");
+          pumpLoop.start();
+        });
       res.json({success: true});
     }
   });
 
   router.post("/stop-pump", auth, (req, res) => {
-    log.info("Received pump stop request from web client");
-    pumpManager.stop();
+    const isPumping = pumpManager.isPumping();
+    log.info(`Received pump stop request from web client. ${isPumping ? "Stopping pump" : "Pump not running (request ignored)"}`);
+    if(isPumping) {
+      pumpManager.stop();
+    }
     res.json({success: true});
   });
 
@@ -65,6 +74,10 @@ module.exports = () => {
     getAllPumpTimes()
       .then((pumpTimes) => res.json(pumpTimes))
       .catch((error) => res.status(400).json({error}));
+  });
+
+  router.get("/status", auth, (req, res) => {
+    res.json(pumpLoop.getState());
   });
 
   return router;

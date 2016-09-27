@@ -5,7 +5,7 @@ const log = require("./log");
 
 module.exports = (port, apiPort) => {
   const server = new WebpackDevServer(webpack(webpackConfig), {
-    quiet: true,
+    quiet: false,
     stats: {
       colors: true
     },

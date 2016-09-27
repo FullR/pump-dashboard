@@ -1,5 +1,46 @@
 /* Application */
 
 .root {
+  width: 900px;
+  height: 100%;
+  margin: 0 auto;
+}
 
+.button-container {
+  margin-top: 30px;
+}
+
+.status {
+  height: 20px;
+  margin: 30px 0 30px;
+}
+
+.status-text {
+  position: relative;
+  margin-left: 10px;
+  top: -5px;
+}
+
+.status-light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-light--connecting {
+  background: gray;
+}
+
+.status-light--waiting_to_pump,
+.status-light--pumping {
+  background: green;
+}
+
+.status-light--waiting_for_times {
+  background: yellow;
+}
+
+.status-light--error {
+  background: red;
 }

@@ -2,7 +2,12 @@ import React, {PropTypes} from "react";
 import formatTimeInterval from "../../../server/util/format-time-interval";
 
 function getTime(date) {
-  return typeof date === "number" ? date : date.getTime();
+  if(!date) return 0;
+  switch(typeof date) {
+    case "number": return date;
+    case "object": return date.getTime();
+    case "string": return new Date(date).getTime();
+  }
 }
 
 export default class ReadableCountdown extends React.Component {

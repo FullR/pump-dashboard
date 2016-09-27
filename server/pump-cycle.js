@@ -54,7 +54,7 @@ module.exports = function runCycle({
         //   }
         // );
         const valvesClosed = inputs.valve1Closed;
-        const sub = valvesClosed.filter(isTrue).take(1).subscribe(() => {
+        const sub = valvesClosed.filter(isTrue).first().subscribe(() => {
           log("Valves closed");
           observer.onNext();
           observer.onCompleted();
@@ -78,7 +78,7 @@ module.exports = function runCycle({
 
     function waitForPrime() {
       log("Waiting for prime signal...");
-      return inputs.primeComplete.filter(isTrue).take(1).do(() => {
+      return inputs.primeComplete.filter(isTrue).first().do(() => {
         log("Prime signal received");
       });
     }
@@ -110,9 +110,9 @@ module.exports = function runCycle({
     function monitorTankAndPressure() {
       return Observable.create((observer) => {
         log("Waiting for tank full and monitoring pressure");
-        const lowPressureObs = inputs.lowPressure.filter(isTrue).take(1).map(() => {throw new Error("low pressure");})
+        const lowPressureObs = inputs.lowPressure.filter(isTrue).first().map(() => {throw new Error("low pressure");})
           .do(() => log("Low pressure signal received"));
-        const tankFullObs = inputs.tankIsFull.filter(isTrue).take(1);
+        const tankFullObs = inputs.tankIsFull.filter(isTrue).first();
 
         const sub = tankFullObs.merge(lowPressureObs).subscribe(() => {
           log("Finished pumping (tank is full)");
@@ -165,13 +165,12 @@ module.exports = function runCycle({
       .flatMap(closeValves)
       .finally(cleanUp)
       .subscribe(noop, (error) => cycleObserver.onError(error), () => {
+        console.log("onComplete");
         cycleObserver.onCompleted();
       });
 
-    const emergencyStopSub = inputs.emergencyStop.filter(isTrue).take(1).subscribe(() => {
-      const error = new Error("Emergency stop signal received");
-      error._isEmergencyStopError = true; // for testing only
-      cycleObserver.onError(error);
+    const emergencyStopSub = inputs.emergencyStop.filter(isTrue).first().subscribe(() => {
+      cycleObserver.onCompleted();
     });
 
     return () => {

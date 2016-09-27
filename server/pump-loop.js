@@ -5,11 +5,14 @@ const fatal = require("./fatal");
 const getNextPumpTime = require("./get-next-pump-time");
 const formatTimeInterval = require("./util/format-time-interval");
 const pumpManager = require("./pump-manager");
+const config = require("./config");
 
 const wait = require("./util/wait");
 const {HOUR} = require("./time-constants");
 const never = new Promise(() => {}); // never resolves/rejects
+
 let currentPumpJob = null;
+let waitingForManualTimes = false;
 
 class PumpJob {
   constructor(pumpTime) {
@@ -51,6 +54,7 @@ function pump() {
 }
 
 function schedulePumpJob() {
+  waitingForManualTimes = false;
   return Promise.resolve()
     .then(cancelPumpJob)
     .then(getNextPumpTime)
@@ -59,6 +63,7 @@ function schedulePumpJob() {
         currentPumpJob = new PumpJob(pumpTime);
         return currentPumpJob.schedule();
       } else {
+        waitingForManualTimes = true;
         return never;
       }
     });
@@ -88,4 +93,20 @@ function restart() {
   start();
 }
 
-module.exports = {start, stop, restart};
+function getState() {
+  let state;
+  if(pumpManager.isPumping()) {
+    state = "pumping";
+  } else if(waitingForManualTimes) {
+    state = "waiting_for_times";
+  } else {
+    state = "waiting_to_pump";
+  }
+  return {
+    state,
+    scheduledPumpDate: currentPumpJob ? currentPumpJob.pumpTime : null,
+    manual: config.get("manual")
+  };
+}
+
+module.exports = {start, stop, restart, getState};

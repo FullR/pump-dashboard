@@ -10,23 +10,51 @@ import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 import Dialog from "material-ui/Dialog";
 import ReadableCountdown from "../readable-countdown";
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 
 function PumpTime(props) {
   const {pumpTime, onChange, onRemove} = props;
   const now = new Date();
   return (
-    <tr>
-      <td>
-        <DatePicker id={pumpTime.id + "-date"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} minDate={now}/>
-      </td>
-      <td>
-        <TimePicker id={pumpTime.id + "-time"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} pedantic/>
-      </td>
+    <TableRow>
+      <TableRowColumn>
+        <DatePicker className={cx("date-picker")} id={pumpTime.id + "-date"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} minDate={now}/>
+      </TableRowColumn>
+      <TableRowColumn>
+        <TimePicker className={cx("time-picker")} id={pumpTime.id + "-time"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} pedantic/>
+      </TableRowColumn>
       {pumpTime.manual ?
-        <td><RaisedButton label="Remove" onClick={onRemove}/></td> :
+        <TableRowColumn>
+          <RaisedButton label="Remove" onClick={onRemove}/>
+        </TableRowColumn> :
         null
       }
-    </tr>
+    </TableRow>
+  );
+}
+
+function shortDateTimeString(date) {
+  return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+}
+
+function StatusBar({status}) {
+  const {state, scheduledPumpDate, manual, error} = status;
+  let statusInfo = null;
+
+  switch(state) {
+    case "connecting": statusInfo = "Connecting..."; break;
+    case "waiting_to_pump": statusInfo = (
+      <span>Waiting to pump ({shortDateTimeString(new Date(scheduledPumpDate))}) (<ReadableCountdown date={scheduledPumpDate}/> remaining)</span>
+    ); break;
+    case "pumping": statusInfo = "Pumping..."; break;
+    case "waiting_for_times": statusInfo = "Waiting for manual pump times"; break;
+    case "error": statusInfo = `Error: ${error}`; break;
+  }
+
+  return (
+    <div className={cx("status")}>
+      <span className={cx("status-light", `status-light--${status.state}`)}/><span className={cx("status-text")}>{statusInfo}</span>
+    </div>
   );
 }
 
@@ -41,9 +69,12 @@ export default class Application extends React.Component {
     loggedIn: false,
     pumpTimes: [],
     manual: false,
-    serverManual: false,
     user: null,
-    error: null
+    error: null,
+    status: {
+      state: "connecting",
+      scheduledPumpDate: null
+    }
   };
 
   handleLoginSubmit = ({username, password}) => {
@@ -63,7 +94,6 @@ export default class Application extends React.Component {
               pumpTime: new Date(pumpTime.pumpTime)
             })),
             manual: res.body.manual,
-            serverManual: res.body.manual,
             loggedIn: true
           });
         }
@@ -108,8 +138,6 @@ export default class Application extends React.Component {
         if(error) {
           console.log(error);
           this.setState({error});
-        } else {
-          this.setState({serverManual: false});
         }
       });
   };
@@ -125,7 +153,6 @@ export default class Application extends React.Component {
           this.setState({error});
         } else {
           this.setState({
-            serverManual: true,
             pumpTimes: replaceWhere(this.state.pumpTimes, ({isNew}) => isNew, (pumpTime) => ({
               ...pumpTime,
               isNew: false
@@ -139,6 +166,41 @@ export default class Application extends React.Component {
     this.setState({saveDialogOpen: false});
   };
 
+  handleStartPump = () => {
+    request
+      .post("/api/start-pump")
+      .end((error) => {
+        if(error) this.setState({error});
+      });
+  };
+
+  handleStopPump = () => {
+    request
+      .post("/api/stop-pump")
+      .end((error) => {
+        if(error) this.setState({error});
+      });
+  };
+
+  requestStatus() {
+    request
+      .get("/api/status")
+      .end((error, res) => {
+        if(error) {
+          this.setState({
+            status: {
+              state: "error",
+              error
+            }
+          });
+        } else {
+          this.setState({
+            status: res.body
+          });
+        }
+      });
+  }
+
   closeSaveDialogModal() {
     if(this.state.saveDialogOpen) this.setState({saveDialogOpen: false});
   }
@@ -149,34 +211,54 @@ export default class Application extends React.Component {
     return manualPumpTimes.length && manualPumpTimes.every((pumpTime) => pumpTime.pumpTime.getTime() > now);
   }
 
-  getNextPumpTime() {
-    const {pumpTimes, serverManual} = this.state;
-    const now = Date.now();
-    const usedPumpTimes = pumpTimes.filter((pumpTime) => !!pumpTime.manual === !!serverManual && !pumpTime.isNew);
-    return usedPumpTimes.map(({pumpTime}) => pumpTime.getTime()).filter((time) => time > now).sort()[0];
+  componentDidMount() {
+    this.statusInterval = setInterval(this.requestStatus.bind(this), 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.statusInterval);
   }
 
   render() {
     const {children, className} = this.props;
-    const {loggedIn, pumpTimes, manual, serverManual, user, saveDialogOpen, error} = this.state;
+    const {loggedIn, pumpTimes, manual, user, saveDialogOpen, status, error} = this.state;
 
     const classNames = cx(className, "root");
 
     if(!loggedIn) return (
-      <LoginForm onSubmit={this.handleLoginSubmit}/>
+      <div className={classNames}>
+        <LoginForm onSubmit={this.handleLoginSubmit}/>
+      </div>
     );
     const visiblePumpTimes = pumpTimes.filter((pumpTime) => !!pumpTime.manual === !!manual);
-    const nextPumpTime = this.getNextPumpTime();
 
     return (
       <div className={classNames}>
-        {nextPumpTime ?
-          <div>Time until next pump: <ReadableCountdown date={nextPumpTime}/></div> :
-          null
-        }
+        <StatusBar status={status}/>
+        <RaisedButton onClick={this.handleStartPump}>Start Pump Job</RaisedButton>
+        <RaisedButton onClick={this.handleStopPump}>Stop Pump Job</RaisedButton>
+
         <Checkbox label="Manual Scheduling Mode" onCheck={this.handleManualChange} checked={manual}/>
-        <table>
-          <tbody>
+        <div className={cx("button-container")}>
+          {manual ?
+            <RaisedButton label="Add" onClick={this.handleAddDate}/> :
+            null
+          }
+          {manual || status.manual !== manual ?
+            <RaisedButton label="Save" onClick={this.handleSave} disabled={manual && !this.areManualTimesValid()}/> :
+            null
+          }
+        </div>
+
+        <Table>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <TableRow>
+              <TableHeaderColumn>Date</TableHeaderColumn>
+              <TableHeaderColumn>Time</TableHeaderColumn>
+              {manual ? <TableHeaderColumn>Remove</TableHeaderColumn> : null}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {visiblePumpTimes.map((pumpTime) =>
               <PumpTime key={pumpTime.id}
                 pumpTime={pumpTime}
@@ -184,18 +266,8 @@ export default class Application extends React.Component {
                 onRemove={this.handleRemoveDate.bind(this, pumpTime.id)}
               />
             )}
-          </tbody>
-        </table>
-
-        {manual ?
-          <RaisedButton label="Add" onClick={this.handleAddDate}/> :
-          null
-        }
-
-        {manual || serverManual !== manual ?
-          <RaisedButton label="Save" onClick={this.handleSave} disabled={manual && !this.areManualTimesValid()}/> :
-          null
-        }
+          </TableBody>
+        </Table>
 
         <Dialog
           actions={[
@@ -203,7 +275,7 @@ export default class Application extends React.Component {
             <FlatButton label="Confirm" onClick={manual ? this.handleEnableManual : this.handleEnableAutomatic}/>
           ]}
           open={saveDialogOpen}
-          title="Switching to manual scheduling mode"
+          title={`Switching to ${manual ? "manual" : "automatic"} scheduling mode`}
           modal
         >
           Are you sure you want the server to run in {manual ? "manual" : "automatic"} mode?
