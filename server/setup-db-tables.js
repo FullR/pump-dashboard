@@ -22,11 +22,11 @@ function logs(table) {
 
 module.exports = function setupDB() {
   return knex.schema
-      .dropTableIfExists("logs")
-      .dropTableIfExists("pump-times")
-      .dropTableIfExists("users")
-      .createTable("logs", logs)
-      .createTable("users", users)
-      .createTable("pump-times", pumpTimes)
-      .then(() => knex);
+    .dropTableIfExists("logs")
+    .dropTableIfExists("pump-times")
+    .dropTableIfExists("users")
+    .createTable("logs", logs)
+    .createTable("users", users)
+    .createTable("pump-times", pumpTimes)
+    .then(() => knex);
 }

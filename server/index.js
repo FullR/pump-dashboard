@@ -1,4 +1,3 @@
-const setupDBTables = require("./setup-db-tables");
 const createUserIfNotExists = require("./db-util/create-user-if-not-exists");
 const updateAutoPumpTimes = require("./update-auto-pump-times");
 const pumpLoop = require("./pump-loop");
@@ -34,8 +33,7 @@ function createAdminUser() {
   return createUserIfNotExists("admin", config.get("defaultAdminPassword"));
 }
 
-setupDBTables()
-  .then(createAdminUser)
+createAdminUser()
   .then(log.enableDatabaseLogging) // keep log module from trying to write to db before its initialized
   .then(startServers).catch(() => {}) // if the web server fails, the system should continue
   .then(() => {
