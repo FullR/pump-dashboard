@@ -1,5 +1,5 @@
 {
-  "defaultAdminPassword": "OIMB45",
+  "defaultAdminPassword": "password",
   "manual": false,
   "noaaStationId": "9432780",
   "prePumpDelay": 3600000,
