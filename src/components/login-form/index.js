@@ -6,7 +6,7 @@ import RaisedButton from "material-ui/RaisedButton";
 
 export default class LoginForm extends React.Component {
   static defaultProps = {onSubmit: window.noop};
-  state = {username: "admin", password: "OIMB45"};
+  state = {username: "admin", password: ""};
   handleUsernameChange = (e, v) => this.setState({username: v});
   handlePasswordChange = (e, v) => this.setState({password: v});
   handleSubmit = (e) => {
