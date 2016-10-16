@@ -2,7 +2,7 @@
   "defaultAdminPassword": "OIMB45",
   "manual": false,
   "noaaStationId": "9432780",
-  "prePumpDelay": 7200000,
+  "prePumpDelay": 3600000,
   "controllerEmail": "oimb.pumps@gmail.com",
   "emailList": [
     "oimb.pumps@gmail.com"
@@ -10,10 +10,10 @@
   "pumpTimeouts": {
     "closeValvesTimeout": 300000,
     "primeTimeout": 1200000,
-    "pumpTimeout": 180000,
-    "primeDelay": 800,
+    "pumpTimeout": 7200000,
+    "primeDelay": 60000,
     "postPumpValveDelay": 50000,
     "pressureMonitorDelay": 180000,
-    "preTideDelay": 7200000
+    "preTideDelay": 3600000
   }
 }
