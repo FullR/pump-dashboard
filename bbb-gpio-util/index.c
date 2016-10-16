@@ -2,22 +2,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#if PROD==true
-  #define GPIO_PATH "/sys/class/gpio"
-#else
-  #define GPIO_PATH "/home/james/projects/pump-dashboard/bbb-gpio-util/test-gpio"
-#endif
+#define GPIO_PATH "/sys/class/gpio"
 #define EXPORT_PATH GPIO_PATH "/export"
 #define UNEXPORT_PATH GPIO_PATH "/unexport"
-#define USAGE_TEXT "Beaglebone Black GPIO Utilities\n"\
-  "GPIO path:" GPIO_PATH "\n"\
-  "Usage:\n"\
-  "  gpio (pinId) (command) [commandArg]\n"\
-  "  Commands:\n"\
-  "    export - Export the given pin to make it available for IO\n"\
-  "    unexport - Unexport the given pin to disable it for IO\n"\
-  "    set-direction - Set the direction for a pin (valid values: high, low, up, down)\n"\
-  "    set-value - Set the value for a pin (valid values: 1, 0)\n"
 
 char* validDirections[] = {"in", "out", "high", "low"};
 
@@ -49,21 +36,25 @@ bool fileExists(char* filename) {
 
 char* getPinDirPath(char* pin) {
   strcpy(pinDirPathBuffer, GPIO_PATH);
-  strcat(pinDirPathBuffer, "/");
-  strcat(pinDirPathBuffer, "gpio");
+  strcat(pinDirPathBuffer, "/gpio");
   strcat(pinDirPathBuffer, pin);
-  strcat(pinDirPathBuffer, "/");
-  strcat(pinDirPathBuffer, "direction");
+  strcat(pinDirPathBuffer, "/direction");
   return pinDirPathBuffer;
 }
 
 char* getPinValuePath(char* pin) {
   strcpy(pinValuePathBuffer, GPIO_PATH);
-  strcat(pinValuePathBuffer, "/");
-  strcat(pinValuePathBuffer, "gpio");
+  strcat(pinValuePathBuffer, "/gpio");
   strcat(pinValuePathBuffer, pin);
-  strcat(pinValuePathBuffer, "/");
-  strcat(pinValuePathBuffer, "value");
+  strcat(pinValuePathBuffer, "/value");
+  return pinValuePathBuffer;
+}
+
+char* getActiveLowPath(char* pin) {
+  strcpy(pinValuePathBuffer, GPIO_PATH);
+  strcat(pinValuePathBuffer, "/gpio");
+  strcat(pinValuePathBuffer, pin);
+  strcat(pinValuePathBuffer, "/active_low");
   return pinValuePathBuffer;
 }
 
@@ -82,8 +73,18 @@ bool isValidValue(char* value) {
   return strEq(value, "0") || strEq(value, "1");
 }
 
-void printUsage() {
-  printf(USAGE_TEXT);
+bool isValidActiveLowValue(char* value) {
+  return isValidValue(value);
+}
+
+void printUsage(char* command) {
+  printf("Usage:\n");
+  printf("  %s (pinId) (command) [commandArg]\n", command);
+  printf("  Commands:\n");
+  printf("    export - Export the given pin to make it available for IO\n");
+  printf("    unexport - Unexport the given pin to disable it for IO\n");
+  printf("    set-direction - Set the direction for a pin (valid values: high, low, up, down)\n");
+  printf("    set-value - Set the value for a pin (valid values: 1, 0)\n");
 }
 
 bool exportPin(char* pin) {
@@ -147,11 +148,31 @@ bool setValue(char* pin, char* value) {
   return false;
 }
 
+bool setActiveLow(char* pin, char* value) {
+  if(!isValidActiveLowValue(value)) {
+    printf("Invalid active_low value: %s\n", value);
+    return true;
+  }
+  printf("Setting active_low value of pin %s to %s\n", pin, value);
+  char* fileName = getActiveLowPath(pin);
+  if(fileExists(fileName)) {
+    bool failed = quickWriteFile(fileName, value, sizeof(char), strlen(value));
+    if(failed) {
+      printf("Failed to write active_low value\n");
+      return true;
+    }
+  } else {
+    printf("active_low file not found. Was the pin exported?\n");
+    return true;
+  }
+  return false;
+}
+
 int main(size_t argc, char* argv[]) {
   bool errorFlag;
 
   if(argc <= 2 || strEq("--help", argv[1])) {
-    printUsage();
+    printUsage(argv[0]);
   } else {
     char* pin = argv[1];
     char* command = argv[2];
@@ -176,10 +197,18 @@ int main(size_t argc, char* argv[]) {
         char* value = argv[3];
         errorFlag = setValue(pin, value);
       }
+    } else if(strEq(command, "set-active-low")) {
+      if(argc <= 3) {
+        printf("set-active-low requires value argument\n");
+        errorFlag = true;
+      } else {
+        char* value = argv[3];
+        errorFlag = setActiveLow(pin, value);
+      }
     } else {
       errorFlag = true;
       printf("Unrecognized command: %s\n", command);
-      printUsage();
+      printUsage(argv[0]);
     }
   }
 
