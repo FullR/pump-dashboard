@@ -1,0 +1,23 @@
+#!/bin/bash
+
+gpio=./server/gpio.exe
+
+gpio 66 export
+gpio 66 set-direction out
+
+led=true
+
+while true
+do
+  if [ "$led" = true ]; then
+    echo "on"
+    gpio 66 set-value 1
+    led=false
+  else
+    echo "off"
+    gpio 66 set-value 0
+    led=true
+  fi
+  sleep 1
+done
+
