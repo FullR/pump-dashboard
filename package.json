@@ -9,6 +9,7 @@
     "build:dev": "npm run clean && webpack",
     "compile-gpio-util": "./bbb-gpio-util/build",
     "start": "node ./server",
+    "start:beaglebone": "BEAGLEBONE=true NODE_ENV=production npm run start",
     "start:prod": "NODE_ENV=production npm run start",
     "postinstall": "npm run compile-gpio-util && node setup-db.js"
   },
