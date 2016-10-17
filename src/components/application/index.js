@@ -12,25 +12,51 @@ import Dialog from "material-ui/Dialog";
 import ReadableCountdown from "../readable-countdown";
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from "material-ui/Table";
 
+function padNum(n) {
+  if(n < 10) return `0${n}`;
+  return n;
+}
+
 function PumpTime(props) {
   const {pumpTime, onChange, onRemove} = props;
   const now = new Date();
-  return (
-    <TableRow>
-      <TableRowColumn>
-        <DatePicker className={cx("date-picker")} id={pumpTime.id + "-date"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} minDate={now}/>
-      </TableRowColumn>
-      <TableRowColumn>
-        <TimePicker className={cx("time-picker")} id={pumpTime.id + "-time"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} pedantic/>
-      </TableRowColumn>
-      {pumpTime.manual ?
+  const {manual} = pumpTime;
+  const date = pumpTime.pumpTime;
+  if(manual) {
+    return (
+      <TableRow>
+        <TableRowColumn>
+          <DatePicker className={cx("date-picker")} id={pumpTime.id + "-date"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} minDate={now}/>
+        </TableRowColumn>
+        <TableRowColumn>
+          <TimePicker className={cx("time-picker")} id={pumpTime.id + "-time"} value={pumpTime.pumpTime} onChange={onChange} disabled={!pumpTime.manual} pedantic/>
+        </TableRowColumn>
         <TableRowColumn>
           <RaisedButton label="Remove" onClick={onRemove}/>
-        </TableRowColumn> :
-        null
-      }
-    </TableRow>
-  );
+        </TableRowColumn>
+      </TableRow>
+    );
+  } else {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    const hour = date.getHours();
+    const ampmHours = (hour % 12) || 12;
+    const pm = hour >= 12;
+    const minute = date.getMinutes();
+    const textStyle = {fontSize: 16};
+
+    return (
+      <TableRow>
+        <TableRowColumn>
+          <span style={textStyle}>{year}-{padNum(month)}-{padNum(day)}</span>
+        </TableRowColumn>
+        <TableRowColumn>
+          <span style={textStyle}>{padNum(ampmHours)}:{padNum(minute)} {pm ? "pm" : "am"}</span>
+        </TableRowColumn>
+      </TableRow>
+    );
+  }
 }
 
 function shortDateTimeString(date) {
@@ -235,8 +261,11 @@ export default class Application extends React.Component {
     return (
       <div className={classNames}>
         <StatusBar status={status}/>
-        <RaisedButton onClick={this.handleStartPump}>Start Pump Job</RaisedButton>
-        <RaisedButton onClick={this.handleStopPump}>Stop Pump Job</RaisedButton>
+        <div>
+          <RaisedButton onClick={this.handleStartPump}>Start Pump Job</RaisedButton>
+          <br/>
+          <RaisedButton onClick={this.handleStopPump}>Stop Pump Job</RaisedButton>
+        </div>
 
         <Checkbox label="Manual Scheduling Mode" onCheck={this.handleManualChange} checked={manual}/>
         <div className={cx("button-container")}>

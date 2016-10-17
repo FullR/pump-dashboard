@@ -14,28 +14,6 @@ export default class LoginForm extends React.Component {
     this.props.onSubmit(this.state);
   };
 
-  // startPump = () => {
-  //   request.post("/api/start-pump")
-  //     .end((error, response) => console.log(error || response));
-  // };
-  //
-  // stopPump = () => {
-  //   request.post("/api/stop-pump")
-  //     .end((error, response) => console.log(error || response))
-  // };
-  //
-  // getPumpTimes() {
-  //   request.get("/api/pump-times")
-  //     .end((error, response) => {
-  //       if(error) {
-  //         console.log(error);
-  //       } else {
-  //         console.log(response);
-  //         this.setState({pumpTimes: response.body});
-  //       }
-  //     });
-  // }
-
   render() {
     const {error, children, className} = this.props;
     const {username, password, pumpTimes} = this.state;
